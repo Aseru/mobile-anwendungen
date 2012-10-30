@@ -1,5 +1,8 @@
-package edu.hm.mineandroidsweeper;
+package edu.hm.mineandroidsweeper.activities;
 
+import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.R.layout;
+import edu.hm.mineandroidsweeper.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
