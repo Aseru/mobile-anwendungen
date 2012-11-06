@@ -10,7 +10,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:clickable="true"
-        android:onClick="onNewGameClicked"
         android:text="@string/new_game"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -22,7 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:onClick="onResumeClicked"
         android:text="@string/resume"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -34,7 +32,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:clickable="true"
-        android:onClick="onHighscoreClicked"
         android:text="@string/highscore"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

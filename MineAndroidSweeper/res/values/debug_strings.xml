@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- MainMenuActivity -->
+    <string name="str_dbg_new_game_clicked">&quot;clicked on New Game&quot;</string>
+    <string name="str_dbg_highscore_clicked">&quot;clicked on Highscore&quot;</string>
+    <string name="str_dbg_resume_clicked">&quot;clicked on Resume&quot;</string>
+    
+</resources>
