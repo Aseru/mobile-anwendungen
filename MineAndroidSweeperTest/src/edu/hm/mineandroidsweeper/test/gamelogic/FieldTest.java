@@ -28,5 +28,14 @@ public class FieldTest extends TestCase {
 			assertEquals(coords[i], neighbors[i]);
 		}
 	}
+	
+	public void testIncreaseValue(){
+		Field bomb = new Field(new Coordinate(2, 2));
+		bomb.setBomb(true);
+		Field field = new Field(new Coordinate(1, 1));
+		
+		assertFalse(bomb.increaseValue());
+		assertTrue(field.increaseValue());
+	}
 
 }
