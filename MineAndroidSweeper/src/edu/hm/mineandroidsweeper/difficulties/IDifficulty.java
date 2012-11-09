@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.difficults;
+package edu.hm.mineandroidsweeper.difficulties;
 
 public interface IDifficulty {
 	

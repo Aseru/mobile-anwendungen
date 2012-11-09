@@ -1,38 +1,29 @@
-package edu.hm.mineandroidsweeper.difficults;
+/**
+ * 
+ */
+package edu.hm.mineandroidsweeper.difficulties;
 
-public class CustomizedDifficulty {
+public class EasyDifficulty implements IDifficulty {
+	
+	public final static int xSize = 15;
+	public final static int ySize = 15;
+	public final static int numberOfBombs = 20;
 
-	public final int xSize;
-	public final int ySize;
-	public final int numberOfBombs;
-
-	public CustomizedDifficulty(int xSize, int ySize, int numberOfBombs) {
-		this.xSize = xSize;
-		this.ySize = ySize;
-		this.numberOfBombs = numberOfBombs;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getXSize()
 	 */
 	public int getXSize() {
 		return xSize;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getYSize()
 	 */
 	public int getYSize() {
 		return ySize;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getNumberOfBombs()
 	 */
 	public int getNumberOfBombs() {

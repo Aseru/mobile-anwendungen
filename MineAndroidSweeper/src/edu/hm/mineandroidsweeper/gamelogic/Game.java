@@ -1,9 +1,20 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
-public class Game {
+import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
-	public Game() {
-		// TODO Auto-generated constructor stub
+public class Game {
+	
+	private final IDifficulty difficulty;
+	private Playground playground;
+	
+
+	public Game(IDifficulty difficulty) {
+		this.difficulty = difficulty;
+		init();
+	}
+	
+	private void init(){
+		playground = new Playground(difficulty);
 	}
 
 }

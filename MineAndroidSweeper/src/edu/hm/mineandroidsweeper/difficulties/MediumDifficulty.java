@@ -1,13 +1,10 @@
-/**
- * 
- */
-package edu.hm.mineandroidsweeper.difficults;
+package edu.hm.mineandroidsweeper.difficulties;
 
-public class HardDifficulty implements IDifficulty {
-
+public class MediumDifficulty implements IDifficulty {
+	
 	public final static int xSize = 15;
 	public final static int ySize = 15;
-	public final static int numberOfBombs = 100;
+	public final static int numberOfBombs = 50;
 
 	/* (non-Javadoc)
 	 * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getXSize()
