@@ -6,10 +6,22 @@ public class CustomizedDifficulty implements IDifficulty {
 	public final int ySize;
 	public final int numberOfBombs;
 
-	public CustomizedDifficulty(int xSize, int ySize, int numberOfBombs) {
+	public CustomizedDifficulty(int xSize, int ySize, int numberOfBombs)
+			throws Exception {
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.numberOfBombs = numberOfBombs;
+		checkConfig();
+	}
+
+	private void checkConfig() throws Exception {
+		int numberOfFields = xSize * ySize;
+		if (numberOfFields < numberOfBombs) {
+			throw new Exception("More bombs as fields. Not possible.");
+		}
+		if (numberOfBombs <= 0) {
+			throw new Exception("Minimum one bomb must be selected.");
+		}
 	}
 
 	/*
