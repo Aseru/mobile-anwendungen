@@ -14,10 +14,10 @@ public class Playground {
 
 	public Playground(IDifficulty difficulty) {
 		this.difficulty = difficulty;;
+		fieldsMap = new HashMap<Coordinate, Field>();
 	}
 
 	public void init() {
-		fieldsMap = new HashMap<Coordinate, Field>();
 		Field[] fields = createFields(difficulty.getXSize(),
 				difficulty.getYSize());
 		Field[] bombs = setBombs(fields, difficulty);
@@ -84,7 +84,6 @@ public class Playground {
 							.println("This should never happen - Playground.increaseNeighborValues(Field[] fields, Field bomb)");
 			}
 		}
-
 	}
 
 }
