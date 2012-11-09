@@ -35,7 +35,12 @@ public class FieldTest extends TestCase {
 		Field field = new Field(new Coordinate(1, 1));
 		
 		assertFalse(bomb.increaseValue());
+		assertEquals(0, bomb.getValue());
 		assertTrue(field.increaseValue());
+		assertEquals(1, field.getValue());
+		assertTrue(field.increaseValue());
+		assertEquals(2, field.getValue());
+		
 	}
 
 }
