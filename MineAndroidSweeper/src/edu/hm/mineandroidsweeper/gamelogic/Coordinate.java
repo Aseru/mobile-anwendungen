@@ -46,6 +46,18 @@ public class Coordinate {
 	public String toString() {
 		return new String("(" + x + "," + y + ")");
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		int hash = 1;
+		hash = hash * 17 + x;
+		hash = hash * 31 + y;
+		return hash;
+	}
+	
 	
 	
 	
