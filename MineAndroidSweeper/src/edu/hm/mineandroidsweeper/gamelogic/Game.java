@@ -10,11 +10,11 @@ public class Game {
 
 	public Game(IDifficulty difficulty) {
 		this.difficulty = difficulty;
-		init();
 	}
 	
-	private void init(){
+	public void init(){
 		playground = new Playground(difficulty);
+		playground.init();
 	}
 
 }
