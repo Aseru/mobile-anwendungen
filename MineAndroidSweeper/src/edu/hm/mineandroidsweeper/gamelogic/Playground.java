@@ -86,4 +86,20 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * @return the difficulty
+	 */
+	public IDifficulty getDifficulty() {
+		return difficulty;
+	}
+
+	/**
+	 * @return the fieldsMap
+	 */
+	public Map<Coordinate, Field> getFieldsMap() {
+		return fieldsMap;
+	}
+	
+	
+
 }
