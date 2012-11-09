@@ -2,15 +2,13 @@ package edu.hm.mineandroidsweeper.gamelogic;
 
 public class Field {
 	
-	private final int xCoord;
-	private final int yCoord;
+	private final Coordinate coord;
 	
 	private boolean isBomb;
 	private int value;
 
-	public Field(int x, int y) {
-		this.xCoord = x;
-		this.yCoord = y;
+	public Field(Coordinate coord) {
+		this.coord = coord;
 		
 		isBomb = false;
 		value = -1;
@@ -45,19 +43,11 @@ public class Field {
 	}
 
 	/**
-	 * @return the xCoord
+	 * @return the coord
 	 */
-	public int getxCoord() {
-		return xCoord;
+	public Coordinate getCoord() {
+		return coord;
 	}
 
-	/**
-	 * @return the yCoord
-	 */
-	public int getyCoord() {
-		return yCoord;
-	}
-	
-	
 
 }

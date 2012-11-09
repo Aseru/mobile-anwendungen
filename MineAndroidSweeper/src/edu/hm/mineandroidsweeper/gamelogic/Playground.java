@@ -1,9 +1,17 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
-public class Playground {
+import java.util.Map;
 
-	public Playground() {
-		// TODO Auto-generated constructor stub
+public class Playground {
+	
+	private final int xSize;
+	private final int ySize;
+	
+	private Map<Coordinate, Field> fieldsMap;
+
+	public Playground(int xSize, int ySize) {
+		this.xSize = xSize;
+		this.ySize = ySize;
 	}
 
 }
