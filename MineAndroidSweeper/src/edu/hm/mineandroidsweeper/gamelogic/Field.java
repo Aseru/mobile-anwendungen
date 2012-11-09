@@ -11,7 +11,7 @@ public class Field {
 		this.coord = coord;
 
 		isBomb = false;
-		value = -1;
+		value = 0;
 	}
 
 	/**
