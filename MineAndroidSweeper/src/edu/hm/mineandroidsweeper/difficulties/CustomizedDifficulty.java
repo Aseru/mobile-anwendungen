@@ -1,6 +1,6 @@
 package edu.hm.mineandroidsweeper.difficulties;
 
-public class CustomizedDifficulty {
+public class CustomizedDifficulty implements IDifficulty {
 
 	public final int xSize;
 	public final int ySize;
