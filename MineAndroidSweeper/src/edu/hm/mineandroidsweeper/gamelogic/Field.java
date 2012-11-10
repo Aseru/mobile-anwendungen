@@ -1,10 +1,13 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
+import java.util.Map;
+
 public class Field {
 
 	private final Coordinate coord;
 
 	private boolean isBomb;
+	private boolean isRevealed;
 	private int value;
 
 	public Field(Coordinate coord) {
@@ -27,6 +30,20 @@ public class Field {
 	 */
 	public void setBomb(boolean isBomb) {
 		this.isBomb = isBomb;
+	}
+
+	/**
+	 * @return the isRevealed
+	 */
+	public boolean isRevealed() {
+		return isRevealed;
+	}
+
+	/**
+	 * @param isRevealed the isRevealed to set
+	 */
+	public void setRevealed(boolean isRevealed) {
+		this.isRevealed = isRevealed;
 	}
 
 	/**
@@ -75,6 +92,15 @@ public class Field {
 		neighborCoords[7] = new Coordinate(x + 1, y + 1);
 
 		return neighborCoords;
+	}
+	
+	public Field[] getNeighborFields8(Map<Coordinate, Field> map){
+		Coordinate[] neighborCoords = getNeighborCoords8();
+		Field[] neighborFields = new Field[neighborCoords.length];
+		for(int i = 0; i < neighborFields.length; i++){
+			neighborFields[i] = map.get(neighborCoords[i]);
+		}
+		return neighborFields;
 	}
 
 	/*
