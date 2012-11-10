@@ -13,7 +13,7 @@ public class Playground {
 	private Map<Coordinate, Field> fieldsMap;
 
 	public Playground(IDifficulty difficulty) {
-		this.difficulty = difficulty;;
+		this.difficulty = difficulty;
 		fieldsMap = new HashMap<Coordinate, Field>();
 	}
 
@@ -99,7 +99,5 @@ public class Playground {
 	public Map<Coordinate, Field> getFieldsMap() {
 		return fieldsMap;
 	}
-	
-	
 
 }
