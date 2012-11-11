@@ -1,21 +1,21 @@
 package edu.hm.mineandroidsweeper.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.format.DateFormat;
+import android.os.SystemClock;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import edu.hm.mineandroidsweeper.R;
 
 public class GameActivity extends Activity {
 	
-	public static final String TAG = "GameActicity";
+	public final static String TAG = "GameActicity";
 	
-	private Chronometer chrono;
+	
+	private Chronometer mChronometer;
+	private long lastPause = SystemClock.elapsedRealtime();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class GameActivity extends Activity {
 	
 	private void initView(Bundle savedInstanceState){
 		setContentView(R.layout.activity_game);
-		chrono = (Chronometer) findViewById(R.id.chronometer);
-		chrono.setBase(android.os.SystemClock.elapsedRealtime());
-		chrono.setOnChronometerTickListener(new OnChronometerTickListener() {
+		mChronometer = (Chronometer) findViewById(R.id.chronometer);
+		mChronometer.setBase(SystemClock.elapsedRealtime());
+		mChronometer.setOnChronometerTickListener(new OnChronometerTickListener() {
 			
 			long base;
 			long current;
@@ -35,12 +35,12 @@ public class GameActivity extends Activity {
 			
 			public void onChronometerTick(Chronometer chronometer) {
 				base = chronometer.getBase();
-				current = android.os.SystemClock.elapsedRealtime();
+				current = SystemClock.elapsedRealtime();
 				time = current - base;
 				chronometer.setText(Long.toString(TimeUnit.MILLISECONDS.toSeconds(time)));
 			}
 		});
-		chrono.start();
+		mChronometer.start();
 	}
 
 	/* (non-Javadoc)
@@ -48,8 +48,9 @@ public class GameActivity extends Activity {
 	 */
 	@Override
 	protected void onPause() {
-		chrono.stop();
 		super.onPause();
+		lastPause = SystemClock.elapsedRealtime();
+		mChronometer.stop();
 	}
 
 	/* (non-Javadoc)
@@ -58,8 +59,10 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		chrono.start();
+		mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+		mChronometer.start();
 	}
+
 	
 	
 
