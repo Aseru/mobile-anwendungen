@@ -9,10 +9,12 @@ import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 public class Playground {
 
 	private final IDifficulty difficulty;
+	private final Game game;
 
 	private Map<Coordinate, Field> fieldsMap;
 
-	public Playground(IDifficulty difficulty) {
+	public Playground(Game game, IDifficulty difficulty) {
+		this.game = game;
 		this.difficulty = difficulty;
 		fieldsMap = new HashMap<Coordinate, Field>();
 	}
@@ -84,6 +86,16 @@ public class Playground {
 							.println("This should never happen - Playground.increaseNeighborValues(Field[] fields, Field bomb)");
 			}
 		}
+	}
+
+	public void reveal(Field field) {
+		if (field.isBomb()) {
+			game.setState(GameState.LOSE);
+			return;
+		} else {
+			FloodFill.fill8(fieldsMap, field);
+		}
+
 	}
 
 	/**
