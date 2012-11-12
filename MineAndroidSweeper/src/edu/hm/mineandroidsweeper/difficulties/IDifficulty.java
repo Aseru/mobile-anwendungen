@@ -1,6 +1,8 @@
 package edu.hm.mineandroidsweeper.difficulties;
 
-public interface IDifficulty {
+import java.io.Serializable;
+
+public interface IDifficulty extends Serializable{
 	
 	/**
 	 * 
@@ -19,5 +21,8 @@ public interface IDifficulty {
 	 * @return the number of bombs
 	 */
 	public int getNumberOfBombs();
+	
+	
+	public DifficultyDescription getDescription();
 
 }

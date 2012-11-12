@@ -1,18 +1,21 @@
 package edu.hm.mineandroidsweeper.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.gamelogic.Game;
+import edu.hm.mineandroidsweeper.persistence.GameLoader;
+
 
 public class GameActivity extends Activity {
-	
+
 	public static final String TAG = "GameActicity";
 	
 	private Chronometer chrono;
@@ -61,6 +64,21 @@ public class GameActivity extends Activity {
 		chrono.start();
 	}
 	
+	
+	private boolean saveTheRunningGame() {
+		Game tmp = null;
+		
+		FileOutputStream fileOutputStream;
+		try {
+			fileOutputStream = openFileOutput(GameLoader.SAVE_GAME_FILENAME, Context.MODE_PRIVATE);
+		} 
+		catch (FileNotFoundException e) {
+			return false;
+		}
+		
+		boolean success = GameLoader.saveGame(tmp, fileOutputStream);
+		return success;
+	}
 	
 
 }

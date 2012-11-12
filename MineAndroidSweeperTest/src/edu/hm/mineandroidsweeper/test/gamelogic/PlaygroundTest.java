@@ -20,7 +20,7 @@ public class PlaygroundTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		this.difficulty = new CustomizedDifficulty(100, 100, 9998);
-		this.playground = new Playground(difficulty);
+		this.playground = new Playground(null, difficulty);
 		playground.init();
 	}
 

@@ -1,9 +1,19 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
-public class Coordinate {
+import java.io.Serializable;
+
+public class Coordinate implements Serializable {
+	
+	private static final long serialVersionUID = -6415929767292021551L;
 	
 	private final int x;
 	private final int y;
+	
+	/* No-args constructor, needed for Serialization. */
+	protected Coordinate() {
+		x = 0;
+		y = 0;
+	}
 	
 	public Coordinate(int x, int y){
 		this.x = x;

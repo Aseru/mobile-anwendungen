@@ -1,18 +1,27 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
-public class Playground {
+public class Playground implements Serializable{
+
+	private static final long serialVersionUID = 3663292402304734906L;
 
 	private final IDifficulty difficulty;
 	private final Game game;
 
 	private Map<Coordinate, Field> fieldsMap;
-
+	
+	/* No-args constructor needed for Serialization. */
+	protected Playground() {
+		difficulty = null;
+		game = null;
+	}
+	
 	public Playground(Game game, IDifficulty difficulty) {
 		this.game = game;
 		this.difficulty = difficulty;

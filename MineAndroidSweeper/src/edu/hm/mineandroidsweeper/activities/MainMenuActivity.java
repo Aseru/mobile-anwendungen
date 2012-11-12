@@ -1,5 +1,8 @@
 package edu.hm.mineandroidsweeper.activities;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +12,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.gamelogic.Game;
+import edu.hm.mineandroidsweeper.persistence.GameLoader;
 
 public class MainMenuActivity extends Activity {
-	
+
 	public static final String TAG = "MainMenuActivity";
 
 	@Override
@@ -65,6 +70,22 @@ public class MainMenuActivity extends Activity {
 
 	private void onHighscoreClicked(View view) {
 		Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
+	}
+	
+	
+	private Game loadGame() {
+		Game loadedGame;
+		
+		FileInputStream fileInputStream;
+		try {
+			fileInputStream = openFileInput(GameLoader.SAVE_GAME_FILENAME);
+		}
+		catch (FileNotFoundException e) {
+			return null;
+		}
+		
+		loadedGame = GameLoader.loadGame(fileInputStream);
+		return loadedGame;
 	}
 
 }

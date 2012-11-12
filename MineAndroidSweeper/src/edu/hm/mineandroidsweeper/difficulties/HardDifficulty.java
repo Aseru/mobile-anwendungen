@@ -5,6 +5,10 @@ package edu.hm.mineandroidsweeper.difficulties;
 
 public class HardDifficulty implements IDifficulty {
 
+	private static final long serialVersionUID = 8096952251879936437L;
+
+	public static final DifficultyDescription description = DifficultyDescription.HARD;
+
 	public final static int xSize = 15;
 	public final static int ySize = 15;
 	public final static int numberOfBombs = 100;
@@ -29,6 +33,10 @@ public class HardDifficulty implements IDifficulty {
 	public int getNumberOfBombs() {
 		// TODO Auto-generated method stub
 		return numberOfBombs;
+	}
+
+	public DifficultyDescription getDescription() {
+		return description;
 	}
 
 }
