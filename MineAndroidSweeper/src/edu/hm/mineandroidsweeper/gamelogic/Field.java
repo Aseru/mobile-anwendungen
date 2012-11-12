@@ -1,8 +1,11 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Field {
+public class Field implements Serializable {
+
+	private static final long serialVersionUID = -4780750269865091787L;
 
 	private final Coordinate coord;
 
@@ -10,6 +13,11 @@ public class Field {
 	private boolean isRevealed;
 	private int value;
 
+	/* No-args constructor needed for Serialization. */
+	protected Field() {
+		coord = null;
+	}
+	
 	public Field(Coordinate coord) {
 		this.coord = coord;
 

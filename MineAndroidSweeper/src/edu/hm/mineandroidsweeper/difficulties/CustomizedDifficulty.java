@@ -2,10 +2,21 @@ package edu.hm.mineandroidsweeper.difficulties;
 
 public class CustomizedDifficulty implements IDifficulty {
 
+	private static final long serialVersionUID = 6850885455181308430L;
+
+	public static final DifficultyDescription description = DifficultyDescription.CUSTOM;
+	
 	public final int xSize;
 	public final int ySize;
 	public final int numberOfBombs;
 
+	/* No-args constructor, needed for Serialization. */
+	protected CustomizedDifficulty() { 
+		xSize = 0;
+		ySize = 0;
+		numberOfBombs = 0;
+	}
+	
 	public CustomizedDifficulty(int xSize, int ySize, int numberOfBombs)
 			throws Exception {
 		this.xSize = xSize;
@@ -50,6 +61,10 @@ public class CustomizedDifficulty implements IDifficulty {
 	public int getNumberOfBombs() {
 		// TODO Auto-generated method stub
 		return numberOfBombs;
+	}
+
+	public DifficultyDescription getDescription() {
+		return description;
 	}
 
 }
