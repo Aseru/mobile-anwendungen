@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info">Bitte wählen Sie die gewünschte Schwierigkeitsstufe</string>
+    
+    <!-- Difficulties -->
+    <string name="difficulty_easy">Leicht</string>
+    <string name="difficulty_medium">Mittel</string>
+    <string name="difficulty_hard">Schwer</string>
+    <string name="difficulty_customized">Benutzerdefiniert</string>
+    
+    <!-- Customized Diffuculty -->
+    <string name="custom_length">Länge</string>
+    <string name="custom_width">Breite</string>
+    <string name="custom_bombs">Bomben</string>
+    
+</resources>

@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.Chronometer;
@@ -45,8 +46,19 @@ public class GameActivity extends Activity {
 	 */
 	private Game createNewGame() {
 		Game newGame = new Game(new EasyDifficulty());
-		// TODO is Stub
+		Intent intent = new Intent(this, DifficultActivity.class);
+		startActivityForResult(intent, 0);
 		return newGame;
+	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void getExtras() {
