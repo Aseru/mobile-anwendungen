@@ -20,8 +20,6 @@ public class GameActivity extends Activity {
 
 	public final static String TAG = "GameActicity";
 
-	private long lastPause = SystemClock.elapsedRealtime();
-
 	private Chronometer mChronometer;
 	private Game game = null;
 
