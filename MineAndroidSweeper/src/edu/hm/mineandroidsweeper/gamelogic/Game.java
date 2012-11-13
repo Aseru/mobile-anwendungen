@@ -6,12 +6,15 @@ import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
 public class Game implements Serializable {
 	
+	public static final String EXTRA_NAME = "edu.hm.mineandroidsweeper.extra.game";
+	
 	private static final long serialVersionUID = 7823809805228633799L;
 
 	private final IDifficulty difficulty;
 	
 	private GameState state;
 	private Playground playground;
+	private long currentPlaytime;
 	
 	/* No-args constructor needed for Serialization. */
 	protected Game() {
@@ -55,6 +58,22 @@ public class Game implements Serializable {
 	public IDifficulty getDifficulty() {
 		return difficulty;
 	}
+
+	/**
+	 * @return the currentPlaytime
+	 */
+	public long getCurrentPlaytime() {
+		return currentPlaytime;
+	}
+
+	/**
+	 * @param currentPlaytime the currentPlaytime to set
+	 */
+	public void setCurrentPlaytime(long currentPlaytime) {
+		this.currentPlaytime = currentPlaytime;
+	}
+	
+	
 	
 	
 

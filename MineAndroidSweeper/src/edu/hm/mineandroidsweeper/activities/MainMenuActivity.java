@@ -27,25 +27,25 @@ public class MainMenuActivity extends Activity {
 
 	private void initView() {
 		setContentView(R.layout.activity_main);
-		
+
 		TextView newGame = (TextView) findViewById(R.id.textView_newGame);
-				newGame.setOnClickListener(new OnClickListener() {
+		newGame.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				onNewGamesClicked(v);
 			}
 		});
-		
+
 		TextView resume = (TextView) findViewById(R.id.textView_resume);
 		resume.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				onResumeClicked(v);
 			}
 		});
-		
+
 		TextView highscore = (TextView) findViewById(R.id.textView_highscore);
 		highscore.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				onHighscoreClicked(v);
 			}
@@ -60,6 +60,12 @@ public class MainMenuActivity extends Activity {
 
 	private void onResumeClicked(View view) {
 		Log.d(TAG, getString(R.string.str_dbg_resume_clicked));
+		Intent intent = new Intent(this, GameActivity.class);
+		Game loadedGame = loadGame();
+		if (loadedGame != null) {
+			intent.putExtra(Game.EXTRA_NAME, loadedGame);
+		}
+		startActivity(intent);
 	}
 
 	private void onNewGamesClicked(View view) {
@@ -71,19 +77,17 @@ public class MainMenuActivity extends Activity {
 	private void onHighscoreClicked(View view) {
 		Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
 	}
-	
-	
+
 	private Game loadGame() {
 		Game loadedGame;
-		
+
 		FileInputStream fileInputStream;
 		try {
 			fileInputStream = openFileInput(GameLoader.SAVE_GAME_FILENAME);
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			return null;
 		}
-		
+
 		loadedGame = GameLoader.loadGame(fileInputStream);
 		return loadedGame;
 	}
