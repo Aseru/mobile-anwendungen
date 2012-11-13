@@ -56,4 +56,5 @@ public final class GameLoader {
 		loadedGame.setState(GameState.STARTING);
 		return loadedGame;
 	}
+	
 }

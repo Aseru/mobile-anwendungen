@@ -1,8 +1,9 @@
 package edu.hm.mineandroidsweeper.gamelogic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 import edu.hm.mineandroidsweeper.difficulties.DifficultyDescription;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
@@ -13,49 +14,47 @@ public final class Highscores implements Serializable {
 
 	public static final int HIGHSCORE_TABLE_SIZE = 5;
 	
-	private final List<Highscore> easy;
-	private final List<Highscore> medium;
-	private final List<Highscore> hard;
+	private final Set<HighscoreEntry> easy;
+	private final Set<HighscoreEntry> medium;
+	private final Set<HighscoreEntry> hard;
 	
 	protected Highscores() {
-		easy = new ArrayList<Highscore>(HIGHSCORE_TABLE_SIZE);
-		medium = new ArrayList<Highscore>(HIGHSCORE_TABLE_SIZE);
-		hard = new ArrayList<Highscore>(HIGHSCORE_TABLE_SIZE);
+		easy = new TreeSet<HighscoreEntry>();
+		medium = new TreeSet<HighscoreEntry>();
+		hard = new TreeSet<HighscoreEntry>();
+		
 		for(int i=0;i<HIGHSCORE_TABLE_SIZE;i++) {
-			easy.add(Highscore.newEmpty());
-			medium.add(Highscore.newEmpty());
-			hard.add(Highscore.newEmpty());
+			easy.add(HighscoreEntry.newEmpty());
+			medium.add(HighscoreEntry.newEmpty());
+			hard.add(HighscoreEntry.newEmpty());
 		}
 	}
 	
-	public boolean addHighscore(double value, IDifficulty difficulty) {
-		List<Highscore> list = selectList(difficulty);
+	public boolean isHighscore(double value, IDifficulty difficulty) {
+		TreeSet<HighscoreEntry> list = selectList(difficulty);
 		
-		Highscore thisValue = new Highscore("", value);
-		Highscore lowestHighscore = list.get(list.size()-1);
-		if(thisValue.compareTo(lowestHighscore)>0) {
-			list.remove(lowestHighscore);
-			// Find out position of value in the highscore.
-			// list.add(thisValue);
+		HighscoreEntry thisValue = new HighscoreEntry("", value);
+		HighscoreEntry lowestHighscore = list.last();
+		if(thisValue.compareTo(lowestHighscore)>0)
+			return true;
+		return false;
+	}
+	
+	public boolean addHighscore(HighscoreEntry highscore, IDifficulty difficulty) {
+		TreeSet<HighscoreEntry> list = selectList(difficulty);
+
+		if(isHighscore(highscore.getTime(), difficulty)) {
+			list.remove(list.last());
+			list.add(highscore);
 			return true;
 		}
 		
 		return false;
 	}
 	
-	public Highscore getHighscoreAtPosition(int position, IDifficulty difficulty) {
-		List<Highscore> list = selectList(difficulty);
-		
-		if(position<1 || position>HIGHSCORE_TABLE_SIZE)
-			throw new IllegalArgumentException("Position is out of bounds.");
-		
-		Highscore result = list.get(position);
-		return result;
-	}
 	
-	
-	private List<Highscore> selectList(IDifficulty difficulty) {
-		List<Highscore> list = null;
+	private TreeSet<HighscoreEntry> selectList(IDifficulty difficulty) {
+		Set<HighscoreEntry> list = null;
 		DifficultyDescription desc = difficulty.getDescription();
 		if(desc==DifficultyDescription.EASY)
 			list = easy;
@@ -66,10 +65,23 @@ public final class Highscores implements Serializable {
 		else
 			throw new IllegalArgumentException("There is no highscore table for the given difficulty.");
 		
-		return list;
+		return (TreeSet<HighscoreEntry>) list;
 	}
 	
 	
+	
+	public Set<HighscoreEntry> getEasy() {
+		return Collections.unmodifiableSet(easy);
+	}
+
+	public Set<HighscoreEntry> getMedium() {
+		return Collections.unmodifiableSet(medium);
+	}
+
+	public Set<HighscoreEntry> getHard() {
+		return Collections.unmodifiableSet(hard);
+	}
+
 	
 	public static Highscores emptyHighscores() {
 		return new Highscores();
