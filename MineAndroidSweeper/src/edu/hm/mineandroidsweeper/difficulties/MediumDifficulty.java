@@ -28,7 +28,6 @@ public class MediumDifficulty implements IDifficulty {
 	 * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getNumberOfBombs()
 	 */
 	public int getNumberOfBombs() {
-		// TODO Auto-generated method stub
 		return numberOfBombs;
 	}
 
