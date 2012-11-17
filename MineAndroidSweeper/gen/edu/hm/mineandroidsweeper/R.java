@@ -15,24 +15,23 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int chronometer=0x7f07000d;
+        public static final int chronometer=0x7f07000c;
         public static final int editNumber_bombs=0x7f07000b;
         public static final int editNumber_length=0x7f070007;
         public static final int editNumber_width=0x7f070009;
-        public static final int layout_customized_difficulty=0x7f070006;
-        public static final int menu_settings=0x7f070011;
-        public static final int radioGroup_difficulty=0x7f070001;
-        public static final int radio_customized=0x7f070005;
-        public static final int radio_easy=0x7f070002;
-        public static final int radio_hard=0x7f070004;
-        public static final int radio_medium=0x7f070003;
-        public static final int relativeLayout1=0x7f070000;
-        public static final int textView1=0x7f070008;
-        public static final int textView2=0x7f07000a;
-        public static final int textView3=0x7f07000c;
-        public static final int textView_highscore=0x7f070010;
-        public static final int textView_newGame=0x7f07000e;
-        public static final int textView_resume=0x7f07000f;
+        public static final int layout_customized_difficulty=0x7f070005;
+        public static final int menu_settings=0x7f070010;
+        public static final int radioGroup_difficulty=0x7f070000;
+        public static final int radio_customized=0x7f070004;
+        public static final int radio_easy=0x7f070001;
+        public static final int radio_hard=0x7f070003;
+        public static final int radio_medium=0x7f070002;
+        public static final int textView1=0x7f070006;
+        public static final int textView2=0x7f070008;
+        public static final int textView3=0x7f07000a;
+        public static final int textView_highscore=0x7f07000f;
+        public static final int textView_newGame=0x7f07000d;
+        public static final int textView_resume=0x7f07000e;
     }
     public static final class layout {
         public static final int activity_difficulty=0x7f030000;
