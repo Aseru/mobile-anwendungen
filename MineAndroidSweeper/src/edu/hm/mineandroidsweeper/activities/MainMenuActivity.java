@@ -70,7 +70,7 @@ public class MainMenuActivity extends Activity {
 
 	private void onNewGamesClicked(View view) {
 		Log.d(TAG, getString(R.string.str_dbg_new_game_clicked));
-		Intent intent = new Intent(this, GameActivity.class);
+		Intent intent = new Intent(this, DifficultActivity.class);
 		startActivity(intent);
 	}
 

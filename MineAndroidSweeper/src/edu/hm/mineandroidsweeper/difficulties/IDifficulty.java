@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public interface IDifficulty extends Serializable{
 	
+	public static final String EXTRA_NAME = "edu.hm.mineandroidsweeper.extra.difficulty";
+	
 	/**
 	 * 
 	 * @return the size in x direction

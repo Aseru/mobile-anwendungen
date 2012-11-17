@@ -13,7 +13,7 @@ import android.os.SystemClock;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.difficulties.EasyDifficulty;
+import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.persistence.GameLoader;
 
@@ -32,9 +32,10 @@ public class GameActivity extends Activity {
 	}
 
 	private void init() {
-		getExtras();
+		Bundle extras = getIntent().getExtras();
+		this.game = getGameFromExtras(extras);
 		if (game == null) {
-			game = createNewGame();
+			game = createNewGame(extras);
 		}
 	}
 
@@ -44,10 +45,9 @@ public class GameActivity extends Activity {
 	 * 
 	 * @return a new game
 	 */
-	private Game createNewGame() {
-		Game newGame = new Game(new EasyDifficulty());
-		Intent intent = new Intent(this, DifficultActivity.class);
-		startActivityForResult(intent, 0);
+	private Game createNewGame(Bundle extras) {
+		IDifficulty difficulty = getDifficultyFromExtras(extras);
+		Game newGame = new Game(difficulty);
 		return newGame;
 	}
 	
@@ -61,15 +61,22 @@ public class GameActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	private void getExtras() {
-		Bundle extras = getIntent().getExtras();
-		if (extras == null) {
-			return;
-		}
+	private Game getGameFromExtras(Bundle extras){
+		Game game = null;
 		Serializable serializable = extras.getSerializable(Game.EXTRA_NAME);
 		if (serializable != null) {
 			game = (Game) serializable;
 		}
+		return game;
+	}
+	
+	private IDifficulty getDifficultyFromExtras(Bundle extras){
+		IDifficulty difficulty = null;
+		Serializable serializable = extras.getSerializable(IDifficulty.EXTRA_NAME);
+		if (serializable != null) {
+			difficulty = (IDifficulty) serializable;
+		}
+		return difficulty;
 	}
 
 	private void initView(Bundle savedInstanceState) {
