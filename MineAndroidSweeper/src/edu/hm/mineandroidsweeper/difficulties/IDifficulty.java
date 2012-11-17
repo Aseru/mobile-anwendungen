@@ -22,7 +22,10 @@ public interface IDifficulty extends Serializable{
 	 */
 	public int getNumberOfBombs();
 	
-	
+	/**
+	 * 
+	 * @return the description
+	 */
 	public DifficultyDescription getDescription();
 
 }
