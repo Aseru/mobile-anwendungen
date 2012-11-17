@@ -7,6 +7,9 @@
     <string name="difficulty_medium">Mittel</string>
     <string name="difficulty_hard">Schwer</string>
     <string name="difficulty_customized">Benutzerdefiniert</string>
+
+    <!-- Buttons -->
+    <string name="button_start">Start</string>
     
     <!-- Customized Diffuculty -->
     <string name="custom_length">Länge</string>
