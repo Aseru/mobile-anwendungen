@@ -31,6 +31,18 @@ public class Game implements Serializable {
 		playground = new Playground(this, difficulty);
 		playground.init();
 	}
+	
+	public void setFlag(View view){
+		if (state != GameState.RUNNING) {
+			return;
+		}
+		Object tag = view.getTag();
+		Field field;
+		if (tag instanceof Field) {
+			field = (Field) tag;
+			field.setFlag(!field.isFlag());
+		}
+	}
 
 	public void reveal(View view) {
 		if (state != GameState.RUNNING) {
