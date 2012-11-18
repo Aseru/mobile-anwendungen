@@ -93,4 +93,11 @@ public class Game implements Serializable {
 		this.currentPlaytime = currentPlaytime;
 	}
 
+	/**
+	 * @return the playground
+	 */
+	public Playground getPlayground() {
+		return playground;
+	}
+
 }
