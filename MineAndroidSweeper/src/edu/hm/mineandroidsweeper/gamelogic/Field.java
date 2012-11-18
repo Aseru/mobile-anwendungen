@@ -3,6 +3,8 @@ package edu.hm.mineandroidsweeper.gamelogic;
 import java.io.Serializable;
 import java.util.Map;
 
+import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
+
 import android.view.View;
 
 public class Field implements Serializable {
@@ -16,6 +18,7 @@ public class Field implements Serializable {
 	private boolean isRevealed;
 	private boolean isExploded;
 	private boolean isFlag;
+
 	/**
 	 * @return the isFlag
 	 */
@@ -24,14 +27,14 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @param isFlag the isFlag to set
+	 * @param isFlag
+	 *            the isFlag to set
 	 */
 	public void setFlag(boolean isFlag) {
 		this.isFlag = isFlag;
 	}
 
 	private int value;
-
 
 	/**
 	 * @return the isExploded
@@ -41,7 +44,8 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @param isExploded the isExploded to set
+	 * @param isExploded
+	 *            the isExploded to set
 	 */
 	public void setExploded(boolean isExploded) {
 		this.isExploded = isExploded;
@@ -51,7 +55,7 @@ public class Field implements Serializable {
 	protected Field() {
 		coord = null;
 	}
-	
+
 	public Field(Coordinate coord) {
 		this.coord = coord;
 
@@ -67,7 +71,8 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @param view the view to set
+	 * @param view
+	 *            the view to set
 	 */
 	public void setView(View view) {
 		this.view = view;
@@ -96,9 +101,12 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @param isRevealed the isRevealed to set
+	 * @param isRevealed
+	 *            the isRevealed to set
 	 */
 	public void setRevealed(boolean isRevealed) {
+		if (isRevealed)
+			FieldViewUtil.revealView(this);
 		this.isRevealed = isRevealed;
 	}
 
@@ -149,11 +157,11 @@ public class Field implements Serializable {
 
 		return neighborCoords;
 	}
-	
-	public Field[] getNeighborFields8(Map<Coordinate, Field> map){
+
+	public Field[] getNeighborFields8(Map<Coordinate, Field> map) {
 		Coordinate[] neighborCoords = getNeighborCoords8();
 		Field[] neighborFields = new Field[neighborCoords.length];
-		for(int i = 0; i < neighborFields.length; i++){
+		for (int i = 0; i < neighborFields.length; i++) {
 			neighborFields[i] = map.get(neighborCoords[i]);
 		}
 		return neighborFields;
