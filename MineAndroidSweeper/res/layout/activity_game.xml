@@ -5,10 +5,31 @@
     android:keepScreenOn="true"
     android:orientation="vertical" >
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/layout_playground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
