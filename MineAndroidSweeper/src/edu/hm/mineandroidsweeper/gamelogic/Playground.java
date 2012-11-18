@@ -8,7 +8,7 @@ import java.util.Random;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 
-public class Playground implements Serializable{
+public class Playground implements Serializable {
 
 	private static final long serialVersionUID = 3663292402304734906L;
 
@@ -16,13 +16,14 @@ public class Playground implements Serializable{
 	private final Game game;
 
 	private Map<Coordinate, Field> fieldsMap;
-	
+	private Field[] fieldsArray;
+
 	/* No-args constructor needed for Serialization. */
 	protected Playground() {
 		difficulty = null;
 		game = null;
 	}
-	
+
 	public Playground(Game game, IDifficulty difficulty) {
 		this.game = game;
 		this.difficulty = difficulty;
@@ -30,11 +31,10 @@ public class Playground implements Serializable{
 	}
 
 	public void init() {
-		Field[] fields = createFields(difficulty.getXSize(),
-				difficulty.getYSize());
-		Field[] bombs = setBombs(fields, difficulty);
-		putFieldsInMap(fields);
-		calcFieldValues(fields, bombs);
+		fieldsArray = createFields(difficulty.getXSize(), difficulty.getYSize());
+		Field[] bombs = setBombs(fieldsArray, difficulty);
+		putFieldsInMap(fieldsArray);
+		calcFieldValues(fieldsArray, bombs);
 	}
 
 	private Field[] createFields(int xSize, int ySize) {
@@ -42,8 +42,8 @@ public class Playground implements Serializable{
 		Field field = null;
 		Field[] fields = new Field[xSize * ySize];
 		int count = 0;
-		for (int x = 0; x < xSize; x++) {
-			for (int y = 0; y < ySize; y++) {
+		for (int y = 0; y < ySize; y++) {
+			for (int x = 0; x < xSize; x++) {
 				coord = new Coordinate(x, y);
 				field = new Field(coord);
 				fields[count] = field;
@@ -101,6 +101,7 @@ public class Playground implements Serializable{
 	public void reveal(Field field) {
 		if (field.isBomb()) {
 			game.setState(GameState.LOSE);
+			field.setExploded(true);
 			FieldViewUtil.revealBombs(fieldsMap);
 			return;
 		} else {
@@ -113,6 +114,13 @@ public class Playground implements Serializable{
 	 */
 	public IDifficulty getDifficulty() {
 		return difficulty;
+	}
+
+	/**
+	 * @return the fieldsArray
+	 */
+	public Field[] getFieldsArray() {
+		return fieldsArray;
 	}
 
 	/**
