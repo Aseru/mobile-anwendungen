@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
+import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 
 public class Playground implements Serializable{
 
@@ -100,11 +101,11 @@ public class Playground implements Serializable{
 	public void reveal(Field field) {
 		if (field.isBomb()) {
 			game.setState(GameState.LOSE);
+			FieldViewUtil.revealBombs(fieldsMap);
 			return;
 		} else {
 			FloodFill.fill8(fieldsMap, field);
 		}
-
 	}
 
 	/**
