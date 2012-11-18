@@ -14,8 +14,8 @@ import edu.hm.mineandroidsweeper.gamelogic.Game;
 
 public class FieldViewUtil {
 
-	public static ImageView[] createFieldViews(Context context,
-			final Game game, Field[] fields) {
+	public static ImageView[] createFieldViews(Context context, final Game game) {
+		Field[] fields = game.getPlayground().getFieldsArray();
 		ImageView[] fieldViews = new ImageView[fields.length];
 		ImageView fieldView = null;
 		for (int i = 0; i < fieldViews.length; i++) {
@@ -29,7 +29,7 @@ public class FieldViewUtil {
 				}
 			});
 			fieldView.setOnLongClickListener(new OnLongClickListener() {
-				
+
 				public boolean onLongClick(View v) {
 					game.setFlag(v);
 					return true;
@@ -42,11 +42,13 @@ public class FieldViewUtil {
 
 	public static void revealView(Field field) {
 		ImageView view = (ImageView) field.getView();
-		if (field.isBomb()) {
-			view.setImageResource(R.drawable.tile_bomb);
+		if (view == null)
 			return;
-		} else if (field.isExploded()) {
+		if (field.isExploded()) {
 			view.setImageResource(R.drawable.tile_exploded);
+			return;
+		} else if (field.isBomb()) {
+			view.setImageResource(R.drawable.tile_bomb);
 			return;
 		} else {
 			int value = field.getValue();
@@ -81,19 +83,20 @@ public class FieldViewUtil {
 			}
 		}
 	}
-	
-	public static void setFlagView(Field field){
-		boolean isFlag = field.isFlag();ImageView view = (ImageView) field.getView();
-		if(isFlag){
+
+	public static void setFlagView(Field field) {
+		boolean isFlag = field.isFlag();
+		ImageView view = (ImageView) field.getView();
+		if (isFlag) {
 			view.setImageResource(R.drawable.tile_flag);
-		}else{
+		} else {
 			view.setImageResource(R.drawable.tile);
 		}
 	}
-	
-	public static void revealBombs(Map<Coordinate, Field> map){
-		for(Field field : map.values()){
-			if(field.isBomb())
+
+	public static void revealBombs(Map<Coordinate, Field> map) {
+		for (Field field : map.values()) {
+			if (field.isBomb())
 				revealView(field);
 		}
 	}
