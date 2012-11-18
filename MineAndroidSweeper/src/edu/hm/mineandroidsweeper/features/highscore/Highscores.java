@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.gamelogic;
+package edu.hm.mineandroidsweeper.features.highscore;
 
 import java.io.Serializable;
 import java.util.Collections;

@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-import edu.hm.mineandroidsweeper.gamelogic.Highscores;
+import edu.hm.mineandroidsweeper.features.highscore.Highscores;
 
 public final class HighscorePersistence {
 
