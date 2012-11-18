@@ -3,15 +3,49 @@ package edu.hm.mineandroidsweeper.gamelogic;
 import java.io.Serializable;
 import java.util.Map;
 
+import android.view.View;
+
 public class Field implements Serializable {
 
 	private static final long serialVersionUID = -4780750269865091787L;
 
 	private final Coordinate coord;
 
+	private View view;
 	private boolean isBomb;
 	private boolean isRevealed;
+	private boolean isExploded;
+	private boolean isFlag;
+	/**
+	 * @return the isFlag
+	 */
+	public boolean isFlag() {
+		return isFlag;
+	}
+
+	/**
+	 * @param isFlag the isFlag to set
+	 */
+	public void setFlag(boolean isFlag) {
+		this.isFlag = isFlag;
+	}
+
 	private int value;
+
+
+	/**
+	 * @return the isExploded
+	 */
+	public boolean isExploded() {
+		return isExploded;
+	}
+
+	/**
+	 * @param isExploded the isExploded to set
+	 */
+	public void setExploded(boolean isExploded) {
+		this.isExploded = isExploded;
+	}
 
 	/* No-args constructor needed for Serialization. */
 	protected Field() {
@@ -23,6 +57,20 @@ public class Field implements Serializable {
 
 		isBomb = false;
 		value = 0;
+	}
+
+	/**
+	 * @return the view
+	 */
+	public View getView() {
+		return view;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(View view) {
+		this.view = view;
 	}
 
 	/**
