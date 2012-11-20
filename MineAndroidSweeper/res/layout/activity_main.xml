@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".activities.MainMenuActivity">    
- 
+    android:layout_height="match_parent"
+    tools:context=".activities.MainMenuActivity" >
+
     <TextView
         android:id="@+id/textView_newGame"
         android:layout_width="wrap_content"
@@ -12,10 +12,9 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:clickable="true"
-        android:onClick="@string/new_game_method"
         android:text="@string/new_game"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <TextView
         android:id="@+id/textView_resume"
         android:layout_width="wrap_content"
@@ -24,10 +23,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:onClick="@string/resume_method"
         android:text="@string/resume"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <TextView
         android:id="@+id/textView_highscore"
         android:layout_width="wrap_content"
@@ -36,7 +34,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:clickable="true"
-        android:onClick="@string/highscore_method"
         android:text="@string/highscore"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
