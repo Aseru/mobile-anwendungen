@@ -6,4 +6,8 @@
         <string name="resume">Weiterspielen</string>
         <string name="highscore">Highscore</string>
         
+        <!-- OnClick Methods -->
+        <string name="new_game_method">onNewGamesClicked</string>
+        <string name="resume_method">onResumeClicked</string>
+        <string name="highscore_method">onHighscoreClicked</string>
     </resources>
