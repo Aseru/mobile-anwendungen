@@ -21,7 +21,6 @@ public class MainMenuActivity extends Activity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
         initView();
     }
     
@@ -60,62 +59,30 @@ public class MainMenuActivity extends Activity {
         Log.d(TAG, getString(R.string.str_dbg_resume_clicked));
         Intent intent = new Intent(this, GameActivity.class);
         Game loadedGame = loadGame();
-        if (loadedGame == null) {
-=======
-        setContentView(R.layout.activity_main);
-    }
-    
-    
-    
-    // Click Methods
-    public void onResumeClicked(final View view) {
-        Log.d(TAG, getString(R.string.str_dbg_resume_clicked));
-        Intent intent = new Intent(this, GameActivity.class);
-        Game loadedGame = loadGame();
-        if(loadedGame==null) {
->>>>>>> origin/master
-            // Kein gespeichertes Spiel gefunden
-            return;
+        if (loadedGame != null) {
+            intent.putExtra(Game.EXTRA_NAME, loadedGame);
         }
-        
-        intent.putExtra(Game.EXTRA_NAME, loadedGame);
         startActivity(intent);
     }
     
-<<<<<<< HEAD
     private void onNewGamesClicked(final View view) {
-=======
-    public void onNewGamesClicked(final View view) {
->>>>>>> origin/master
         Log.d(TAG, getString(R.string.str_dbg_new_game_clicked));
         Intent intent = new Intent(this, DifficultActivity.class);
         startActivity(intent);
     }
     
-<<<<<<< HEAD
     private void onHighscoreClicked(final View view) {
         Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
     }
     
-=======
-    public void onHighscoreClicked(final View view) {
-        Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
-    }
-    
-    
->>>>>>> origin/master
     private Game loadGame() {
         Game loadedGame;
         
         FileInputStream fileInputStream;
         try {
             fileInputStream = openFileInput(GameLoader.SAVE_GAME_FILENAME);
-<<<<<<< HEAD
         }
         catch (FileNotFoundException e) {
-=======
-        } catch (FileNotFoundException e) {
->>>>>>> origin/master
             return null;
         }
         
