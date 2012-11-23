@@ -6,6 +6,7 @@
     <string name="str_dbg_highscore_clicked">&quot;clicked on Highscore&quot;</string>
     <string name="str_dbg_resume_clicked">&quot;clicked on Resume&quot;</string>
     
-    <string name="str_dbg_saving_game">&quot;saving game&quot;</string>
+    <!-- GameActivity -->
+    <string name="str_dbg_saving_game">&quot;saving game... saved %1$s&quot;</string>
     
 </resources>
