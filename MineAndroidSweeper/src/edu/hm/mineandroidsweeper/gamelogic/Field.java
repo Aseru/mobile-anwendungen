@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import android.view.View;
+import android.view.ViewParent;
+import android.widget.LinearLayout;
 import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 
 public class Field implements Serializable {
@@ -135,7 +137,8 @@ public class Field implements Serializable {
     public boolean increaseValue() {
         if (isBomb) {
             return false;
-        } else {
+        }
+        else {
             value++;
             return true;
         }
@@ -169,7 +172,6 @@ public class Field implements Serializable {
     
     /*
      * (non-Javadoc)
-     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -177,12 +179,21 @@ public class Field implements Serializable {
         if (o == null || !(o instanceof Field)) {
             return false;
         }
-        Field another = (Field) o;
+        Field another = (Field)o;
         if (coord.equals(another.getCoord())) {
             return true;
         }
         else {
             return false;
+        }
+    }
+    
+    public void removeViewFromParent() {
+        ViewParent viewParent = view.getParent();
+        LinearLayout parent = null;
+        if(viewParent instanceof LinearLayout){
+            parent = (LinearLayout)viewParent;
+            parent.removeView(view);
         }
     }
     
