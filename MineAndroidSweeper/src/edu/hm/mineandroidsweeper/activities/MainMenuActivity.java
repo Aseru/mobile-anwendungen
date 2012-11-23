@@ -1,8 +1,5 @@
 package edu.hm.mineandroidsweeper.activities;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +28,7 @@ public class MainMenuActivity extends Activity {
         newGame.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                onNewGamesClicked(v);
+                onNewGamesClicked();
             }
         });
         
@@ -40,7 +37,7 @@ public class MainMenuActivity extends Activity {
             
             @Override
             public void onClick(final View v) {
-                onResumeClicked(v);
+                onResumeClicked();
             }
         });
         
@@ -49,45 +46,30 @@ public class MainMenuActivity extends Activity {
             
             @Override
             public void onClick(final View v) {
-                onHighscoreClicked(v);
+                onHighscoreClicked();
             }
         });
     }
     
     // Click Methods
-    private void onResumeClicked(final View view) {
+    private void onResumeClicked() {
         Log.d(TAG, getString(R.string.str_dbg_resume_clicked));
         Intent intent = new Intent(this, GameActivity.class);
-        Game loadedGame = loadGame();
+        Game loadedGame = GameLoader.loadGame(this);
         if (loadedGame != null) {
             intent.putExtra(Game.EXTRA_NAME, loadedGame);
         }
         startActivity(intent);
     }
     
-    private void onNewGamesClicked(final View view) {
+    private void onNewGamesClicked() {
         Log.d(TAG, getString(R.string.str_dbg_new_game_clicked));
         Intent intent = new Intent(this, DifficultActivity.class);
         startActivity(intent);
     }
     
-    private void onHighscoreClicked(final View view) {
+    private void onHighscoreClicked() {
         Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
-    }
-    
-    private Game loadGame() {
-        Game loadedGame;
-        
-        FileInputStream fileInputStream;
-        try {
-            fileInputStream = openFileInput(GameLoader.SAVE_GAME_FILENAME);
-        }
-        catch (FileNotFoundException e) {
-            return null;
-        }
-        
-        loadedGame = GameLoader.loadGame(fileInputStream);
-        return loadedGame;
     }
     
 }
