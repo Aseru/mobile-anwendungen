@@ -1,13 +1,9 @@
 package edu.hm.mineandroidsweeper.activities;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -27,28 +23,37 @@ public class GameActivity extends Activity {
     public final static String TAG = "GameActicity";
     
     private Chronometer mChronometer;
-    private Game game = null;
+    private Game game;
     
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
-        initView(savedInstanceState);
+        if (savedInstanceState == null) {
+            init();
+        }
+        else {
+            game = (Game)savedInstanceState.getSerializable(Game.EXTRA_NAME);
+        }
+        initView();
         game.setState(GameState.RUNNING);
     }
     
     private void init() {
-        Bundle extras = getIntent().getExtras();
-        game = getGameFromExtras(extras);
         if (game == null) {
-            game = createNewGame(extras);
+            Bundle extras = getIntent().getExtras();
+            game = getGameFromExtras(extras);
+            if (game == null) {
+                game = createNewGame(extras);
+            }
         }
     }
     
     /**
      * Starts the DifficultyActivity and creates a new game with the user
-     * selected difficulty
+     * selected difficulty.
      * 
+     * @param extras
+     *            the extras bundle
      * @return a new game
      */
     private Game createNewGame(final Bundle extras) {
@@ -58,52 +63,41 @@ public class GameActivity extends Activity {
         return newGame;
     }
     
-    
-    
-    /* (non-Javadoc)
-     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-    
-    private Game getGameFromExtras(final Bundle extras){
-        if(extras == null) {
+    private Game getGameFromExtras(final Bundle extras) {
+        if (extras == null) {
             return null;
         }
-        Game game = null;
+        Game tmpGame = null;
         Serializable serializable = extras.getSerializable(Game.EXTRA_NAME);
-        if (serializable != null) {
-            game = (Game) serializable;
+        if (serializable instanceof Game) {
+            tmpGame = (Game)serializable;
         }
-        return game;
+        return tmpGame;
     }
     
-    private IDifficulty getDifficultyFromExtras(final Bundle extras){
-        if(extras == null) {
+    private IDifficulty getDifficultyFromExtras(final Bundle extras) {
+        if (extras == null) {
             return null;
         }
         IDifficulty difficulty = null;
         Serializable serializable = extras.getSerializable(IDifficulty.EXTRA_NAME);
         if (serializable != null) {
-            difficulty = (IDifficulty) serializable;
+            difficulty = (IDifficulty)serializable;
         }
         return difficulty;
     }
     
-    private void initView(final Bundle savedInstanceState) {
+    private void initView() {
         FieldViewUtil.createFieldViews(this, game);
         View view = PlaygroundViewUtil.createPlayGroundView(this, game.getPlayground());
         setContentView(view);
         initChronometer();
     }
     
-    private void initChronometer(){
-        mChronometer = (Chronometer) findViewById(R.id.chronometer);
+    private void initChronometer() {
+        mChronometer = (Chronometer)findViewById(R.id.chronometer);
         mChronometer.setBase(SystemClock.elapsedRealtime());
-        mChronometer
-        .setOnChronometerTickListener(new OnChronometerTickListener() {
+        mChronometer.setOnChronometerTickListener(new OnChronometerTickListener() {
             
             long base;
             long current;
@@ -114,8 +108,7 @@ public class GameActivity extends Activity {
                 base = chronometer.getBase();
                 current = SystemClock.elapsedRealtime();
                 time = current - base;
-                chronometer.setText(Long.toString(TimeUnit.MILLISECONDS
-                        .toSeconds(time)));
+                chronometer.setText(Long.toString(TimeUnit.MILLISECONDS.toSeconds(time)));
             }
         });
         mChronometer.start();
@@ -123,7 +116,6 @@ public class GameActivity extends Activity {
     
     /*
      * (non-Javadoc)
-     * 
      * @see android.app.Activity#onPause()
      */
     @Override
@@ -136,35 +128,28 @@ public class GameActivity extends Activity {
         long time = current - base;
         game.setCurrentPlaytime(time);
         
-        boolean result = saveTheRunningGame();
-        Log.d(TAG, getString(R.string.str_dbg_saving_game) +"... saved: " +result);
+        boolean result = GameLoader.saveGame(this, game);
+        Log.d(TAG, getString(R.string.str_dbg_saving_game, result));
+    }
+    
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        outState.putSerializable(Game.EXTRA_NAME, game);
+        Log.d(TAG, "onSaveInstance");
+        super.onSaveInstanceState(outState);
     }
     
     /*
      * (non-Javadoc)
-     * 
      * @see android.app.Activity#onResume()
      */
     @Override
     protected void onResume() {
         super.onResume();
+        // TODO load game should run before onCreate is called
+        // game = GameLoader.loadGame(this);
         mChronometer.setBase(SystemClock.elapsedRealtime() - game.getCurrentPlaytime());
         mChronometer.start();
-    }
-    
-    private boolean saveTheRunningGame() {
-        Game tmp = game;
-        
-        FileOutputStream fileOutputStream;
-        try {
-            fileOutputStream = openFileOutput(GameLoader.SAVE_GAME_FILENAME,
-                    Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            return false;
-        }
-        
-        boolean success = GameLoader.saveGame(tmp, fileOutputStream);
-        return success;
     }
     
 }
