@@ -21,6 +21,7 @@ public final class GameLoader {
         FileOutputStream fileOutputStream = null;
         GameState currentState = game.getState();
         if (currentState != GameState.RUNNING) {
+            deleteSaveGame(context);
             return false;
         }
         try {
@@ -37,6 +38,22 @@ public final class GameLoader {
         catch (IOException e) {
             Log.e(TAG, "Exception:", e);
             game.setState(currentState);
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean deleteSaveGame(final Context context) {
+        boolean deleted = context.deleteFile(SAVE_GAME_FILENAME);
+        Log.d(TAG, "Save game deleted: " + deleted);
+        return deleted;
+    }
+    
+    public static boolean saveGameAvailable(final Context context) {
+        try {
+            FileInputStream inStream = context.openFileInput(SAVE_GAME_FILENAME);
+        }
+        catch (Exception exception) {
             return false;
         }
         return true;
