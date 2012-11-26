@@ -7,6 +7,11 @@
     <string name="str_dbg_resume_clicked">&quot;clicked on Resume&quot;</string>
     
     <!-- GameActivity -->
-    <string name="str_dbg_saving_game">&quot;saving game... saved %1$s&quot;</string>
+    <string name="str_dbg_saving_game">&quot;saving game… saved %1$s&quot;</string>
+    
+    <!-- GameLoader -->
+    <string name="str_dbg_delete_save_game">&quot;Save game deleted: %1$s&quot;</string>
+    <string name="str_dbg_loaded_save_game">&quot;Loaded game. File size in bytes: %1$d&quot;</string>
+    
     
 </resources>

@@ -8,6 +8,7 @@ import java.io.OptionalDataException;
 
 import android.content.Context;
 import android.util.Log;
+import edu.hm.mineandroidsweeper.R;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
 import edu.hm.mineandroidsweeper.misc.FileUtil;
@@ -45,7 +46,7 @@ public final class GameLoader {
     
     public static boolean deleteSaveGame(final Context context) {
         boolean deleted = context.deleteFile(SAVE_GAME_FILENAME);
-        Log.d(TAG, "Save game deleted: " + deleted);
+        Log.d(TAG, context.getString(R.string.str_dbg_delete_save_game, deleted));
         return deleted;
     }
     
@@ -69,7 +70,7 @@ public final class GameLoader {
             long fileSize = fileInputStream.getChannel().size();
             object = FileUtil.loadObject(fileInputStream);
             loadedGame = (Game)object;
-            Log.i(TAG, "Loaded game. File size in bytes: " + fileSize);
+            Log.d(TAG, context.getString(R.string.str_dbg_loaded_save_game, fileSize));
             if (loadedGame.getState() == GameState.SAVED) {
                 return loadedGame;
             }
