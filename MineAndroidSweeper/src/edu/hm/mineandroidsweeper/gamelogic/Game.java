@@ -2,13 +2,9 @@ package edu.hm.mineandroidsweeper.gamelogic;
 
 import java.io.Serializable;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import edu.hm.mineandroidsweeper.activities.GameActivity;
-import edu.hm.mineandroidsweeper.dialogs.DialogUtil;
-import edu.hm.mineandroidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
 public class Game implements Serializable {
@@ -25,7 +21,6 @@ public class Game implements Serializable {
     private Playground playground;
     private GameActivity activity;
     private int flagCount;
-    
     
     /* No-args constructor needed for Serialization. */
     protected Game() {
@@ -50,11 +45,11 @@ public class Game implements Serializable {
         Field field;
         if (tag instanceof Field) {
             field = (Field)tag;
-            if(field.isFlag()) {
+            if (field.isFlag()) {
                 field.setFlag(false);
                 flagCount--;
             }
-            else{
+            else {
                 field.setFlag(true);
                 flagCount++;
             }
@@ -76,11 +71,8 @@ public class Game implements Serializable {
         }
     }
     
-    public void lose(final Context context) {
-        setCurrentPlaytime(activity.getChronometerTimeInMillis());
-        double d = currentPlaytime / 1000d;
-        Dialog loseDialog = new GameFinishedDialog(context, false, d);
-        DialogUtil.showDialog(loseDialog);
+    public void endGame() {
+        activity.handleGameEnd();
     }
     
     /**
@@ -97,6 +89,9 @@ public class Game implements Serializable {
     public void setState(final GameState state) {
         this.state = state;
         Log.d(TAG, "set state to: " + state);
+        if (state == GameState.WON || state == GameState.LOSE) {
+            activity.handleGameEnd();
+        }
     }
     
     /**
@@ -131,7 +126,8 @@ public class Game implements Serializable {
     /**
      * Sets the activity to the specified value.
      * 
-     * @param activity the value to set
+     * @param activity
+     *            the value to set
      */
     public void setActivity(final GameActivity activity) {
         this.activity = activity;
@@ -145,7 +141,5 @@ public class Game implements Serializable {
     public int getFlagCount() {
         return flagCount;
     }
-    
-    
     
 }

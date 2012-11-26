@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.TextView;
 import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.dialogs.DialogUtil;
+import edu.hm.mineandroidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
@@ -166,6 +169,16 @@ public class GameActivity extends Activity {
         outState.putSerializable(Game.EXTRA_NAME, game);
         Log.d(TAG, "onSaveInstance");
         super.onSaveInstanceState(outState);
+    }
+    
+    public void handleGameEnd(){
+        GameState state = game.getState();
+        boolean won = (state == GameState.WON);
+        long time = getChronometerTimeInMillis();
+        mChronometer.stop();
+        double d = time / 1000d;
+        Dialog loseDialog = new GameFinishedDialog(this, won, d);
+        DialogUtil.showDialog(loseDialog);
     }
     
     /*

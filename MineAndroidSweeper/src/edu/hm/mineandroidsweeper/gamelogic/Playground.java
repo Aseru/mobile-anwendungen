@@ -126,7 +126,6 @@ public class Playground implements Serializable {
         game.setState(GameState.LOSE);
         field.setExploded(true);
         FieldViewUtil.revealBombs(fieldsMap);
-        game.lose(field.getView().getContext());
         return;
     }
     
