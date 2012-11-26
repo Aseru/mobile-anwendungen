@@ -33,6 +33,7 @@ public class Field implements Serializable {
      */
     public void setFlag(final boolean isFlag) {
         this.isFlag = isFlag;
+        FieldViewUtil.setFlagView(this);
     }
     
     private int value;
