@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
+import android.widget.TextView;
 import edu.hm.mineandroidsweeper.R;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
@@ -92,6 +93,25 @@ public class GameActivity extends Activity {
         View view = PlaygroundViewUtil.createPlayGroundView(this, game.getPlayground());
         setContentView(view);
         initChronometer();
+        initInfoBar();
+    }
+    
+    public void setFlagCount(final int count) {
+        View view = findViewById(R.id.txt_flags);
+        if (view instanceof TextView) {
+            TextView textView = (TextView)view;
+            textView.setText(Integer.toString(count));
+        }
+    }
+    
+    private void initInfoBar() {
+        TextView textView = null;
+        View view = findViewById(R.id.txt_bombs);
+        if (view instanceof TextView) {
+            textView = (TextView)view;
+            textView.setText(Integer.toString(game.getDifficulty().getNumberOfBombs()));
+        }
+        setFlagCount(0);
     }
     
     private void initChronometer() {
