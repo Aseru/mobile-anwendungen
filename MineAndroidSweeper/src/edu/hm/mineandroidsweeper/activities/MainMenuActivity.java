@@ -21,6 +21,13 @@ public class MainMenuActivity extends Activity {
         initView();
     }
     
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView resume = (TextView)findViewById(R.id.textView_resume);
+        resume.setEnabled(GameLoader.saveGameAvailable(this));
+    }
+    
     private void initView() {
         setContentView(R.layout.activity_main);
         
