@@ -16,8 +16,8 @@
     <!-- Dialogs -->
     <!-- GameFinishedDialog -->
     <string name="dialog_finished_won_title">Geschafft!</string>
-    <string name="dialog_finished_won_message">Herzlichen Glückwünsch du hast gewonnen. \n Deine Zeit %1$d</string>
+    <string name="dialog_finished_won_message">Herzlichen Glückwünsch du hast gewonnen.\nDeine Zeit: %1$.3f Sekunden.</string>
     <string name="dialog_finished_lose_title">Schade</string>
-    <string name="dialog_finished_lose_message">Vielleicht klappt es ja beim nächsten mal \n Deine Zeit %1$d</string>
+    <string name="dialog_finished_lose_message">Vielleicht klappt es ja beim nächsten mal.\nDeine Zeit: %1$.3f Sekunden.</string>
 
 </resources>

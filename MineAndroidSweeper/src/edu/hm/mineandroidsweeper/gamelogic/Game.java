@@ -77,7 +77,9 @@ public class Game implements Serializable {
     }
     
     public void lose(final Context context) {
-        Dialog loseDialog = new GameFinishedDialog(context, false, getCurrentPlaytime());
+        setCurrentPlaytime(activity.getChronometerTimeInMillis());
+        double d = currentPlaytime / 1000d;
+        Dialog loseDialog = new GameFinishedDialog(context, false, d);
         DialogUtil.showDialog(loseDialog);
     }
     

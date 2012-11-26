@@ -129,10 +129,22 @@ public class GameActivity extends Activity {
                 base = chronometer.getBase();
                 current = SystemClock.elapsedRealtime();
                 time = current - base;
-                chronometer.setText(Long.toString(TimeUnit.MILLISECONDS.toSeconds(time)));
+                chronometer.setText(Long.toString(getChronometerTimeInSeconds()));
             }
         });
         mChronometer.start();
+    }
+    
+    public long getChronometerTimeInMillis() {
+        long base = mChronometer.getBase();
+        long current = SystemClock.elapsedRealtime();
+        long time = current - base;
+        return time;
+    }
+    
+    public long getChronometerTimeInSeconds(){
+        long millis = getChronometerTimeInMillis();
+        return TimeUnit.MILLISECONDS.toSeconds(millis);
     }
     
     /*
@@ -142,12 +154,8 @@ public class GameActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        
         mChronometer.stop();
-        long base = mChronometer.getBase();
-        long current = SystemClock.elapsedRealtime();
-        long time = current - base;
-        game.setCurrentPlaytime(time);
+        game.setCurrentPlaytime(getChronometerTimeInMillis());
         
         boolean result = GamePersistanceManager.saveGame(this, game);
         Log.d(TAG, getString(R.string.str_dbg_saving_game, result));

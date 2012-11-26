@@ -12,13 +12,13 @@ public class GameFinishedDialog extends AlertDialog {
     
     private final Context context;
     
-    public GameFinishedDialog(final Context context, final boolean isWon, final long time) {
+    public GameFinishedDialog(final Context context, final boolean isWon, final double time) {
         super(context);
         this.context = context;
         init(isWon, time);
     }
     
-    private void init(final boolean isWon, final long time) {
+    private void init(final boolean isWon, final double time) {
         setCancelable(true);
         String title;
         String message;
