@@ -25,12 +25,12 @@ public class GameFinishedDialog extends AlertDialog {
         if(isWon){
             title = context.getString(R.string.dialog_finished_won_title);
             message = context.getString(R.string.dialog_finished_won_message, time);
-            setIcon(android.R.drawable.btn_plus);
+            setIcon(R.drawable.smily_happy);
         }
         else {
             title = context.getString(R.string.dialog_finished_lose_title);
             message = context.getString(R.string.dialog_finished_lose_message, time);
-            setIcon(android.R.drawable.btn_minus);
+            setIcon(R.drawable.smily_sad);
         }
         setTitle(title);
         setMessage(message);
