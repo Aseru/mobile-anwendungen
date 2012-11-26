@@ -4,16 +4,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
-import java.io.OutputStream;
 
 import android.content.Context;
 import android.util.Log;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
+import edu.hm.mineandroidsweeper.misc.FileUtil;
 
 public final class GameLoader {
     
@@ -23,12 +20,14 @@ public final class GameLoader {
     public static boolean saveGame(final Context context, final Game game) {
         FileOutputStream fileOutputStream = null;
         GameState currentState = game.getState();
-        
+        if (currentState != GameState.RUNNING) {
+            return false;
+        }
         try {
             fileOutputStream = context.openFileOutput(GameLoader.SAVE_GAME_FILENAME,
                     Context.MODE_PRIVATE);
-            saveObject(fileOutputStream, game);
             game.setState(GameState.SAVED);
+            FileUtil.saveObject(fileOutputStream, game);
         }
         catch (FileNotFoundException e) {
             Log.e(TAG, "Exception:", e);
@@ -43,22 +42,6 @@ public final class GameLoader {
         return true;
     }
     
-    public static void saveObject(final OutputStream outStream, final Object object)
-            throws IOException {
-        ObjectOutputStream objectOutputStream = null;
-        objectOutputStream = new ObjectOutputStream(outStream);
-        objectOutputStream.writeObject(object);
-        objectOutputStream.close();
-    }
-    
-    public static Object loadObject(final InputStream inStream) throws OptionalDataException,
-    ClassNotFoundException, IOException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(inStream);
-        Object object = objectInputStream.readObject();
-        objectInputStream.close();
-        return object;
-    }
-    
     public static Game loadGame(final Context context) {
         Game loadedGame = null;
         FileInputStream fileInputStream = null;
@@ -66,8 +49,13 @@ public final class GameLoader {
         Object object;
         try {
             fileInputStream = context.openFileInput(SAVE_GAME_FILENAME);
-            object = loadObject(fileInputStream);
-            loadedGame = (Game) object;
+            long fileSize = fileInputStream.getChannel().size();
+            object = FileUtil.loadObject(fileInputStream);
+            loadedGame = (Game)object;
+            Log.i(TAG, "Loaded game. File size in bytes: " + fileSize);
+            if (loadedGame.getState() == GameState.SAVED) {
+                return loadedGame;
+            }
         }
         catch (OptionalDataException e) {
             Log.e(TAG, "Exception:", e);
@@ -78,6 +66,6 @@ public final class GameLoader {
         catch (IOException e) {
             Log.e(TAG, "Exception:", e);
         }
-        return loadedGame;
+        return null;
     }
 }
