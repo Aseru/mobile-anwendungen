@@ -36,6 +36,7 @@ public class GameActivity extends Activity {
             game = (Game)savedInstanceState.getSerializable(Game.EXTRA_NAME);
         }
         initView();
+        game.setActivity(this);
         game.setState(GameState.RUNNING);
     }
     
@@ -111,7 +112,7 @@ public class GameActivity extends Activity {
             textView = (TextView)view;
             textView.setText(Integer.toString(game.getDifficulty().getNumberOfBombs()));
         }
-        setFlagCount(0);
+        setFlagCount(game.getFlagCount());
     }
     
     private void initChronometer() {
@@ -166,8 +167,6 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO load game should run before onCreate is called
-        // game = GameLoader.loadGame(this);
         mChronometer.setBase(SystemClock.elapsedRealtime() - game.getCurrentPlaytime());
         mChronometer.start();
     }

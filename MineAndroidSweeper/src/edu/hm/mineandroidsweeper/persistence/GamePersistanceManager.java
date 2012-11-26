@@ -29,6 +29,7 @@ public final class GamePersistanceManager {
             fileOutputStream = context.openFileOutput(GamePersistanceManager.SAVE_GAME_FILENAME,
                     Context.MODE_PRIVATE);
             game.setState(GameState.SAVED);
+            game.setActivity(null);
             FileUtil.saveObject(fileOutputStream, game);
         }
         catch (FileNotFoundException e) {

@@ -43,6 +43,9 @@ public class FieldViewUtil {
             if (fields[i].isRevealed()) {
                 revealView(fields[i]);
             }
+            if(fields[i].isFlag()){
+                setFlagView(fields[i]);
+            }
             fieldViews[i] = fieldView;
         }
         return fieldViews;

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import edu.hm.mineandroidsweeper.activities.GameActivity;
 import edu.hm.mineandroidsweeper.dialogs.DialogUtil;
 import edu.hm.mineandroidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
@@ -19,9 +20,12 @@ public class Game implements Serializable {
     
     private final IDifficulty difficulty;
     
+    private long currentPlaytime;
     private GameState state;
     private Playground playground;
-    private long currentPlaytime;
+    private GameActivity activity;
+    private int flagCount;
+    
     
     /* No-args constructor needed for Serialization. */
     protected Game() {
@@ -46,7 +50,15 @@ public class Game implements Serializable {
         Field field;
         if (tag instanceof Field) {
             field = (Field)tag;
-            field.setFlag(!field.isFlag());
+            if(field.isFlag()) {
+                field.setFlag(false);
+                flagCount--;
+            }
+            else{
+                field.setFlag(true);
+                flagCount++;
+            }
+            activity.setFlagCount(flagCount);
         }
     }
     
@@ -113,5 +125,25 @@ public class Game implements Serializable {
     public Playground getPlayground() {
         return playground;
     }
+    
+    /**
+     * Sets the activity to the specified value.
+     * 
+     * @param activity the value to set
+     */
+    public void setActivity(final GameActivity activity) {
+        this.activity = activity;
+    }
+    
+    /**
+     * Returns the flagCount.
+     * 
+     * @return the flagCount
+     */
+    public int getFlagCount() {
+        return flagCount;
+    }
+    
+    
     
 }
