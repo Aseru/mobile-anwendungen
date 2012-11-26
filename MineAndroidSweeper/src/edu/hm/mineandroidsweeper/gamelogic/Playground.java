@@ -98,14 +98,36 @@ public class Playground implements Serializable {
     
     public void reveal(final Field field) {
         if (field.isBomb()) {
-            game.setState(GameState.LOSE);
-            field.setExploded(true);
-            FieldViewUtil.revealBombs(fieldsMap);
-            return;
+            handleBomb(field);
         }
         else {
             FloodFill.fill8(fieldsMap, field);
+            if (checkIfGameIsWon()) {
+                game.setState(GameState.WON);
+            }
         }
+    }
+    
+    private boolean checkIfGameIsWon() {
+        boolean allRevealed = true;
+        Field field;
+        for (int i = 0; i < fieldsArray.length; i++) {
+            field = fieldsArray[i];
+            if (!field.isBomb() && !field.isRevealed()) {
+                allRevealed = false;
+                break;
+            }
+            
+        }
+        return allRevealed;
+    }
+    
+    private void handleBomb(final Field field) {
+        game.setState(GameState.LOSE);
+        field.setExploded(true);
+        FieldViewUtil.revealBombs(fieldsMap);
+        game.lose(field.getView().getContext());
+        return;
     }
     
     /**

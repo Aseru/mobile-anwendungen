@@ -2,8 +2,12 @@ package edu.hm.mineandroidsweeper.gamelogic;
 
 import java.io.Serializable;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import edu.hm.mineandroidsweeper.dialogs.DialogUtil;
+import edu.hm.mineandroidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
 public class Game implements Serializable {
@@ -34,14 +38,14 @@ public class Game implements Serializable {
         playground.init();
     }
     
-    public void setFlag(final View view){
+    public void setFlag(final View view) {
         if (state != GameState.RUNNING) {
             return;
         }
         Object tag = view.getTag();
         Field field;
         if (tag instanceof Field) {
-            field = (Field) tag;
+            field = (Field)tag;
             field.setFlag(!field.isFlag());
         }
     }
@@ -53,9 +57,16 @@ public class Game implements Serializable {
         Object tag = view.getTag();
         Field field;
         if (tag instanceof Field) {
-            field = (Field) tag;
-            playground.reveal(field);
+            field = (Field)tag;
+            if (!field.isRevealed()) {
+                playground.reveal(field);
+            }
         }
+    }
+    
+    public void lose(final Context context) {
+        Dialog loseDialog = new GameFinishedDialog(context, false, getCurrentPlaytime());
+        DialogUtil.showDialog(loseDialog);
     }
     
     /**
