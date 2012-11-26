@@ -19,7 +19,7 @@ public class FieldViewUtil {
         ImageView[] fieldViews = new ImageView[fields.length];
         ImageView fieldView = null;
         for (int i = 0; i < fieldViews.length; i++) {
-            if(fields[i].getView() != null){
+            if (fields[i].getView() != null) {
                 continue;
             }
             fieldView = new ImageView(context);
@@ -40,23 +40,28 @@ public class FieldViewUtil {
                     return true;
                 }
             });
+            if (fields[i].isRevealed()) {
+                revealView(fields[i]);
+            }
             fieldViews[i] = fieldView;
         }
         return fieldViews;
     }
     
     public static void revealView(final Field field) {
-        ImageView view = (ImageView) field.getView();
+        ImageView view = (ImageView)field.getView();
         if (view == null) {
             return;
         }
         if (field.isExploded()) {
             view.setImageResource(R.drawable.tile_exploded);
             return;
-        } else if (field.isBomb()) {
+        }
+        else if (field.isBomb()) {
             view.setImageResource(R.drawable.tile_bomb);
             return;
-        } else {
+        }
+        else {
             int value = field.getValue();
             switch (value) {
                 case 0:
@@ -92,10 +97,11 @@ public class FieldViewUtil {
     
     public static void setFlagView(final Field field) {
         boolean isFlag = field.isFlag();
-        ImageView view = (ImageView) field.getView();
+        ImageView view = (ImageView)field.getView();
         if (isFlag) {
             view.setImageResource(R.drawable.tile_flag);
-        } else {
+        }
+        else {
             view.setImageResource(R.drawable.tile);
         }
     }
