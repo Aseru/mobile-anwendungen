@@ -16,7 +16,7 @@ import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
 import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 import edu.hm.mineandroidsweeper.graphics.PlaygroundViewUtil;
-import edu.hm.mineandroidsweeper.persistence.GameLoader;
+import edu.hm.mineandroidsweeper.persistence.GamePersistanceManager;
 
 public class GameActivity extends Activity {
     
@@ -128,7 +128,7 @@ public class GameActivity extends Activity {
         long time = current - base;
         game.setCurrentPlaytime(time);
         
-        boolean result = GameLoader.saveGame(this, game);
+        boolean result = GamePersistanceManager.saveGame(this, game);
         Log.d(TAG, getString(R.string.str_dbg_saving_game, result));
     }
     

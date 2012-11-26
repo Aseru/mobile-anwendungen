@@ -13,7 +13,7 @@ import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
 import edu.hm.mineandroidsweeper.misc.FileUtil;
 
-public final class GameLoader {
+public final class GamePersistanceManager {
     
     public static final String TAG = "GameLoader";
     public static final String SAVE_GAME_FILENAME = "ms_savegame_data.ser";
@@ -26,7 +26,7 @@ public final class GameLoader {
             return false;
         }
         try {
-            fileOutputStream = context.openFileOutput(GameLoader.SAVE_GAME_FILENAME,
+            fileOutputStream = context.openFileOutput(GamePersistanceManager.SAVE_GAME_FILENAME,
                     Context.MODE_PRIVATE);
             game.setState(GameState.SAVED);
             FileUtil.saveObject(fileOutputStream, game);
