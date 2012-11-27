@@ -22,7 +22,7 @@ import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 import edu.hm.mineandroidsweeper.graphics.PlaygroundViewUtil;
 import edu.hm.mineandroidsweeper.persistence.GamePersistanceManager;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements IGameActivity {
     
     public final static String TAG = "GameActicity";
     
@@ -41,6 +41,7 @@ public class GameActivity extends Activity {
         initView();
         game.setActivity(this);
         game.setState(GameState.RUNNING);
+        
     }
     
     private void init() {
@@ -100,7 +101,7 @@ public class GameActivity extends Activity {
         initInfoBar();
     }
     
-    public void setFlagCount(final int count) {
+    private void setFlagCount(final int count) {
         View view = findViewById(R.id.txt_flags);
         if (view instanceof TextView) {
             TextView textView = (TextView)view;
@@ -123,29 +124,21 @@ public class GameActivity extends Activity {
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.setOnChronometerTickListener(new OnChronometerTickListener() {
             
-            long base;
-            long current;
-            long time;
-            
             @Override
             public void onChronometerTick(final Chronometer chronometer) {
-                base = chronometer.getBase();
-                current = SystemClock.elapsedRealtime();
-                time = current - base;
                 chronometer.setText(Long.toString(getChronometerTimeInSeconds()));
             }
         });
         mChronometer.start();
     }
     
-    public long getChronometerTimeInMillis() {
+    private long getChronometerTimeInMillis() {
         long base = mChronometer.getBase();
         long current = SystemClock.elapsedRealtime();
-        long time = current - base;
-        return time;
+        return current - base;
     }
     
-    public long getChronometerTimeInSeconds(){
+    private long getChronometerTimeInSeconds() {
         long millis = getChronometerTimeInMillis();
         return TimeUnit.MILLISECONDS.toSeconds(millis);
     }
@@ -171,7 +164,8 @@ public class GameActivity extends Activity {
         super.onSaveInstanceState(outState);
     }
     
-    public void handleGameEnd(){
+    @Override
+    public void handleGameEnd() {
         GameState state = game.getState();
         boolean won = (state == GameState.WON);
         long time = getChronometerTimeInMillis();
@@ -179,6 +173,12 @@ public class GameActivity extends Activity {
         double d = time / 1000d;
         Dialog loseDialog = new GameFinishedDialog(this, won, d);
         DialogUtil.showDialog(loseDialog);
+    }
+    
+    @Override
+    public void updateFlagCount() {
+        int flagCount = game.getFlagCount();
+        setFlagCount(flagCount);
     }
     
     /*

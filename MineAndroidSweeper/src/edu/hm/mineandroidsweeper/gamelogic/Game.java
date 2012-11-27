@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import android.util.Log;
 import android.view.View;
-import edu.hm.mineandroidsweeper.activities.GameActivity;
+import edu.hm.mineandroidsweeper.activities.IGameActivity;
 import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
 
 public class Game implements Serializable {
@@ -19,7 +19,7 @@ public class Game implements Serializable {
     private long currentPlaytime;
     private GameState state;
     private Playground playground;
-    private GameActivity activity;
+    private IGameActivity activity;
     private int flagCount;
     
     /* No-args constructor needed for Serialization. */
@@ -53,7 +53,7 @@ public class Game implements Serializable {
                 field.setFlag(true);
                 flagCount++;
             }
-            activity.setFlagCount(flagCount);
+            activity.updateFlagCount();
         }
     }
     
@@ -129,7 +129,7 @@ public class Game implements Serializable {
      * @param activity
      *            the value to set
      */
-    public void setActivity(final GameActivity activity) {
+    public void setActivity(final IGameActivity activity) {
         this.activity = activity;
     }
     
