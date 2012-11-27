@@ -177,7 +177,7 @@ public class Field implements Serializable {
      */
     @Override
     public boolean equals(final Object o) {
-        if (o == null || !(o instanceof Field)) {
+        if (!(o instanceof Field)) {
             return false;
         }
         Field another = (Field)o;
@@ -192,7 +192,7 @@ public class Field implements Serializable {
     public void removeViewFromParent() {
         ViewParent viewParent = view.getParent();
         LinearLayout parent = null;
-        if(viewParent instanceof LinearLayout){
+        if (viewParent instanceof LinearLayout) {
             parent = (LinearLayout)viewParent;
             parent.removeView(view);
         }
