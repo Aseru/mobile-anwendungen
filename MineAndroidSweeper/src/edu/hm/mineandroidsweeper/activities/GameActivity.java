@@ -162,8 +162,6 @@ public class GameActivity extends Activity implements IGameActivity {
             game.setCurrentPlaytime(getChronometerTimeInMillis());
             GamePersistenceManager.saveGame(this, game);
         }
-        else {
-        }
         super.onStop();
     }
     
