@@ -190,6 +190,9 @@ public class Field implements Serializable {
     }
     
     public void removeViewFromParent() {
+        if (view == null) {
+            return;
+        }
         ViewParent viewParent = view.getParent();
         LinearLayout parent = null;
         if (viewParent instanceof LinearLayout) {
