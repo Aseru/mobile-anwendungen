@@ -2,16 +2,23 @@
 <resources>
     
     <!-- MainMenuActivity -->
-    <string name="str_dbg_new_game_clicked">&quot;clicked on New Game&quot;</string>
-    <string name="str_dbg_highscore_clicked">&quot;clicked on Highscore&quot;</string>
-    <string name="str_dbg_resume_clicked">&quot;clicked on Resume&quot;</string>
+    <string name="str_dbg_new_game_clicked">Clicked on New Game</string>
+    <string name="str_dbg_highscore_clicked">Clicked on Highscore</string>
+    <string name="str_dbg_resume_clicked">Clicked on Resume</string>
     
     <!-- GameActivity -->
-    <string name="str_dbg_saving_game">&quot;saving game… saved %1$s&quot;</string>
+    <string name="str_dbg_handle_game_end">handleGameEnd() called</string>
     
     <!-- GameLoader -->
-    <string name="str_dbg_delete_save_game">&quot;Save game deleted: %1$s&quot;</string>
-    <string name="str_dbg_loaded_save_game">&quot;Loaded game. File size in bytes: %1$d&quot;</string>
+    <string name="str_dbg_delete_save_game">Save game deleted: %1$s</string>
+    <string name="str_dbg_saving_game">Game saved: %1$s</string>
+    <string name="str_dbg_loaded_save_game">Loaded game. File size in bytes: %1$d</string>
     
+    <!-- General -->
+    <string name="str_dbg_on_create">onCreate(Bundle) called</string>
+    <string name="str_dbg_on_start">onStart() called</string>
+    <string name="str_dbg_on_stop">onStop() called</string>
+    <string name="str_dbg_on_resume">onResume() called</string>
+    <string name="str_dbg_exception">Exception: </string>
     
 </resources>

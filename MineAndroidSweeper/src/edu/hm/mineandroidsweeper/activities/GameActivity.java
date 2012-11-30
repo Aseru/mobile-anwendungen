@@ -22,27 +22,19 @@ import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 import edu.hm.mineandroidsweeper.graphics.PlaygroundViewUtil;
 import edu.hm.mineandroidsweeper.persistence.GamePersistanceManager;
 
+/**
+ * Activity for the game <br>
+ * creates the all views and handles the game.
+ */
 public class GameActivity extends Activity implements IGameActivity {
     
-    public final static String TAG = "GameActicity";
+    /**
+     * Tag used for logging.
+     */
+    public static final String TAG = "GameActicity";
     
     private Chronometer mChronometer;
     private Game game;
-    
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            init();
-        }
-        else {
-            game = (Game)savedInstanceState.getSerializable(Game.EXTRA_NAME);
-        }
-        initView();
-        game.setActivity(this);
-        game.setState(GameState.RUNNING);
-        
-    }
     
     private void init() {
         if (game == null) {
@@ -51,6 +43,7 @@ public class GameActivity extends Activity implements IGameActivity {
             if (game == null) {
                 game = createNewGame(extras);
             }
+            game.setState(GameState.RUNNING);
         }
     }
     
@@ -120,16 +113,18 @@ public class GameActivity extends Activity implements IGameActivity {
     }
     
     private void initChronometer() {
-        mChronometer = (Chronometer)findViewById(R.id.chronometer);
-        mChronometer.setBase(SystemClock.elapsedRealtime());
-        mChronometer.setOnChronometerTickListener(new OnChronometerTickListener() {
-            
-            @Override
-            public void onChronometerTick(final Chronometer chronometer) {
-                chronometer.setText(Long.toString(getChronometerTimeInSeconds()));
-            }
-        });
-        mChronometer.start();
+        View view = findViewById(R.id.chronometer);
+        if (view instanceof Chronometer) {
+            mChronometer = (Chronometer)view;
+            mChronometer.setBase(SystemClock.elapsedRealtime());
+            mChronometer.setOnChronometerTickListener(new OnChronometerTickListener() {
+                
+                @Override
+                public void onChronometerTick(final Chronometer chronometer) {
+                    setChronometerTime(getChronometerTimeInMillis());
+                }
+            });
+        }
     }
     
     private long getChronometerTimeInMillis() {
@@ -138,38 +133,64 @@ public class GameActivity extends Activity implements IGameActivity {
         return current - base;
     }
     
-    private long getChronometerTimeInSeconds() {
-        long millis = getChronometerTimeInMillis();
-        return TimeUnit.MILLISECONDS.toSeconds(millis);
+    private void setChronometerTime(final long time) {
+        long timeInSecs = TimeUnit.MILLISECONDS.toSeconds(time);
+        mChronometer.setText(Long.toString(timeInSecs));
+    }
+    
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        Log.d(TAG, getString(R.string.str_dbg_on_create));
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+    }
+    
+    @Override
+    protected void onStart() {
+        Log.d(TAG, getString(R.string.str_dbg_on_start));
+        init();
+        initView();
+        game.setActivity(this);
+        super.onStart();
+    }
+    
+    @Override
+    protected void onStop() {
+        Log.d(TAG, getString(R.string.str_dbg_on_stop));
+        mChronometer.stop();
+        if (game.getState() == GameState.RUNNING) {
+            game.setCurrentPlaytime(getChronometerTimeInMillis());
+            GamePersistanceManager.saveGame(this, game);
+        }
+        else {
+            GamePersistanceManager.deleteSaveGame(this);
+        }
+        super.onStop();
     }
     
     /*
      * (non-Javadoc)
-     * @see android.app.Activity#onPause()
+     * @see android.app.Activity#onResume()
      */
     @Override
-    protected void onPause() {
-        super.onPause();
-        mChronometer.stop();
-        game.setCurrentPlaytime(getChronometerTimeInMillis());
-        
-        boolean result = GamePersistanceManager.saveGame(this, game);
-        Log.d(TAG, getString(R.string.str_dbg_saving_game, result));
-    }
-    
-    @Override
-    protected void onSaveInstanceState(final Bundle outState) {
-        outState.putSerializable(Game.EXTRA_NAME, game);
-        Log.d(TAG, "onSaveInstance");
-        super.onSaveInstanceState(outState);
+    protected void onResume() {
+        Log.d(TAG, getString(R.string.str_dbg_on_resume));
+        super.onResume();
+        mChronometer.setBase(SystemClock.elapsedRealtime() - game.getCurrentPlaytime());
+        setChronometerTime(game.getCurrentPlaytime());
+        if (game.getState() == GameState.RUNNING) {
+            mChronometer.start();
+        }
     }
     
     @Override
     public void handleGameEnd() {
+        Log.d(TAG, getString(R.string.str_dbg_handle_game_end));
         GameState state = game.getState();
-        boolean won = (state == GameState.WON);
+        boolean won = state == GameState.WON;
         long time = getChronometerTimeInMillis();
         mChronometer.stop();
+        game.setCurrentPlaytime(time);
         double d = time / 1000d;
         Dialog loseDialog = new GameFinishedDialog(this, won, d);
         DialogUtil.showDialog(loseDialog);
@@ -179,17 +200,6 @@ public class GameActivity extends Activity implements IGameActivity {
     public void updateFlagCount() {
         int flagCount = game.getFlagCount();
         setFlagCount(flagCount);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see android.app.Activity#onResume()
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mChronometer.setBase(SystemClock.elapsedRealtime() - game.getCurrentPlaytime());
-        mChronometer.start();
     }
     
 }
