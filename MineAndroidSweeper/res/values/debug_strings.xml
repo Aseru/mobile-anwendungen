@@ -9,10 +9,11 @@
     <!-- GameActivity -->
     <string name="str_dbg_handle_game_end">handleGameEnd() called</string>
     
-    <!-- GameLoader -->
+    <!-- GamePersistenceManager -->
     <string name="str_dbg_delete_save_game">Save game deleted: %1$s</string>
     <string name="str_dbg_saving_game">Game saved: %1$s</string>
     <string name="str_dbg_loaded_save_game">Loaded game. File size in bytes: %1$d</string>
+    <string name="str_dbg_save_game_available">Save game available: %1$s</string>
     
     <!-- General -->
     <string name="str_dbg_on_create">onCreate(Bundle) called</string>

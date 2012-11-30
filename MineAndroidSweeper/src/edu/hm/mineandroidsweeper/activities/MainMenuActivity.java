@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import edu.hm.mineandroidsweeper.R;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
-import edu.hm.mineandroidsweeper.persistence.GamePersistanceManager;
+import edu.hm.mineandroidsweeper.persistence.GamePersistenceManager;
 
 public class MainMenuActivity extends Activity {
     
@@ -22,10 +22,13 @@ public class MainMenuActivity extends Activity {
     }
     
     @Override
-    protected void onResume() {
-        super.onResume();
-        TextView resume = (TextView)findViewById(R.id.textView_resume);
-        resume.setEnabled(GamePersistanceManager.saveGameAvailable(this));
+    protected void onPostResume() {
+        super.onPostResume();
+        View view = findViewById(R.id.textView_resume);
+        if (view instanceof TextView) {
+            TextView resume = (TextView)view;
+            resume.setEnabled(GamePersistenceManager.saveGameAvailable(this));
+        }
     }
     
     private void initView() {
@@ -62,7 +65,7 @@ public class MainMenuActivity extends Activity {
     private void onResumeClicked() {
         Log.d(TAG, getString(R.string.str_dbg_resume_clicked));
         Intent intent = new Intent(this, GameActivity.class);
-        Game loadedGame = GamePersistanceManager.loadGame(this);
+        Game loadedGame = GamePersistenceManager.loadGame(this);
         if (loadedGame != null) {
             intent.putExtra(Game.EXTRA_NAME, loadedGame);
         }

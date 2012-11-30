@@ -20,7 +20,7 @@ import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
 import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
 import edu.hm.mineandroidsweeper.graphics.PlaygroundViewUtil;
-import edu.hm.mineandroidsweeper.persistence.GamePersistanceManager;
+import edu.hm.mineandroidsweeper.persistence.GamePersistenceManager;
 
 /**
  * Activity for the game <br>
@@ -160,10 +160,9 @@ public class GameActivity extends Activity implements IGameActivity {
         mChronometer.stop();
         if (game.getState() == GameState.RUNNING) {
             game.setCurrentPlaytime(getChronometerTimeInMillis());
-            GamePersistanceManager.saveGame(this, game);
+            GamePersistenceManager.saveGame(this, game);
         }
         else {
-            GamePersistanceManager.deleteSaveGame(this);
         }
         super.onStop();
     }
@@ -186,10 +185,12 @@ public class GameActivity extends Activity implements IGameActivity {
     @Override
     public void handleGameEnd() {
         Log.d(TAG, getString(R.string.str_dbg_handle_game_end));
+        GamePersistenceManager.deleteSaveGame(this);
         GameState state = game.getState();
         boolean won = state == GameState.WON;
-        long time = getChronometerTimeInMillis();
         mChronometer.stop();
+        long time = getChronometerTimeInMillis();
+        setChronometerTime(time);
         game.setCurrentPlaytime(time);
         double d = time / 1000d;
         Dialog loseDialog = new GameFinishedDialog(this, won, d);

@@ -16,15 +16,19 @@ import edu.hm.mineandroidsweeper.misc.FileUtil;
 /**
  * Class to manage the save game persistence.
  */
-public final class GamePersistanceManager {
+public final class GamePersistenceManager {
     
-    private GamePersistanceManager() {
-    }
+    /**
+     * 
+     * Creates a new instance of {@link GamePersistenceManager}.
+     * This constructor should never be called.
+     */
+    private GamePersistenceManager() { }
     
     /**
      * Tag used for logging.
      */
-    public static final String TAG = "GameLoader";
+    public static final String TAG = "GamePersistenceManager";
     
     /**
      * File name for save game.
@@ -45,7 +49,7 @@ public final class GamePersistanceManager {
         GameState currentState = game.getState();
         boolean success = false;
         try {
-            fileOutputStream = context.openFileOutput(GamePersistanceManager.SAVE_GAME_FILENAME,
+            fileOutputStream = context.openFileOutput(GamePersistenceManager.SAVE_GAME_FILENAME,
                     Context.MODE_PRIVATE);
             game.setState(GameState.SAVED);
             game.setActivity(null);
@@ -86,13 +90,16 @@ public final class GamePersistanceManager {
      * @return true if there is a save game.
      */
     public static boolean saveGameAvailable(final Context context) {
+        boolean available = false;
         try {
             context.openFileInput(SAVE_GAME_FILENAME);
+            available = true;
         }
         catch (FileNotFoundException exception) {
-            return false;
+            available = false;
         }
-        return true;
+        Log.d(TAG, context.getString(R.string.str_dbg_save_game_available, available));
+        return available;
     }
     
     /**
