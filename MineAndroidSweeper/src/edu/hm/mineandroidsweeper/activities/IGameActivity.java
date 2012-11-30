@@ -1,13 +1,19 @@
 package edu.hm.mineandroidsweeper.activities;
 
 /**
- * TODO: Document type IGameActivity.
+ * Provides callback methods to handle the game end and to update the flag
+ * count.
  */
 public interface IGameActivity {
     
-    public void handleGameEnd();
+    /**
+     * Callback method to handle the game end.
+     */
+    void handleGameEnd();
     
-    public void updateFlagCount();
+    /**
+     * Callback method to update the flag count.
+     */
+    void updateFlagCount();
     
 }
-
