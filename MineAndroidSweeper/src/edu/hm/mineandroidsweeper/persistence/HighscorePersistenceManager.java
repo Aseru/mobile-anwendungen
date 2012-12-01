@@ -16,6 +16,13 @@ import edu.hm.mineandroidsweeper.misc.FileUtil;
  */
 public final class HighscorePersistenceManager {
     
+    /**
+     * 
+     * Creates a new instance of {@link GamePersistenceManager}.
+     * This constructor should never be called.
+     */
+    private HighscorePersistenceManager() { }
+    
     
     /**
      * Tag used for logging.
