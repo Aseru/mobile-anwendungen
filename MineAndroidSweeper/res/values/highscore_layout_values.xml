@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
     <dimen name="table_padding">10dp</dimen>
-    <dimen name="tablerow_padding_top">10dp</dimen>
+    <dimen name="tablerow_padding_top">5dp</dimen>
     <dimen name="tablerow_contents_padding">5dp</dimen>
     
     <dimen name="index_width">20dp</dimen>
@@ -14,5 +14,19 @@
     <string name="index_3">3</string>
     <string name="index_4">4</string>
     <string name="index_5">5</string>
+    
+    
+    <string name="name_1">name_1</string>
+    <string name="name_2">name_2</string>
+    <string name="name_3">name_3</string>
+    <string name="name_4">name_4</string>
+    <string name="name_5">name_5</string>
+    
+    
+    <string name="score_1">score_1</string>
+    <string name="score_2">score_2</string>
+    <string name="score_3">score_3</string>
+    <string name="score_4">score_4</string>
+    <string name="score_5">score_5</string>
     
 </resources>

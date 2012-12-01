@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="name_1" />
+                    android:text="@string/name_1" />
 
                 <TextView
                     android:id="@+id/score1"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="score_1" />
+                    android:text="@string/score_1" />
 
             </TableRow>
 
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="name_2" />
+                    android:text="@string/name_2" />
 
 
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="score_2" />
+                    android:text="@string/score_2" />
             </TableRow>
 
             <TableRow
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="name_3" />
+                    android:text="@string/name_3" />
 
 
 
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="score_3" />
+                    android:text="@string/score_3" />
             </TableRow>
 
             <TableRow
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="name_4" />
+                    android:text="@string/name_4" />
 
 
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="score_4" />
+                    android:text="@string/score_4" />
             </TableRow>
 
             <TableRow
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="name_5" />
+                    android:text="@string/name_5" />
 
 
 
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
 					android:padding="@dimen/tablerow_contents_padding"
-                    android:text="score_5" />
+                    android:text="@string/score_5" />
             </TableRow>
 
         </TableLayout>
