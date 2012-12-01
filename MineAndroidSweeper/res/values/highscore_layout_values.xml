@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <dimen name="table_padding">10dp</dimen>
+    <dimen name="tablerow_padding_top">10dp</dimen>
+    <dimen name="tablerow_contents_padding">5dp</dimen>
+    
+    <dimen name="index_width">20dp</dimen>
+    <dimen name="name_width">100dp</dimen>
+    <dimen name="score_width">100dp</dimen>
+    
+    <string name="index_1">1</string>
+    <string name="index_2">2</string>
+    <string name="index_3">3</string>
+    <string name="index_4">4</string>
+    <string name="index_5">5</string>
+    
+</resources>
