@@ -22,7 +22,7 @@ public class Game implements Serializable {
     private IGameActivity activity;
     private int flagCount;
     
-    /* No-args constructor needed for Serialization. */
+    /** No-args constructor needed for Serialization. */
     protected Game() {
         difficulty = null;
     }
@@ -74,10 +74,6 @@ public class Game implements Serializable {
         }
     }
     
-    public void endGame() {
-        activity.handleGameEnd();
-    }
-    
     /**
      * @return the state
      */
@@ -93,7 +89,9 @@ public class Game implements Serializable {
         this.state = state;
         Log.d(TAG, "set state to: " + state);
         if (state == GameState.WON || state == GameState.LOSE) {
-            activity.handleGameEnd();
+            if (activity != null) {
+                activity.handleGameEnd();
+            }
         }
     }
     

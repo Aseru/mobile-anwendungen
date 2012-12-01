@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import edu.hm.mineandroidsweeper.R;
 import edu.hm.mineandroidsweeper.features.highscore.Highscores;
-import edu.hm.mineandroidsweeper.persistence.GamePersistenceManager;
+import edu.hm.mineandroidsweeper.persistence.HighscorePersistenceManager;
 
 
 
@@ -26,7 +26,7 @@ public class HighscoreActivity extends Activity {
     private View initView() {
         View highscoreView = getLayoutInflater().inflate(R.layout.activity_highscore, null);
         
-        Highscores highscores = GamePersistenceManager.loadHighscores(this);
+        Highscores highscores = HighscorePersistenceManager.loadHighscores(this);
         
         highscoreView.findViewById(R.id.name1);
         
