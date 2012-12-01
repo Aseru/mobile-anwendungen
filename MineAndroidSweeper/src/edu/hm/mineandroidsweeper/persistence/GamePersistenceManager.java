@@ -9,6 +9,7 @@ import java.io.OptionalDataException;
 import android.content.Context;
 import android.util.Log;
 import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.features.highscore.Highscores;
 import edu.hm.mineandroidsweeper.gamelogic.Game;
 import edu.hm.mineandroidsweeper.gamelogic.GameState;
 import edu.hm.mineandroidsweeper.misc.FileUtil;
@@ -34,6 +35,12 @@ public final class GamePersistenceManager {
      * File name for save game.
      */
     public static final String SAVE_GAME_FILENAME = "ms_savegame_data.ser";
+    
+    /**
+     * File name for highscores.
+     */
+    public static final String HIGHSCORES_FILENAME = "ms_highscore_data.ser";
+    
     
     /**
      * Saves the passed game to internal storage. <br>
@@ -134,5 +141,55 @@ public final class GamePersistenceManager {
             Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
         }
         return null;
+    }
+    
+    
+    /**
+     * Loads the Highscores from the internal storage.
+     * 
+     * @param context The context of this application.
+     * @return The Highscores loaded.
+     */
+    public static Highscores loadHighscores(final Context context) {
+        Highscores loadedHighscores = null;
+        FileInputStream fileInputStream = null;
+        Object object;
+        try {
+            fileInputStream = context.openFileInput(HIGHSCORES_FILENAME);
+            object = FileUtil.loadObject(fileInputStream);
+            loadedHighscores = (Highscores)object;
+            Log.d(TAG, context.getString(R.string.str_dbg_loaded_highscores));
+            return loadedHighscores;
+        }
+        catch (IOException ioe) {
+            Log.e(TAG, context.getString(R.string.str_dbg_exception), ioe);
+        }
+        catch (ClassNotFoundException e) {
+            Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
+        }
+        return null;
+    }
+    
+    
+    
+    /**
+     * Saves the Highscores to internal storage.
+     * 
+     * @param context The context of this application.
+     * @param highscores The Highscores object to save.
+     */
+    public static void saveHighscores(final Context context, final Highscores highscores) {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = context.openFileOutput(GamePersistenceManager.HIGHSCORES_FILENAME, Context.MODE_PRIVATE);
+            FileUtil.saveObject(fileOutputStream, highscores);
+        }
+        catch (FileNotFoundException e) {
+            Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
+        }
+        catch (IOException e) {
+            Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
+        }
+        
     }
 }
