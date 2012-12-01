@@ -5,15 +5,15 @@
     android:gravity="center_horizontal"
     android:keepScreenOn="true"
     android:orientation="vertical" >
-    
-    <include layout="@layout/info_bar"/>
+
+    <include layout="@layout/info_bar" />
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:fillViewport="true"
-        android:paddingTop="10dp"
-        android:layout_gravity="center_horizontal" >
+        android:paddingTop="10dp" >
 
         <ScrollView
             android:layout_width="wrap_content"

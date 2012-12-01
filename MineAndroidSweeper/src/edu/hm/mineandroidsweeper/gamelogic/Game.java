@@ -45,6 +45,9 @@ public class Game implements Serializable {
         Field field;
         if (tag instanceof Field) {
             field = (Field)tag;
+            if (field.isRevealed()) {
+                return;
+            }
             if (field.isFlag()) {
                 field.setFlag(false);
                 flagCount--;
