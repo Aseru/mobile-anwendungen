@@ -88,10 +88,8 @@ public class Game implements Serializable {
     public void setState(final GameState state) {
         this.state = state;
         Log.d(TAG, "set state to: " + state);
-        if (state == GameState.WON || state == GameState.LOSE) {
-            if (activity != null) {
-                activity.handleGameEnd();
-            }
+        if (state == GameState.WON || state == GameState.LOSE && activity != null) {
+            activity.handleGameEnd();
         }
     }
     
