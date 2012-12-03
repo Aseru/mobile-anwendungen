@@ -35,6 +35,7 @@ public class GameActivity extends Activity implements IGameActivity {
     
     private Chronometer mChronometer;
     private Game game;
+    private Dialog gameEndDialog;
     
     private void init() {
         if (game == null) {
@@ -138,10 +139,24 @@ public class GameActivity extends Activity implements IGameActivity {
         mChronometer.setText(Long.toString(timeInSecs));
     }
     
+    private void openGameEndDialog() {
+        boolean won = false;
+        if (game.getState() == GameState.WON) {
+            won = true;
+        }
+        long time = game.getCurrentPlaytime();
+        double d = time / 1000d;
+        gameEndDialog = new GameFinishedDialog(this, won, d);
+        DialogUtil.showDialog(gameEndDialog);
+    }
+    
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         Log.d(TAG, getString(R.string.str_dbg_on_create));
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            game = (Game)savedInstanceState.getSerializable(Game.TAG);
+        }
         setContentView(R.layout.activity_game);
     }
     
@@ -151,6 +166,9 @@ public class GameActivity extends Activity implements IGameActivity {
         init();
         initView();
         game.setActivity(this);
+        if (game.getState() == GameState.SAVED) {
+            game.setState(GameState.RUNNING);
+        }
         super.onStart();
     }
     
@@ -158,11 +176,22 @@ public class GameActivity extends Activity implements IGameActivity {
     protected void onStop() {
         Log.d(TAG, getString(R.string.str_dbg_on_stop));
         mChronometer.stop();
+        game.setActivity(null);
         if (game.getState() == GameState.RUNNING) {
             game.setCurrentPlaytime(getChronometerTimeInMillis());
             GamePersistenceManager.saveGame(this, game);
         }
+        if (gameEndDialog != null && gameEndDialog.isShowing()) {
+            gameEndDialog.dismiss();
+        }
         super.onStop();
+    }
+    
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        Log.d(TAG, getString(R.string.str_dbg_on_save_instance));
+        outState.putSerializable(Game.TAG, game);
+        super.onSaveInstanceState(outState);
     }
     
     /*
@@ -178,21 +207,20 @@ public class GameActivity extends Activity implements IGameActivity {
         if (game.getState() == GameState.RUNNING) {
             mChronometer.start();
         }
+        else {
+            openGameEndDialog();
+        }
     }
     
     @Override
     public void handleGameEnd() {
         Log.d(TAG, getString(R.string.str_dbg_handle_game_end));
         GamePersistenceManager.deleteSaveGame(this);
-        GameState state = game.getState();
-        boolean won = state == GameState.WON;
         mChronometer.stop();
         long time = getChronometerTimeInMillis();
         setChronometerTime(time);
         game.setCurrentPlaytime(time);
-        double d = time / 1000d;
-        Dialog loseDialog = new GameFinishedDialog(this, won, d);
-        DialogUtil.showDialog(loseDialog);
+        openGameEndDialog();
     }
     
     @Override

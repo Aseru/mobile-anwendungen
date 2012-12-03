@@ -25,4 +25,7 @@ public class DialogUtil {
         handler.post(runnable);
     }
     
+    public static void dismissDialog(final Dialog dialog){
+    }
+    
 }

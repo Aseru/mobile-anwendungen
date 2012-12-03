@@ -21,6 +21,7 @@
     <string name="str_dbg_on_start">onStart() called</string>
     <string name="str_dbg_on_stop">onStop() called</string>
     <string name="str_dbg_on_resume">onResume() called</string>
+    <string name="str_dbg_on_save_instance">onSaveInstanceState(Bundle) called</string>
     <string name="str_dbg_exception">Exception: </string>
     
 </resources>
