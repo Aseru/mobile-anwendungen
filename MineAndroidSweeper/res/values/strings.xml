@@ -19,5 +19,9 @@
     <string name="dialog_finished_won_message">Herzlichen Glückwünsch du hast gewonnen.\nDeine Zeit: %1$.3f Sekunden.</string>
     <string name="dialog_finished_lose_title">Schade</string>
     <string name="dialog_finished_lose_message">Vielleicht klappt es ja beim nächsten mal.\nDeine Zeit: %1$.3f Sekunden.</string>
+    <string name="dialog_finished_button_back">Zurück</string>
+    <string name="dialog_finished_button_restart">Nochmal</string>
+    <string name="dialog_finished_button_highscore">Highscore</string>
 
+    
 </resources>
