@@ -3,7 +3,10 @@ package edu.hm.mineandroidsweeper.dialogs;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import edu.hm.mineandroidsweeper.R;
+import edu.hm.mineandroidsweeper.activities.DifficultActivity;
+import edu.hm.mineandroidsweeper.activities.MainMenuActivity;
 
 /**
  * TODO: Document type GameFinishedDialog.
@@ -19,7 +22,7 @@ public class GameFinishedDialog extends AlertDialog {
     }
     
     private void init(final boolean isWon, final double time) {
-        setCancelable(false);
+        setCancelable(true);
         String title;
         String message;
         if (isWon) {
@@ -44,6 +47,9 @@ public class GameFinishedDialog extends AlertDialog {
             
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
+                Intent intent = new Intent(context, MainMenuActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
                 dialog.dismiss();
             }
         });
@@ -61,8 +67,9 @@ public class GameFinishedDialog extends AlertDialog {
             
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                // TODO Auto-generated method stub
-                
+                Intent intent = new Intent(context, DifficultActivity.class);
+                context.startActivity(intent);
+                dialog.dismiss();
             }
         });
     }
