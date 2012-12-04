@@ -22,6 +22,13 @@
     <string name="dialog_finished_button_back">Zurück</string>
     <string name="dialog_finished_button_restart">Nochmal</string>
     <string name="dialog_finished_button_highscore">Highscore</string>
+    
+    <!-- Toasts -->
+    <string name="toast_max_length">Maximale Länge: %1$s.</string>
+    <string name="toast_max_width">Maximale Breite: %1$s.</string>
+    <string name="toast_max_bombs">Zuviele Bomben.</string>
+    <string name="toast_min_bombs">Mindestens eine Bombe.</string>
+    
 
     
 </resources>
