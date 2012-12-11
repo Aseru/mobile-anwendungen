@@ -1,12 +1,12 @@
-package edu.hm.mineandroidsweeper.gamelogic;
+package edu.hm.androidsweeper.gamelogic;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
-import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.graphics.FieldViewUtil;
 
 public class Playground implements Serializable {
     

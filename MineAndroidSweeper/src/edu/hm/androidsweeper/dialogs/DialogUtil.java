@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.dialogs;
+package edu.hm.androidsweeper.dialogs;
 
 import android.app.Dialog;
 import android.os.Handler;

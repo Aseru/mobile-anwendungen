@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.activities;
+package edu.hm.androidsweeper.activities;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
@@ -12,15 +12,15 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.TextView;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.dialogs.DialogUtil;
-import edu.hm.mineandroidsweeper.dialogs.GameFinishedDialog;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
-import edu.hm.mineandroidsweeper.gamelogic.Game;
-import edu.hm.mineandroidsweeper.gamelogic.GameState;
-import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
-import edu.hm.mineandroidsweeper.graphics.PlaygroundViewUtil;
-import edu.hm.mineandroidsweeper.persistence.GamePersistenceManager;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.dialogs.DialogUtil;
+import edu.hm.androidsweeper.dialogs.GameFinishedDialog;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
+import edu.hm.androidsweeper.graphics.FieldViewUtil;
+import edu.hm.androidsweeper.graphics.PlaygroundViewUtil;
+import edu.hm.androidsweeper.persistence.GamePersistenceManager;
 
 /**
  * Activity for the game <br>

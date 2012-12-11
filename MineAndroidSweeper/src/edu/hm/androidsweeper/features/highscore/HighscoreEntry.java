@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.features.highscore;
+package edu.hm.androidsweeper.features.highscore;
 
 import java.io.Serializable;
 

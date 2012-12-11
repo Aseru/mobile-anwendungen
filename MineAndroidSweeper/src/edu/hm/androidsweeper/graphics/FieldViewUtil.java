@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.graphics;
+package edu.hm.androidsweeper.graphics;
 
 import java.util.Map;
 
@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.gamelogic.Coordinate;
-import edu.hm.mineandroidsweeper.gamelogic.Field;
-import edu.hm.mineandroidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.gamelogic.Coordinate;
+import edu.hm.androidsweeper.gamelogic.Field;
+import edu.hm.androidsweeper.gamelogic.Game;
 
 public class FieldViewUtil {
     

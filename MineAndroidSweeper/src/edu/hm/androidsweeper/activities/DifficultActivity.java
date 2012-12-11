@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.activities;
+package edu.hm.androidsweeper.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,14 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.difficulties.CustomizedDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.EasyDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.HardDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.InvalidConfigException;
-import edu.hm.mineandroidsweeper.difficulties.MediumDifficulty;
-import edu.hm.mineandroidsweeper.misc.ToastUtil;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
+import edu.hm.androidsweeper.difficulties.EasyDifficulty;
+import edu.hm.androidsweeper.difficulties.HardDifficulty;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.difficulties.InvalidConfigException;
+import edu.hm.androidsweeper.difficulties.MediumDifficulty;
+import edu.hm.androidsweeper.misc.ToastUtil;
 
 public class DifficultActivity extends Activity {
     

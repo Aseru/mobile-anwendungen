@@ -1,6 +1,6 @@
-package edu.hm.mineandroidsweeper.difficulties;
+package edu.hm.androidsweeper.difficulties;
 
-import edu.hm.mineandroidsweeper.R;
+import edu.hm.androidsweeper.R;
 
 public class CustomizedDifficulty implements IDifficulty {
     

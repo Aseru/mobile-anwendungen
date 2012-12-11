@@ -1,12 +1,12 @@
-package edu.hm.mineandroidsweeper.dialogs;
+package edu.hm.androidsweeper.dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.activities.DifficultActivity;
-import edu.hm.mineandroidsweeper.activities.MainMenuActivity;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.activities.DifficultActivity;
+import edu.hm.androidsweeper.activities.MainMenuActivity;
 
 /**
  * TODO: Document type GameFinishedDialog.

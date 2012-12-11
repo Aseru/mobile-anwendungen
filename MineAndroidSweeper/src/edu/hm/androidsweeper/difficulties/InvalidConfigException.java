@@ -1,6 +1,6 @@
-package edu.hm.mineandroidsweeper.difficulties;
+package edu.hm.androidsweeper.difficulties;
 
-import edu.hm.mineandroidsweeper.application.App;
+import edu.hm.androidsweeper.application.App;
 
 /**
  * TODO: Document type InvalidConfigException.

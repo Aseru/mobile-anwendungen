@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.application;
+package edu.hm.androidsweeper.application;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.misc;
+package edu.hm.androidsweeper.misc;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

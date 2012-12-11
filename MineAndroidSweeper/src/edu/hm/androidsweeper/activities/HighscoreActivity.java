@@ -1,11 +1,11 @@
-package edu.hm.mineandroidsweeper.activities;
+package edu.hm.androidsweeper.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.features.highscore.Highscores;
-import edu.hm.mineandroidsweeper.persistence.HighscorePersistenceManager;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.features.highscore.Highscores;
+import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
 
 
 

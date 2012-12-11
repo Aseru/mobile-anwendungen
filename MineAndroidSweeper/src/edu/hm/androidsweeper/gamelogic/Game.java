@@ -1,11 +1,11 @@
-package edu.hm.mineandroidsweeper.gamelogic;
+package edu.hm.androidsweeper.gamelogic;
 
 import java.io.Serializable;
 
 import android.util.Log;
 import android.view.View;
-import edu.hm.mineandroidsweeper.activities.IGameActivity;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.activities.IGameActivity;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
 
 public class Game implements Serializable {
     

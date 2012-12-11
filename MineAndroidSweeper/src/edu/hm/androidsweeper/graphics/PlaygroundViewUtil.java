@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.graphics;
+package edu.hm.androidsweeper.graphics;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.gamelogic.Field;
-import edu.hm.mineandroidsweeper.gamelogic.Playground;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.gamelogic.Field;
+import edu.hm.androidsweeper.gamelogic.Playground;
 
 public class PlaygroundViewUtil {
     

@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.gamelogic;
+package edu.hm.androidsweeper.gamelogic;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.LinearLayout;
-import edu.hm.mineandroidsweeper.graphics.FieldViewUtil;
+import edu.hm.androidsweeper.graphics.FieldViewUtil;
 
 public class Field implements Serializable {
     

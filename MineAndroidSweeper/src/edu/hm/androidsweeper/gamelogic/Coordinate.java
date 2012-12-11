@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.gamelogic;
+package edu.hm.androidsweeper.gamelogic;
 
 import java.io.Serializable;
 

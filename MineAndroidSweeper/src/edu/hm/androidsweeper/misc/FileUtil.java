@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.misc;
+package edu.hm.androidsweeper.misc;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.persistence;
+package edu.hm.androidsweeper.persistence;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import android.content.Context;
 import android.util.Log;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.features.highscore.Highscores;
-import edu.hm.mineandroidsweeper.misc.FileUtil;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.features.highscore.Highscores;
+import edu.hm.androidsweeper.misc.FileUtil;
 
 /**
  * Class to manage the highscore persistence.

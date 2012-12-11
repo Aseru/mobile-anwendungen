@@ -1,12 +1,12 @@
-package edu.hm.mineandroidsweeper.features.highscore;
+package edu.hm.androidsweeper.features.highscore;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
-import edu.hm.mineandroidsweeper.difficulties.DifficultyDescription;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.difficulties.DifficultyDescription;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
 
 public final class Highscores implements Serializable {
     

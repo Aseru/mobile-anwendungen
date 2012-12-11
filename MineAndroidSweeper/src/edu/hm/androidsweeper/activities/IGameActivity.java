@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.activities;
+package edu.hm.androidsweeper.activities;
 
 /**
  * Provides callback methods to handle the game end and to update the flag

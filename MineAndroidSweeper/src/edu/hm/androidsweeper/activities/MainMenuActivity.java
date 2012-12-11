@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.activities;
+package edu.hm.androidsweeper.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.gamelogic.Game;
-import edu.hm.mineandroidsweeper.persistence.GamePersistenceManager;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.persistence.GamePersistenceManager;
 
 public class MainMenuActivity extends Activity {
     

@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.difficulties;
+package edu.hm.androidsweeper.difficulties;
 
 public class MediumDifficulty implements IDifficulty {
 	

@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.difficulties;
+package edu.hm.androidsweeper.difficulties;
 
 import java.io.Serializable;
 

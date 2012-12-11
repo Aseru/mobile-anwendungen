@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.persistence;
+package edu.hm.androidsweeper.persistence;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,10 +8,10 @@ import java.io.OptionalDataException;
 
 import android.content.Context;
 import android.util.Log;
-import edu.hm.mineandroidsweeper.R;
-import edu.hm.mineandroidsweeper.gamelogic.Game;
-import edu.hm.mineandroidsweeper.gamelogic.GameState;
-import edu.hm.mineandroidsweeper.misc.FileUtil;
+import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
+import edu.hm.androidsweeper.misc.FileUtil;
 
 /**
  * Class to manage the save game persistence.
