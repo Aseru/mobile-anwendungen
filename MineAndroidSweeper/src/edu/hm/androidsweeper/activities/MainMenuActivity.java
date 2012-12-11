@@ -80,6 +80,8 @@ public class MainMenuActivity extends Activity {
     
     private void onHighscoreClicked() {
         Log.d(TAG, getString(R.string.str_dbg_highscore_clicked));
+        Intent intent = new Intent(this, HighscoreActivity.class);
+        startActivity(intent);
     }
     
 }

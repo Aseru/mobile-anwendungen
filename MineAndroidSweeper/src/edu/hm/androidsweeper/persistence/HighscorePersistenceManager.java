@@ -83,4 +83,11 @@ public final class HighscorePersistenceManager {
         
     }
     
+    
+    public static Highscores initNewHighscores(final Context context) {
+        Highscores result = Highscores.emptyHighscores();
+        saveHighscores(context, result);
+        return result;
+    }
+    
 }
