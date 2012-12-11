@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".activities.DifficultActivity" >
 
     <RadioGroup
         android:id="@+id/radioGroup_difficulty"
@@ -49,70 +51,77 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:paddingTop="20dp"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/custom_length"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <EditText
-                android:id="@+id/editNumber_length"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </LinearLayout>
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="@string/custom_length"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/custom_width"
+                android:layout_weight="0.2"
+                android:layout_marginLeft="20dp"
+                android:text="1"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <EditText
-                android:id="@+id/editNumber_width"
-                android:layout_width="wrap_content"
+            <SeekBar
+                android:id="@+id/seekBar_length"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="10" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/custom_bombs"
+                android:layout_marginRight="20dp"
+                android:layout_weight="0.2"
+                android:text="2"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <EditText
-                android:id="@+id/editNumber_bombs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="@string/custom_width"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SeekBar
+            android:id="@+id/seekBar_width"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="@string/custom_bombs"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SeekBar
+            android:id="@+id/seekBar_bombs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
     </LinearLayout>
 
     <Button
@@ -121,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_customized_difficulty"
         android:layout_centerHorizontal="true"
-       	android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         android:text="@string/button_start" />
 
 </RelativeLayout>
