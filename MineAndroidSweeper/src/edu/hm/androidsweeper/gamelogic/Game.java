@@ -19,7 +19,7 @@ public class Game implements Serializable {
     private long currentPlaytime;
     private GameState state;
     private Playground playground;
-    private IGameActivity activity;
+    private transient IGameActivity activity;
     private int flagCount;
     
     /** No-args constructor needed for Serialization. */
