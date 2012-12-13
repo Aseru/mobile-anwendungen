@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
 import edu.hm.androidsweeper.difficulties.EasyDifficulty;
@@ -28,6 +29,13 @@ public class DifficultActivity extends Activity {
     private SeekBar seekWidth;
     private SeekBar seekBombs;
     
+    private TextView actualLength;
+    private TextView actualWidth;
+    private TextView actualBombs;
+    private TextView maxLength;
+    private TextView maxWidth;
+    private TextView maxBombs;
+    
     /*
      * (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -41,23 +49,55 @@ public class DifficultActivity extends Activity {
     private void initView() {
         setContentView(R.layout.activity_difficulty);
         addOnClickListeners();
-        setDefaultValuesForCustomizedDifficulty();
+        initTextViews();
+        initSeekBars();
+        update();
     }
     
-    private void setDefaultValuesForCustomizedDifficulty() {
+    private void initTextViews() {
+        View view = findViewById(R.id.textView_actual_bombs);
+        if (view instanceof TextView) {
+            actualBombs = (TextView)view;
+            actualBombs.setText(Integer.toString(CustomizedDifficulty.DEFAULT_BOMBS));
+        }
+        view = findViewById(R.id.textView_actual_length);
+        if (view instanceof TextView) {
+            actualLength = (TextView)view;
+            actualLength.setText(Integer.toString(CustomizedDifficulty.DEFAULT_SIZE));
+        }
+        view = findViewById(R.id.textView_actual_width);
+        if (view instanceof TextView) {
+            actualWidth = (TextView)view;
+            actualWidth.setText(Integer.toString(CustomizedDifficulty.DEFAULT_SIZE));
+        }
+        view = findViewById(R.id.textView_max_bombs);
+        if (view instanceof TextView) {
+            maxBombs = (TextView)view;
+            maxBombs.setText(Integer.toString(calcMaxBombs()));
+        }
+        view = findViewById(R.id.textView_max_length);
+        if (view instanceof TextView) {
+            maxLength = (TextView)view;
+            maxLength.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
+        }
+        view = findViewById(R.id.textView_max_width);
+        if (view instanceof TextView) {
+            maxWidth = (TextView)view;
+            maxWidth.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
+        }
+    }
+    
+    private void initSeekBars() {
         View view = findViewById(R.id.seekBar_length);
         if (view instanceof SeekBar) {
             seekLength = (SeekBar)view;
             if (seekLength.getProgress() == 0) {
                 seekLength.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
             }
+            seekLength.setMax(CustomizedDifficulty.MAX_SIZE - 1);
             seekLength.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
-                }
+                public void onStopTrackingTouch(final SeekBar seekBar) {}
                 
                 @Override
                 public void onStartTrackingTouch(final SeekBar seekBar) {}
@@ -65,10 +105,7 @@ public class DifficultActivity extends Activity {
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress,
                         final boolean fromUser) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
-                    updateMaxBombs();
+                    update();
                 }
             });
         }
@@ -78,13 +115,10 @@ public class DifficultActivity extends Activity {
             if (seekWidth.getProgress() == 0) {
                 seekWidth.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
             }
+            seekWidth.setMax(CustomizedDifficulty.MAX_SIZE - 1);
             seekWidth.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
-                }
+                public void onStopTrackingTouch(final SeekBar seekBar) {}
                 
                 @Override
                 public void onStartTrackingTouch(final SeekBar seekBar) {}
@@ -92,10 +126,7 @@ public class DifficultActivity extends Activity {
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress,
                         final boolean fromUser) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
-                    updateMaxBombs();
+                    update();
                 }
             });
         }
@@ -103,16 +134,11 @@ public class DifficultActivity extends Activity {
         if (view instanceof SeekBar) {
             seekBombs = (SeekBar)view;
             if (seekBombs.getProgress() == 0) {
-                seekBombs.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
-                updateMaxBombs();
+                seekBombs.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_BOMBS - 1));
             }
             seekBombs.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
-                }
+                public void onStopTrackingTouch(final SeekBar seekBar) {}
                 
                 @Override
                 public void onStartTrackingTouch(final SeekBar seekBar) {}
@@ -120,18 +146,21 @@ public class DifficultActivity extends Activity {
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress,
                         final boolean fromUser) {
-                    if (seekBar.getProgress() < 1) {
-                        seekBar.setProgress(1);
-                    }
+                    update();
                 }
             });
         }
     }
     
-    private void updateMaxBombs() {
-        int xSize = seekLength.getProgress();
-        int ySize = seekWidth.getProgress();
-        seekBombs.setMax((xSize * ySize) - 1);
+    private void update() {
+        int xSize = seekLength.getProgress() + 1;
+        int ySize = seekWidth.getProgress() + 1;
+        seekBombs.setMax(Math.min(CustomizedDifficulty.MAX_BOMBS - 1, (xSize * ySize) - 2));
+        maxBombs.setText(Integer.toString((xSize * ySize) - 1));
+        int bombs = seekBombs.getProgress() + 1;
+        actualLength.setText(Integer.toString(xSize));
+        actualWidth.setText(Integer.toString(ySize));
+        actualBombs.setText(Integer.toString(bombs));
     }
     
     private void addOnClickListeners() {
@@ -191,6 +220,12 @@ public class DifficultActivity extends Activity {
         });
     }
     
+    private int calcMaxBombs() {
+        int lenght = Integer.parseInt((String)actualLength.getText());
+        int width = Integer.parseInt((String)actualWidth.getText());
+        return lenght * width;
+    }
+    
     private void startGame() throws InvalidConfigException {
         IDifficulty difficulty = getDifficulty();
         Intent intent = new Intent(this, GameActivity.class);
@@ -213,13 +248,12 @@ public class DifficultActivity extends Activity {
                 difficulty = new HardDifficulty();
                 break;
             case R.id.radio_customized:
-                int xSize = seekLength.getProgress();
-                int ySize = seekWidth.getProgress();
-                int numberOfBombs = seekBombs.getProgress();
+                int xSize = Integer.parseInt((String)actualLength.getText());
+                int ySize = Integer.parseInt((String)actualWidth.getText());
+                int numberOfBombs = Integer.parseInt((String)actualBombs.getText());
                 difficulty = new CustomizedDifficulty(xSize, ySize, numberOfBombs);
                 break;
         }
         return difficulty;
     }
-    
 }
