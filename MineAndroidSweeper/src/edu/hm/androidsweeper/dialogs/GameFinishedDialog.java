@@ -80,6 +80,7 @@ public class GameFinishedDialog extends AlertDialog {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 Intent intent = new Intent(context, DifficultActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
                 dialog.dismiss();
             }
