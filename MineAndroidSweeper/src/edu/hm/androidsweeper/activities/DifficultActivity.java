@@ -85,6 +85,16 @@ public class DifficultActivity extends Activity {
             maxWidth = (TextView)view;
             maxWidth.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
         }
+        view = findViewById(R.id.textView_min_length);
+        if (view instanceof TextView) {
+            TextView minLength = (TextView)view;
+            minLength.setText(Integer.toString(CustomizedDifficulty.MIN_SIZE));
+        }
+        view = findViewById(R.id.textView_min_width);
+        if (view instanceof TextView) {
+            TextView minWidth = (TextView)view;
+            minWidth.setText(Integer.toString(CustomizedDifficulty.MIN_SIZE));
+        }
     }
     
     private void initSeekBars() {
@@ -115,7 +125,7 @@ public class DifficultActivity extends Activity {
             if (seekWidth.getProgress() == 0) {
                 seekWidth.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
             }
-            seekWidth.setMax(CustomizedDifficulty.MAX_SIZE - 1);
+            seekWidth.setMax(CustomizedDifficulty.MAX_SIZE - CustomizedDifficulty.MIN_SIZE);
             seekWidth.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(final SeekBar seekBar) {}
@@ -134,7 +144,8 @@ public class DifficultActivity extends Activity {
         if (view instanceof SeekBar) {
             seekBombs = (SeekBar)view;
             if (seekBombs.getProgress() == 0) {
-                seekBombs.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_BOMBS - 1));
+                seekBombs.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_BOMBS
+                        - CustomizedDifficulty.MIN_SIZE));
             }
             seekBombs.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
@@ -153,8 +164,8 @@ public class DifficultActivity extends Activity {
     }
     
     private void update() {
-        int xSize = seekLength.getProgress() + 1;
-        int ySize = seekWidth.getProgress() + 1;
+        int xSize = seekLength.getProgress() + CustomizedDifficulty.MIN_SIZE;
+        int ySize = seekWidth.getProgress() + CustomizedDifficulty.MIN_SIZE;
         seekBombs.setMax(Math.min(CustomizedDifficulty.MAX_BOMBS - 1, (xSize * ySize) - 2));
         maxBombs.setText(Integer.toString((xSize * ySize) - 1));
         int bombs = seekBombs.getProgress() + 1;
