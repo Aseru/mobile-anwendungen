@@ -7,6 +7,7 @@ public class CustomizedDifficulty implements IDifficulty {
     public static final DifficultyDescription DESCRIPTION = DifficultyDescription.CUSTOM;
     public static final int DEFAULT_SIZE = 15;
     public static final int DEFAULT_BOMBS = 35;
+    public static final int MIN_SIZE = 3;
     public static final int MAX_SIZE = 30;
     public static final int MAX_BOMBS = 720;
     

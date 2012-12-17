@@ -67,13 +67,12 @@
             android:gravity="center" >
 
             <TextView
+                android:id="@+id/textView_min_length"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.2"
-                android:text="1"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:ignore="HardcodedText" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <SeekBar
                 android:id="@+id/seekBar_length"
@@ -114,13 +113,12 @@
             android:gravity="center" >
 
             <TextView
+                android:id="@+id/textView_min_width"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.2"
-                android:text="1"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:ignore="HardcodedText" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <SeekBar
                 android:id="@+id/seekBar_width"
@@ -190,9 +188,9 @@
                 android:id="@+id/textView_actual_bombs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="40dp"
-                android:gravity="right"
                 android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:minWidth="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
     </LinearLayout>
