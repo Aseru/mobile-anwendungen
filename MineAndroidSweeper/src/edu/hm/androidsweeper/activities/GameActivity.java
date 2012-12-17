@@ -16,6 +16,8 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.dialogs.DialogUtil;
 import edu.hm.androidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
+import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.gamelogic.Game;
 import edu.hm.androidsweeper.gamelogic.GameState;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
@@ -220,6 +222,9 @@ public class GameActivity extends Activity implements IGameActivity {
         long time = getChronometerTimeInMillis();
         setChronometerTime(time);
         game.setCurrentPlaytime(time);
+        if (Highscores.isHighscore(time, game.getDifficulty())) {
+            Highscores.addHighscore(new HighscoreEntry("testPlayer", time), game.getDifficulty());
+        }
         openGameEndDialog();
     }
     

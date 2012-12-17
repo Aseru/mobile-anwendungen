@@ -17,12 +17,10 @@ import edu.hm.androidsweeper.misc.FileUtil;
 public final class HighscorePersistenceManager {
     
     /**
-     * 
-     * Creates a new instance of {@link GamePersistenceManager}.
-     * This constructor should never be called.
+     * Creates a new instance of {@link GamePersistenceManager}. This
+     * constructor should never be called.
      */
-    private HighscorePersistenceManager() { }
-    
+    private HighscorePersistenceManager() {}
     
     /**
      * Tag used for logging.
@@ -37,7 +35,8 @@ public final class HighscorePersistenceManager {
     /**
      * Loads the Highscores from the internal storage.
      * 
-     * @param context The context of this application.
+     * @param context
+     *            The context of this application.
      * @return The Highscores loaded.
      */
     public static Highscores loadHighscores(final Context context) {
@@ -57,21 +56,22 @@ public final class HighscorePersistenceManager {
         catch (ClassNotFoundException e) {
             Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
         }
-        return null;
+        return initNewHighscores(context);
     }
-    
-    
     
     /**
      * Saves the Highscores to internal storage.
      * 
-     * @param context The context of this application.
-     * @param highscores The Highscores object to save.
+     * @param context
+     *            The context of this application.
+     * @param highscores
+     *            The Highscores object to save.
      */
     public static void saveHighscores(final Context context, final Highscores highscores) {
         FileOutputStream fileOutputStream = null;
         try {
-            fileOutputStream = context.openFileOutput(HighscorePersistenceManager.HIGHSCORES_FILENAME, Context.MODE_PRIVATE);
+            fileOutputStream = context.openFileOutput(
+                    HighscorePersistenceManager.HIGHSCORES_FILENAME, Context.MODE_PRIVATE);
             FileUtil.saveObject(fileOutputStream, highscores);
         }
         catch (FileNotFoundException e) {
@@ -80,11 +80,9 @@ public final class HighscorePersistenceManager {
         catch (IOException e) {
             Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
         }
-        
     }
     
-    
-    public static Highscores initNewHighscores(final Context context) {
+    private static Highscores initNewHighscores(final Context context) {
         Highscores result = Highscores.emptyHighscores();
         saveHighscores(context, result);
         return result;

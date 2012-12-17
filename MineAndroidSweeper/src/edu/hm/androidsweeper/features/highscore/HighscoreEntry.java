@@ -12,7 +12,7 @@ public class HighscoreEntry implements Serializable, Comparable<HighscoreEntry> 
     /* No-args constructor needed for Serialization. */
     protected HighscoreEntry() {
         playerName = null;
-        time = 0;
+        time = Double.MAX_VALUE;
     }
     
     public HighscoreEntry(final String playerName, final double time) {
@@ -32,7 +32,7 @@ public class HighscoreEntry implements Serializable, Comparable<HighscoreEntry> 
     }
     
     public static HighscoreEntry newEmpty() {
-        return new HighscoreEntry("", 0);
+        return new HighscoreEntry("", Double.MAX_VALUE);
     }
     
     @Override

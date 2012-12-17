@@ -12,12 +12,12 @@ public class App extends Application {
     
     @Override
     public void onCreate() {
+        setContext(this);
         super.onCreate();
-        App.setContext();
     }
     
-    private static void setContext() {
-        App.mContext = getContext();
+    private static void setContext(final Context context) {
+        App.mContext = context;
     }
     
     public static Context getContext() {
