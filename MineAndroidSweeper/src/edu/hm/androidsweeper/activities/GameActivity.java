@@ -108,7 +108,7 @@ public class GameActivity extends Activity implements IGameActivity {
         View view = findViewById(R.id.txt_bombs);
         if (view instanceof TextView) {
             textView = (TextView)view;
-            textView.setText(Integer.toString(game.getDifficulty().getNumberOfBombs()));
+            textView.setText(Integer.toString(game.getDifficulty().getBombs()));
         }
         setFlagCount(game.getFlagCount());
     }

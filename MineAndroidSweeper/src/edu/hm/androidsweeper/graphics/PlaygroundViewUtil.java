@@ -13,8 +13,8 @@ import edu.hm.androidsweeper.gamelogic.Playground;
 public class PlaygroundViewUtil {
     
     public static View createPlayGroundView(final Context context, final Playground playground) {
-        int xSize = playground.getDifficulty().getXSize();
-        int ySize = playground.getDifficulty().getYSize();
+        int xSize = playground.getDifficulty().getWidth();
+        int ySize = playground.getDifficulty().getHeight();
         Field[] fields = playground.getFieldsArray();
         View layout = LayoutInflater.from(context).inflate(R.layout.activity_game, null);
         View view = layout.findViewById(R.id.layout_playground);

@@ -11,8 +11,14 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.gamelogic.Game;
 import edu.hm.androidsweeper.persistence.GamePersistenceManager;
 
+/**
+ * Activity for the main menu.
+ */
 public class MainMenuActivity extends Activity {
     
+    /**
+     * Logging Tag.
+     */
     public static final String TAG = "MainMenuActivity";
     
     @Override
@@ -32,33 +38,43 @@ public class MainMenuActivity extends Activity {
     }
     
     private void initView() {
+        View view;
         setContentView(R.layout.activity_main);
         
-        TextView newGame = (TextView)findViewById(R.id.textView_newGame);
-        newGame.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                onNewGamesClicked();
-            }
-        });
+        view = findViewById(R.id.textView_newGame);
+        if (view instanceof TextView) {
+            TextView newGame = (TextView)view;
+            newGame.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    onNewGamesClicked();
+                }
+            });
+        }
         
-        TextView resume = (TextView)findViewById(R.id.textView_resume);
-        resume.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                onResumeClicked();
-            }
-        });
+        view = findViewById(R.id.textView_resume);
+        if (view instanceof TextView) {
+            TextView resume = (TextView)view;
+            resume.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    onResumeClicked();
+                }
+            });
+        }
         
-        TextView highscore = (TextView)findViewById(R.id.textView_highscore);
-        highscore.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                onHighscoreClicked();
-            }
-        });
+        view = findViewById(R.id.textView_highscore);
+        if (view instanceof TextView) {
+            TextView highscore = (TextView)view;
+            highscore.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    onHighscoreClicked();
+                }
+            });
+        }
     }
     
     // Click Methods

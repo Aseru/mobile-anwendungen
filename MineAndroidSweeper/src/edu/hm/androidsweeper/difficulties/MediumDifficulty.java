@@ -1,40 +1,61 @@
 package edu.hm.androidsweeper.difficulties;
 
+/**
+ * Class to represent the medium predefined difficulty.
+ */
 public class MediumDifficulty implements IDifficulty {
     
+    /**
+     * Description for this difficulty.
+     */
     public static final DifficultyDescription DESCRIPTION = DifficultyDescription.MEDIUM;
     
     private static final long serialVersionUID = -885855746218919308L;
     
-    public final static int xSize = 15;
-    public final static int ySize = 15;
-    public final static int numberOfBombs = 40;
+    /**
+     * Defined field width.
+     */
+    public static final int WIDTH = 15;
     
-    /* (non-Javadoc)
+    /**
+     * Defined field height.
+     */
+    public static final int HEIGTH = 15;
+    
+    /**
+     * Defined number of bombs.
+     */
+    public static final int BOMBS = 40;
+    
+    /*
+     * (non-Javadoc)
      * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getXSize()
      */
     @Override
-    public int getXSize() {
-        return xSize;
+    public int getWidth() {
+        return WIDTH;
     }
     
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getYSize()
      */
     @Override
-    public int getYSize() {
-        return ySize;
+    public int getHeight() {
+        return HEIGTH;
     }
     
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getNumberOfBombs()
      */
     @Override
-    public int getNumberOfBombs() {
-        return numberOfBombs;
+    public int getBombs() {
+        return BOMBS;
     }
     
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getDescription
      */
     @Override

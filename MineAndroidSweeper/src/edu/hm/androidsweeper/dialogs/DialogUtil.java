@@ -4,17 +4,26 @@ import android.app.Dialog;
 import android.os.Handler;
 
 /**
- * TODO: Document type DialogUtil.
+ * Utility class for showing dialogs.
  */
-public class DialogUtil {
+public final class DialogUtil {
     
-    private static Handler handler = null;
+    private static final Object LOCK = new Object();
     
-    public static void showDialog(final Dialog dialog){
-        if(handler == null){
-            handler = new Handler();
-        }
+    private static Handler handler;
+    
+    private DialogUtil() {
         
+    }
+    
+    /**
+     * Show a passed dialog.
+     * 
+     * @param dialog
+     *            the dialog to show
+     */
+    public static void showDialog(final Dialog dialog) {
+        checkHandler();
         Runnable runnable = new Runnable() {
             
             @Override
@@ -25,7 +34,22 @@ public class DialogUtil {
         handler.post(runnable);
     }
     
-    public static void dismissDialog(final Dialog dialog){
+    /**
+     * Dismisses the passed Dialog.
+     * 
+     * @param dialog
+     *            the dialog to dismiss
+     */
+    public static void dismissDialog(final Dialog dialog) {
+        // Not yet implemented.
+    }
+    
+    private static void checkHandler() {
+        synchronized (LOCK) {
+            if (handler == null) {
+                handler = new Handler();
+            }
+        }
     }
     
 }

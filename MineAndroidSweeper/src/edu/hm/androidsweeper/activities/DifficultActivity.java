@@ -21,19 +21,25 @@ import edu.hm.androidsweeper.difficulties.InvalidConfigException;
 import edu.hm.androidsweeper.difficulties.MediumDifficulty;
 import edu.hm.androidsweeper.misc.ToastUtil;
 
+/**
+ * Activity where the user can select his desired difficulty.
+ */
 public class DifficultActivity extends Activity {
     
+    /**
+     * Logging Tag.
+     */
     public static final String TAG = "DifficultActivity";
     
-    private SeekBar seekLength;
     private SeekBar seekWidth;
+    private SeekBar seekHeight;
     private SeekBar seekBombs;
     
-    private TextView actualLength;
     private TextView actualWidth;
+    private TextView actualHeight;
     private TextView actualBombs;
-    private TextView maxLength;
     private TextView maxWidth;
+    private TextView maxHeight;
     private TextView maxBombs;
     
     /*
@@ -55,71 +61,63 @@ public class DifficultActivity extends Activity {
     }
     
     private void initTextViews() {
+        initActualViews();
+        initMaxViews();
+        initMinViews();
+        
+    }
+    
+    private void initActualViews() {
         View view = findViewById(R.id.textView_actual_bombs);
         if (view instanceof TextView) {
             actualBombs = (TextView)view;
             actualBombs.setText(Integer.toString(CustomizedDifficulty.DEFAULT_BOMBS));
-        }
-        view = findViewById(R.id.textView_actual_length);
-        if (view instanceof TextView) {
-            actualLength = (TextView)view;
-            actualLength.setText(Integer.toString(CustomizedDifficulty.DEFAULT_SIZE));
         }
         view = findViewById(R.id.textView_actual_width);
         if (view instanceof TextView) {
             actualWidth = (TextView)view;
             actualWidth.setText(Integer.toString(CustomizedDifficulty.DEFAULT_SIZE));
         }
-        view = findViewById(R.id.textView_max_bombs);
+        view = findViewById(R.id.textView_actual_height);
+        if (view instanceof TextView) {
+            actualHeight = (TextView)view;
+            actualHeight.setText(Integer.toString(CustomizedDifficulty.DEFAULT_SIZE));
+        }
+    }
+    
+    private void initMaxViews() {
+        View view = findViewById(R.id.textView_max_bombs);
         if (view instanceof TextView) {
             maxBombs = (TextView)view;
             maxBombs.setText(Integer.toString(calcMaxBombs()));
-        }
-        view = findViewById(R.id.textView_max_length);
-        if (view instanceof TextView) {
-            maxLength = (TextView)view;
-            maxLength.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
         }
         view = findViewById(R.id.textView_max_width);
         if (view instanceof TextView) {
             maxWidth = (TextView)view;
             maxWidth.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
         }
-        view = findViewById(R.id.textView_min_length);
+        view = findViewById(R.id.textView_max_height);
         if (view instanceof TextView) {
-            TextView minLength = (TextView)view;
-            minLength.setText(Integer.toString(CustomizedDifficulty.MIN_SIZE));
+            maxHeight = (TextView)view;
+            maxHeight.setText(Integer.toString(CustomizedDifficulty.MAX_SIZE));
         }
-        view = findViewById(R.id.textView_min_width);
+    }
+    
+    private void initMinViews() {
+        View view = findViewById(R.id.textView_min_width);
         if (view instanceof TextView) {
             TextView minWidth = (TextView)view;
             minWidth.setText(Integer.toString(CustomizedDifficulty.MIN_SIZE));
         }
+        view = findViewById(R.id.textView_min_height);
+        if (view instanceof TextView) {
+            TextView minHeight = (TextView)view;
+            minHeight.setText(Integer.toString(CustomizedDifficulty.MIN_SIZE));
+        }
     }
     
     private void initSeekBars() {
-        View view = findViewById(R.id.seekBar_length);
-        if (view instanceof SeekBar) {
-            seekLength = (SeekBar)view;
-            if (seekLength.getProgress() == 0) {
-                seekLength.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
-            }
-            seekLength.setMax(CustomizedDifficulty.MAX_SIZE - 1);
-            seekLength.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-                @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {}
-                
-                @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {}
-                
-                @Override
-                public void onProgressChanged(final SeekBar seekBar, final int progress,
-                        final boolean fromUser) {
-                    update();
-                }
-            });
-        }
-        view = findViewById(R.id.seekBar_width);
+        View view = findViewById(R.id.seekBar_width);
         if (view instanceof SeekBar) {
             seekWidth = (SeekBar)view;
             if (seekWidth.getProgress() == 0) {
@@ -128,10 +126,39 @@ public class DifficultActivity extends Activity {
             seekWidth.setMax(CustomizedDifficulty.MAX_SIZE - CustomizedDifficulty.MIN_SIZE);
             seekWidth.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {}
+                public void onStopTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
                 
                 @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {}
+                public void onStartTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
+                
+                @Override
+                public void onProgressChanged(final SeekBar seekBar, final int progress,
+                        final boolean fromUser) {
+                    update();
+                }
+            });
+        }
+        view = findViewById(R.id.seekBar_height);
+        if (view instanceof SeekBar) {
+            seekHeight = (SeekBar)view;
+            if (seekHeight.getProgress() == 0) {
+                seekHeight.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
+            }
+            seekHeight.setMax(CustomizedDifficulty.MAX_SIZE - CustomizedDifficulty.MIN_SIZE);
+            seekHeight.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
+                
+                @Override
+                public void onStartTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
                 
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress,
@@ -149,10 +176,14 @@ public class DifficultActivity extends Activity {
             }
             seekBombs.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {}
+                public void onStopTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
                 
                 @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {}
+                public void onStartTrackingTouch(final SeekBar seekBar) {
+                    // No implementation necessary
+                }
                 
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress,
@@ -164,77 +195,92 @@ public class DifficultActivity extends Activity {
     }
     
     private void update() {
-        int xSize = seekLength.getProgress() + CustomizedDifficulty.MIN_SIZE;
-        int ySize = seekWidth.getProgress() + CustomizedDifficulty.MIN_SIZE;
-        seekBombs.setMax(Math.min(CustomizedDifficulty.MAX_BOMBS - 1, (xSize * ySize) - 2));
-        maxBombs.setText(Integer.toString((xSize * ySize) - 1));
+        int width = seekWidth.getProgress() + CustomizedDifficulty.MIN_SIZE;
+        int height = seekHeight.getProgress() + CustomizedDifficulty.MIN_SIZE;
+        int maximumBombs = width * height - 1;
+        if (maximumBombs > CustomizedDifficulty.MAX_BOMBS) {
+            maximumBombs = CustomizedDifficulty.MAX_BOMBS;
+        }
+        seekBombs.setMax(maximumBombs - 1);
+        maxBombs.setText(Integer.toString(maximumBombs));
         int bombs = seekBombs.getProgress() + 1;
-        actualLength.setText(Integer.toString(xSize));
-        actualWidth.setText(Integer.toString(ySize));
+        actualWidth.setText(Integer.toString(width));
+        actualHeight.setText(Integer.toString(height));
         actualBombs.setText(Integer.toString(bombs));
     }
     
     private void addOnClickListeners() {
-        RadioButton rButton = (RadioButton)findViewById(R.id.radio_customized);
-        rButton.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                View custom = findViewById(R.id.layout_customized_difficulty);
-                custom.setVisibility(View.VISIBLE);
-            }
-        });
-        
-        rButton = (RadioButton)findViewById(R.id.radio_easy);
-        rButton.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                View custom = findViewById(R.id.layout_customized_difficulty);
-                custom.setVisibility(View.GONE);
-            }
-        });
-        
-        rButton = (RadioButton)findViewById(R.id.radio_medium);
-        rButton.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                View custom = findViewById(R.id.layout_customized_difficulty);
-                custom.setVisibility(View.GONE);
-            }
-        });
-        
-        rButton = (RadioButton)findViewById(R.id.radio_hard);
-        rButton.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                View custom = findViewById(R.id.layout_customized_difficulty);
-                custom.setVisibility(View.GONE);
-            }
-        });
-        
-        Button button = (Button)findViewById(R.id.button_start);
-        button.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(final View v) {
-                try {
-                    startGame();
+        View view = findViewById(R.id.radio_customized);
+        RadioButton rButton;
+        if (view instanceof RadioButton) {
+            rButton = (RadioButton)view;
+            rButton.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    View custom = findViewById(R.id.layout_customized_difficulty);
+                    custom.setVisibility(View.VISIBLE);
                 }
-                catch (InvalidConfigException e) {
-                    ToastUtil.showShortToast(DifficultActivity.this, e.getToastText());
-                    Log.e(TAG, getString(R.string.str_dbg_exception), e);
+            });
+        }
+        view = findViewById(R.id.radio_easy);
+        if (view instanceof RadioButton) {
+            rButton = (RadioButton)view;
+            rButton.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    View custom = findViewById(R.id.layout_customized_difficulty);
+                    custom.setVisibility(View.GONE);
                 }
-            }
-        });
+            });
+        }
+        view = findViewById(R.id.radio_medium);
+        if (view instanceof RadioButton) {
+            rButton = (RadioButton)view;
+            rButton.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    View custom = findViewById(R.id.layout_customized_difficulty);
+                    custom.setVisibility(View.GONE);
+                }
+            });
+        }
+        view = findViewById(R.id.radio_hard);
+        if (view instanceof RadioButton) {
+            rButton = (RadioButton)view;
+            rButton.setOnClickListener(new OnClickListener() {
+                
+                @Override
+                public void onClick(final View v) {
+                    View custom = findViewById(R.id.layout_customized_difficulty);
+                    custom.setVisibility(View.GONE);
+                }
+            });
+        }
+        view = findViewById(R.id.button_start);
+        if (view instanceof Button) {
+            Button button = (Button)view;
+            button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    try {
+                        startGame();
+                    }
+                    catch (InvalidConfigException e) {
+                        ToastUtil.showShortToast(DifficultActivity.this, e.getToastText());
+                        Log.e(TAG, getString(R.string.str_dbg_exception), e);
+                    }
+                }
+            });
+        }
     }
     
     private int calcMaxBombs() {
-        int lenght = Integer.parseInt((String)actualLength.getText());
         int width = Integer.parseInt((String)actualWidth.getText());
-        return lenght * width;
+        int height = Integer.parseInt((String)actualHeight.getText());
+        return width * height;
     }
     
     private void startGame() throws InvalidConfigException {
@@ -245,25 +291,30 @@ public class DifficultActivity extends Activity {
     }
     
     private IDifficulty getDifficulty() throws InvalidConfigException {
-        RadioGroup rGroup = (RadioGroup)findViewById(R.id.radioGroup_difficulty);
-        int selectedButtonID = rGroup.getCheckedRadioButtonId();
         IDifficulty difficulty = null;
-        switch (selectedButtonID) {
-            case R.id.radio_easy:
-                difficulty = new EasyDifficulty();
-                break;
-            case R.id.radio_medium:
-                difficulty = new MediumDifficulty();
-                break;
-            case R.id.radio_hard:
-                difficulty = new HardDifficulty();
-                break;
-            case R.id.radio_customized:
-                int xSize = Integer.parseInt((String)actualLength.getText());
-                int ySize = Integer.parseInt((String)actualWidth.getText());
-                int numberOfBombs = Integer.parseInt((String)actualBombs.getText());
-                difficulty = new CustomizedDifficulty(xSize, ySize, numberOfBombs);
-                break;
+        View view = findViewById(R.id.radioGroup_difficulty);
+        if (view instanceof RadioGroup) {
+            RadioGroup rGroup = (RadioGroup)view;
+            int selectedButtonID = rGroup.getCheckedRadioButtonId();
+            switch (selectedButtonID) {
+                case R.id.radio_easy:
+                    difficulty = new EasyDifficulty();
+                    break;
+                case R.id.radio_medium:
+                    difficulty = new MediumDifficulty();
+                    break;
+                case R.id.radio_hard:
+                    difficulty = new HardDifficulty();
+                    break;
+                case R.id.radio_customized:
+                    int xSize = Integer.parseInt((String)actualWidth.getText());
+                    int ySize = Integer.parseInt((String)actualHeight.getText());
+                    int numberOfBombs = Integer.parseInt((String)actualBombs.getText());
+                    difficulty = new CustomizedDifficulty(xSize, ySize, numberOfBombs);
+                    break;
+                default:
+                    break;
+            }
         }
         return difficulty;
     }

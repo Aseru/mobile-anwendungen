@@ -32,7 +32,7 @@ public class Playground implements Serializable {
     }
     
     public void init() {
-        fieldsArray = createFields(difficulty.getXSize(), difficulty.getYSize());
+        fieldsArray = createFields(difficulty.getWidth(), difficulty.getHeight());
         Field[] bombs = setBombs(fieldsArray, difficulty);
         putFieldsInMap(fieldsArray);
         calcFieldValues(fieldsArray, bombs);
@@ -55,7 +55,7 @@ public class Playground implements Serializable {
     }
     
     private Field[] setBombs(final Field[] fields, final IDifficulty difficulty) {
-        int numberOfBombs = difficulty.getNumberOfBombs();
+        int numberOfBombs = difficulty.getBombs();
         Field[] bombs = new Field[numberOfBombs];
         int random = -1;
         Field field = null;

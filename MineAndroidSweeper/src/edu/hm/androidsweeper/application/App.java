@@ -13,12 +13,15 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = this;
+        App.setContext();
     }
     
-    public static Context getContext(){
+    private static void setContext() {
+        App.mContext = getContext();
+    }
+    
+    public static Context getContext() {
         return mContext;
     }
     
 }
-

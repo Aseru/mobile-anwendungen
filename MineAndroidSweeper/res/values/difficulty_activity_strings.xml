@@ -12,8 +12,8 @@
     <string name="button_start">Start</string>
     
     <!-- Customized Diffuculty -->
-    <string name="custom_length">Länge</string>
     <string name="custom_width">Breite</string>
+    <string name="custom_height">Höhe</string>
     <string name="custom_bombs">Bomben</string>
     
 </resources>

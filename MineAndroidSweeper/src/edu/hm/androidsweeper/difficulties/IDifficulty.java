@@ -2,32 +2,42 @@ package edu.hm.androidsweeper.difficulties;
 
 import java.io.Serializable;
 
-public interface IDifficulty extends Serializable{
-	
-	public static final String EXTRA_NAME = "edu.hm.mineandroidsweeper.extra.difficulty";
-	
-	/**
-	 * 
-	 * @return the size in x direction
-	 */
-	public int getXSize();
-	
-	/**
-	 * 
-	 * @return the size in y direction
-	 */
-	public int getYSize();
-	
-	/**
-	 * 
-	 * @return the number of bombs
-	 */
-	public int getNumberOfBombs();
-	
-	/**
-	 * 
-	 * @return the description
-	 */
-	public DifficultyDescription getDescription();
-
+/**
+ * Interface for the difficulty classes TODO: Document type IDifficulty.
+ */
+public interface IDifficulty extends Serializable {
+    
+    /**
+     * The string used to set a difficulty as a extra to intents.
+     */
+    String EXTRA_NAME = "edu.hm.mineandroidsweeper.extra.difficulty";
+    
+    /**
+     * Returns the field width.
+     * 
+     * @return the size in x direction
+     */
+    int getWidth();
+    
+    /**
+     * Returns the field heigth.
+     * 
+     * @return the size in y direction
+     */
+    int getHeight();
+    
+    /**
+     * Returns the number of bombs.
+     * 
+     * @return the number of bombs
+     */
+    int getBombs();
+    
+    /**
+     * Returns the description.
+     * 
+     * @return the description
+     */
+    DifficultyDescription getDescription();
+    
 }

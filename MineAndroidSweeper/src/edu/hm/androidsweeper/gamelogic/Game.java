@@ -56,7 +56,9 @@ public class Game implements Serializable {
                 field.setFlag(true);
                 flagCount++;
             }
-            activity.updateFlagCount();
+            if (activity != null) {
+                activity.updateFlagCount();
+            }
         }
     }
     

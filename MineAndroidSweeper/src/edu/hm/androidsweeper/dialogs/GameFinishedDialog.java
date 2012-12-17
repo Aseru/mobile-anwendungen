@@ -9,12 +9,23 @@ import edu.hm.androidsweeper.activities.DifficultActivity;
 import edu.hm.androidsweeper.activities.MainMenuActivity;
 
 /**
- * TODO: Document type GameFinishedDialog.
+ * The dialog which informs the user of the game state if the game is finished.<br>
+ * The user can retry the game, show the highscore or go back to the main menu.
  */
 public class GameFinishedDialog extends AlertDialog {
     
     private final Context context;
     
+    /**
+     * Creates a new instance of {@link GameFinishedDialog}.
+     * 
+     * @param context
+     *            the activity context
+     * @param isWon
+     *            the state is the game was won or lose
+     * @param time
+     *            the total playtime for this game
+     */
     public GameFinishedDialog(final Context context, final boolean isWon, final double time) {
         super(context);
         this.context = context;
@@ -48,7 +59,8 @@ public class GameFinishedDialog extends AlertDialog {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 Intent intent = new Intent(context, MainMenuActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
                 dialog.dismiss();
             }

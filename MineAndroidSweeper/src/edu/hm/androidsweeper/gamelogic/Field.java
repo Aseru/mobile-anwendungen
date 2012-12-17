@@ -8,6 +8,9 @@ import android.view.ViewParent;
 import android.widget.LinearLayout;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
 
+/**
+ * Class for field representation.
+ */
 public class Field implements Serializable {
     
     private static final long serialVersionUID = -4780750269865091787L;
@@ -21,6 +24,8 @@ public class Field implements Serializable {
     private boolean isFlag;
     
     /**
+     * Returns the state of the isFlag boolean.
+     * 
      * @return the isFlag
      */
     public boolean isFlag() {
@@ -28,6 +33,8 @@ public class Field implements Serializable {
     }
     
     /**
+     * Sets the isFlag boolean.
+     * 
      * @param isFlag
      *            the isFlag to set
      */
@@ -53,11 +60,17 @@ public class Field implements Serializable {
         this.isExploded = isExploded;
     }
     
-    /* No-args constructor needed for Serialization. */
+    /** No-args constructor needed for Serialization. */
     protected Field() {
         coord = null;
     }
     
+    /**
+     * Creates a new instance of {@link Field}.
+     * 
+     * @param coord
+     *            the coordinate of this field
+     */
     public Field(final Coordinate coord) {
         this.coord = coord;
         
@@ -103,14 +116,17 @@ public class Field implements Serializable {
     }
     
     /**
-     * @param isRevealed
+     * Sets the field as revealed (or not revealed).<br>
+     * If the field is now revealed, the view will be changed.
+     * 
+     * @param reveal
      *            the isRevealed to set
      */
-    public void setRevealed(final boolean isRevealed) {
-        if (isRevealed) {
+    public void setRevealed(final boolean reveal) {
+        if (reveal) {
             FieldViewUtil.revealView(this);
         }
-        this.isRevealed = isRevealed;
+        isRevealed = reveal;
     }
     
     /**
@@ -135,6 +151,12 @@ public class Field implements Serializable {
         return coord;
     }
     
+    /**
+     * Increases the field value. <br>
+     * Only if this field is not a bomb itself.
+     * 
+     * @return true if the field value is increased
+     */
     public boolean increaseValue() {
         if (isBomb) {
             return false;
@@ -145,6 +167,11 @@ public class Field implements Serializable {
         }
     }
     
+    /**
+     * Calculates the neighbor coordinates of the field.
+     * 
+     * @return the 8 neighbors as a Coordinate array.
+     */
     public Coordinate[] getNeighborCoords8() {
         Coordinate[] neighborCoords = new Coordinate[8];
         int x = coord.getX();
@@ -162,6 +189,13 @@ public class Field implements Serializable {
         return neighborCoords;
     }
     
+    /**
+     * Calculates the neighbor coordinates of the field.
+     * 
+     * @param map
+     *            the Coordinate-Field map.
+     * @return the 8 neighbors as a Field array.
+     */
     public Field[] getNeighborFields8(final Map<Coordinate, Field> map) {
         Coordinate[] neighborCoords = getNeighborCoords8();
         Field[] neighborFields = new Field[neighborCoords.length];
@@ -169,6 +203,21 @@ public class Field implements Serializable {
             neighborFields[i] = map.get(neighborCoords[i]);
         }
         return neighborFields;
+    }
+    
+    /**
+     * Removes his own view from the parent of the view.
+     */
+    public void removeViewFromParent() {
+        if (view == null) {
+            return;
+        }
+        ViewParent viewParent = view.getParent();
+        LinearLayout parent = null;
+        if (viewParent instanceof LinearLayout) {
+            parent = (LinearLayout)viewParent;
+            parent.removeView(view);
+        }
     }
     
     /*
@@ -181,24 +230,12 @@ public class Field implements Serializable {
             return false;
         }
         Field another = (Field)o;
-        if (coord.equals(another.getCoord())) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return coord.equals(another.getCoord());
     }
     
-    public void removeViewFromParent() {
-        if (view == null) {
-            return;
-        }
-        ViewParent viewParent = view.getParent();
-        LinearLayout parent = null;
-        if (viewParent instanceof LinearLayout) {
-            parent = (LinearLayout)viewParent;
-            parent.removeView(view);
-        }
+    @Override
+    public int hashCode() {
+        return coord.getX() + coord.getY();
     }
     
 }
