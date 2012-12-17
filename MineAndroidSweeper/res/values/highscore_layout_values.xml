@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
+    <string name="title_text">Difficulty</string>
+    <string name="easy_button_text">Easy</string>
+    <string name="medium_button_text">Medium</string>
+    <string name="hard_button_text">Hard</string>
+    
+    
     <dimen name="table_padding">10dp</dimen>
     <dimen name="tablerow_padding_top">5dp</dimen>
     <dimen name="tablerow_contents_padding">5dp</dimen>
     
-    <dimen name="index_width">20dp</dimen>
-    <dimen name="name_width">100dp</dimen>
-    <dimen name="score_width">100dp</dimen>
+    <dimen name="index_width">30dp</dimen>
+    <dimen name="name_width">95dp</dimen>
+    <dimen name="score_width">95dp</dimen>
     
     <string name="index_1">1</string>
     <string name="index_2">2</string>
     <string name="index_3">3</string>
     <string name="index_4">4</string>
     <string name="index_5">5</string>
-    
+    <string name="index_6">6</string>
+    <string name="index_7">7</string>
+    <string name="index_8">8</string>
+    <string name="index_9">9</string>
+    <string name="index_10">10</string>
     
     <string name="name_1">name_1</string>
     <string name="name_2">name_2</string>
     <string name="name_3">name_3</string>
     <string name="name_4">name_4</string>
     <string name="name_5">name_5</string>
-    
+    <string name="name_6">name_6</string>
+    <string name="name_7">name_7</string>
+    <string name="name_8">name_8</string>
+    <string name="name_9">name_9</string>
+    <string name="name_10">name_10</string>
     
     <string name="score_1">score_1</string>
     <string name="score_2">score_2</string>
     <string name="score_3">score_3</string>
     <string name="score_4">score_4</string>
     <string name="score_5">score_5</string>
+    <string name="score_6">score_6</string>
+    <string name="score_7">score_7</string>
+    <string name="score_8">score_8</string>
+    <string name="score_9">score_9</string>
+    <string name="score_10">score_10</string>
+    
+    
     
 </resources>
