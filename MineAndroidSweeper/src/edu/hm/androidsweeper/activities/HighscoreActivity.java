@@ -8,8 +8,11 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import edu.hm.androidsweeper.R;
+import edu.hm.androidsweeper.application.App;
 import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 
@@ -17,10 +20,6 @@ public class HighscoreActivity extends Activity {
     
     public static final String TAG = "HighscoreActivity";
     
-    private static int[] viewNames = {R.id.name1,R.id.name2,R.id.name3,R.id.name4,R.id.name5,
-        R.id.name6,R.id.name7,R.id.name8,R.id.name9,R.id.name10};
-    private static int[] viewScores = {R.id.score1,R.id.score2,R.id.score3,R.id.score4,R.id.score5,
-        R.id.score6,R.id.score7,R.id.score8,R.id.score9,R.id.score10};
     
     private Highscores myHighscores;
     
@@ -40,7 +39,7 @@ public class HighscoreActivity extends Activity {
         View view;
         highscoreView = getLayoutInflater().inflate(R.layout.activity_highscore, null);
         myHighscores = Highscores.getInstance();
-        // setContentView(highscoreView);
+        
         
         view = highscoreView.findViewById(R.id.textViewEasy);
         if (view instanceof TextView) {
@@ -77,43 +76,60 @@ public class HighscoreActivity extends Activity {
         onEasyClick();
     }
     
-    private void setView(final Set<HighscoreEntry> highscoreSet) {
-        View highscoreLayout = getHighscoreView(highscoreSet);
-        
-        setContentView(highscoreLayout);
-    }
     
-    private View getHighscoreView(final Set<HighscoreEntry> highscoreSet) {
-        View view;
-        Iterator<HighscoreEntry> it = highscoreSet.iterator();
+    private void setScores(final Set<HighscoreEntry> highscoreSet) {
+        TableLayout highscoreTable = (TableLayout)highscoreView.findViewById(R.id.highscoreTable);
+        highscoreTable.removeAllViews();
+        
+        int rowContentPadding = Math.round(App.getContext().getResources().getDimension(R.dimen.tablerow_contents_padding));
+        
         HighscoreEntry he = null;
-        for (int i = 0; i < viewNames.length; i++) {
-            
+        Iterator<HighscoreEntry> it = highscoreSet.iterator();
+        
+        for (int i = 1; i <= highscoreSet.size(); i++) {
             if (it.hasNext()) {
                 he = it.next();
             }
-            view = highscoreView.findViewById(viewNames[i]);
-            if (view instanceof TextView && he != null) {
-                TextView nameView = (TextView)view;
-                String playerName = he.getPlayerName();
-                if (playerName.equals("")) {
-                    playerName = "empty";
-                }
-                nameView.setText(playerName);
-            }
-            view = highscoreView.findViewById(viewScores[i]);
-            if (view instanceof TextView && he != null) {
-                TextView scoreView = (TextView)view;
-                String playerScore = Double.toString(he.getTime());
-                if (he.getTime() == 0) {
-                    playerScore = "-";
-                }
-                scoreView.setText(playerScore);
-            }
+            
+            
+            TableRow tr = new TableRow(this);
+            tr.setPadding(0, Math.round(App.getContext().getResources().getDimension(R.dimen.tablerow_padding_top)), 0, 0);
+            
+            
+            TextView index = new TextView(this);
+            index.setPadding(rowContentPadding, rowContentPadding, rowContentPadding, rowContentPadding);
+            index.setWidth(Math.round(App.getContext().getResources().getDimension(R.dimen.index_width)));
+            //index.setHeight()
+            index.setText(Integer.toString(i));
+            
+            tr.addView(index, 0);
+            
+            
+            TextView name = new TextView(this);
+            name.setPadding(rowContentPadding, rowContentPadding, rowContentPadding, rowContentPadding);
+            name.setWidth(Math.round(App.getContext().getResources().getDimension(R.dimen.name_width)));
+            name.setText(he.getPlayerName());
+            tr.addView(name, 1);
+            
+            
+            TextView score = new TextView(this);
+            score.setPadding(rowContentPadding, rowContentPadding, rowContentPadding, rowContentPadding);
+            score.setWidth(Math.round(App.getContext().getResources().getDimension(R.dimen.score_width)));
+            score.setText(Double.toString(he.getTime()));
+            tr.addView(score, 2);
+            
+            
+            highscoreTable.addView(tr);
         }
         
-        return highscoreView;
     }
+    
+    private void setView(final Set<HighscoreEntry> highscoreSet) {
+        setScores(highscoreSet);
+        
+        setContentView(highscoreView);
+    }
+    
     
     private void onEasyClick() {
         easy.setTypeface(null, Typeface.BOLD);
@@ -135,4 +151,5 @@ public class HighscoreActivity extends Activity {
         hard.setTypeface(null, Typeface.BOLD);
         setView(myHighscores.getHard());
     }
+    
 }

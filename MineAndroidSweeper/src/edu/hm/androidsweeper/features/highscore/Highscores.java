@@ -8,8 +8,10 @@ import java.util.TreeSet;
 import android.content.Context;
 import edu.hm.androidsweeper.application.App;
 import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
-import edu.hm.androidsweeper.difficulties.DifficultyDescription;
+import edu.hm.androidsweeper.difficulties.EasyDifficulty;
+import edu.hm.androidsweeper.difficulties.HardDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.difficulties.MediumDifficulty;
 import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
 
 public final class Highscores implements Serializable {
@@ -18,7 +20,7 @@ public final class Highscores implements Serializable {
     
     private static final long serialVersionUID = 46357815423849470L;
     
-    public static final int HIGHSCORE_TABLE_SIZE = 5;
+    public static final int HIGHSCORE_TABLE_SIZE = 10;
     
     private final Set<HighscoreEntry> easy;
     private final Set<HighscoreEntry> medium;
@@ -42,10 +44,16 @@ public final class Highscores implements Serializable {
         medium = new TreeSet<HighscoreEntry>();
         hard = new TreeSet<HighscoreEntry>();
         
-        for (int i = 0; i < HIGHSCORE_TABLE_SIZE; i++) {
-            easy.add(HighscoreEntry.newEmpty());
-            medium.add(HighscoreEntry.newEmpty());
-            hard.add(HighscoreEntry.newEmpty());
+        initHighscoreSets();
+    }
+    
+    private void initHighscoreSets() {
+        
+        // random values
+        for (int i = 1; i <= 3; i++) {
+            easy.add(new HighscoreEntry("player"+i, i*83.3));
+            medium.add(new HighscoreEntry("player"+(i+24), i*23.64));
+            hard.add(new HighscoreEntry("player"+(i+72), i*39.12));
         }
     }
     
@@ -77,14 +85,14 @@ public final class Highscores implements Serializable {
     
     private TreeSet<HighscoreEntry> selectList(final IDifficulty difficulty) {
         Set<HighscoreEntry> list = null;
-        DifficultyDescription desc = difficulty.getDescription();
-        if (desc == DifficultyDescription.EASY) {
+        Class<? extends IDifficulty> difClass = difficulty.getClass();
+        if (difClass == EasyDifficulty.class) {
             list = easy;
         }
-        else if (desc == DifficultyDescription.MEDIUM) {
+        else if (difClass == MediumDifficulty.class) {
             list = medium;
         }
-        else if (desc == DifficultyDescription.HARD) {
+        else if (difClass == HardDifficulty.class) {
             list = hard;
         }
         else {
