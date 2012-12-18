@@ -10,11 +10,6 @@ import edu.hm.androidsweeper.R;
 public class CustomizedDifficulty implements IDifficulty {
     
     /**
-     * Description for this difficulty.
-     */
-    public static final DifficultyDescription DESCRIPTION = DifficultyDescription.CUSTOM;
-    
-    /**
      * Default field size.
      */
     public static final int DEFAULT_SIZE = 15;
@@ -73,7 +68,7 @@ public class CustomizedDifficulty implements IDifficulty {
      */
     public CustomizedDifficulty(final int width, final int heigth, final int bombs)
             throws InvalidConfigException {
-        this.witdh = width;
+        witdh = width;
         this.heigth = heigth;
         this.bombs = bombs;
         checkConfig();
@@ -124,13 +119,6 @@ public class CustomizedDifficulty implements IDifficulty {
         return bombs;
     }
     
-    /*
-     * (non-Javadoc)
-     * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getDescription
-     */
-    @Override
-    public DifficultyDescription getDescription() {
-        return DESCRIPTION;
-    }
+    
     
 }

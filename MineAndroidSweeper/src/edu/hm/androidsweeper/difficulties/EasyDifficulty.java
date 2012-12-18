@@ -5,11 +5,6 @@ package edu.hm.androidsweeper.difficulties;
  */
 public class EasyDifficulty implements IDifficulty {
     
-    /**
-     * Description for this difficulty.
-     */
-    public static final DifficultyDescription DESCRIPTION = DifficultyDescription.EASY;
-    
     private static final long serialVersionUID = 1952238030186230671L;
     
     /**
@@ -54,13 +49,5 @@ public class EasyDifficulty implements IDifficulty {
         return BOMBS;
     }
     
-    /*
-     * (non-Javadoc)
-     * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getDescription
-     */
-    @Override
-    public DifficultyDescription getDescription() {
-        return DESCRIPTION;
-    }
     
 }

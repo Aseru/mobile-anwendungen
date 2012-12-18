@@ -33,11 +33,5 @@ public interface IDifficulty extends Serializable {
      */
     int getBombs();
     
-    /**
-     * Returns the description.
-     * 
-     * @return the description
-     */
-    DifficultyDescription getDescription();
     
 }

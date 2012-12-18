@@ -5,10 +5,6 @@ package edu.hm.androidsweeper.difficulties;
  */
 public class MediumDifficulty implements IDifficulty {
     
-    /**
-     * Description for this difficulty.
-     */
-    public static final DifficultyDescription DESCRIPTION = DifficultyDescription.MEDIUM;
     
     private static final long serialVersionUID = -885855746218919308L;
     
@@ -54,13 +50,5 @@ public class MediumDifficulty implements IDifficulty {
         return BOMBS;
     }
     
-    /*
-     * (non-Javadoc)
-     * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getDescription
-     */
-    @Override
-    public DifficultyDescription getDescription() {
-        return DESCRIPTION;
-    }
     
 }
