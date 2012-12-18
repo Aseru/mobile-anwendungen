@@ -169,4 +169,15 @@ public class Playground implements Serializable {
         this.isCreated = isCreated;
     }
     
+    /**
+     * TODO: Document method revealRandomField
+     */
+    public void revealRandomField() {
+        Field field;
+        Random random = new Random();
+        do {
+            field = fieldsArray[random.nextInt(fieldsArray.length)];
+        } while (field.isBomb() || field.isRevealed());
+        reveal(field);
+    }
 }

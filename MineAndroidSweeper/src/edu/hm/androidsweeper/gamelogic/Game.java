@@ -21,6 +21,7 @@ public class Game implements Serializable {
     private Playground playground;
     private transient IGameActivity activity;
     private int flagCount;
+    private int usedHints;
     
     /** No-args constructor needed for Serialization. */
     protected Game() {
@@ -141,6 +142,24 @@ public class Game implements Serializable {
      */
     public int getFlagCount() {
         return flagCount;
+    }
+    
+    public boolean askForHint() {
+        if (usedHints < difficulty.getHints() && state == GameState.RUNNING) {
+            playground.revealRandomField();
+            usedHints++;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Returns the usedHints.
+     * 
+     * @return the usedHints
+     */
+    public int getAvaiableHints() {
+        return difficulty.getHints() - usedHints;
     }
     
 }

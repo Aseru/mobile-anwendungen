@@ -22,6 +22,11 @@ public class EasyDifficulty implements IDifficulty {
      */
     public static final int BOMBS = 12;
     
+    /**
+     * Defined number of available hints.
+     */
+    public static final int HINTS = 3;
+    
     /*
      * (non-Javadoc)
      * @see edu.hm.mineandroidsweeper.difficults.IDifficult#getXSize()
@@ -49,5 +54,10 @@ public class EasyDifficulty implements IDifficulty {
         return BOMBS;
     }
     
+    
+    @Override
+    public int getHints() {
+        return HINTS;
+    }
     
 }

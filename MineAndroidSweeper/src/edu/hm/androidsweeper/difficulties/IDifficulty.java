@@ -34,4 +34,11 @@ public interface IDifficulty extends Serializable {
     int getBombs();
     
     
+    /**
+     * Returns the maximum hints.
+     * 
+     * @return number of available hints for this difficulty.
+     */
+    int getHints();
+    
 }
