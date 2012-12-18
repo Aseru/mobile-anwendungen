@@ -10,6 +10,7 @@ import android.util.Log;
 import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.misc.FileUtil;
+import edu.hm.androidsweeper.misc.ToastUtil;
 
 /**
  * Class to manage the highscore persistence.
@@ -86,6 +87,12 @@ public final class HighscorePersistenceManager {
         Highscores result = Highscores.emptyHighscores();
         saveHighscores(context, result);
         return result;
+    }
+    
+    public static void deleteHighscores(final Context context) {
+        if(context.deleteFile(HIGHSCORES_FILENAME)) {
+            ToastUtil.showShortToast(context, R.string.toast_clearhighscore_successful);
+        }
     }
     
 }

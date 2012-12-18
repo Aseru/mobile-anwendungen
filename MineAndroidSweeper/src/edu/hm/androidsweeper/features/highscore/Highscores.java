@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.content.Context;
 import edu.hm.androidsweeper.application.App;
+import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
 import edu.hm.androidsweeper.difficulties.DifficultyDescription;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
@@ -29,6 +31,12 @@ public final class Highscores implements Serializable {
         return instance;
     }
     
+    public static void deleteHighscores(final Context context){
+        instance = null;
+        HighscorePersistenceManager.deleteHighscores(context);
+        Highscores.getInstance();
+    }
+    
     private Highscores() {
         easy = new TreeSet<HighscoreEntry>();
         medium = new TreeSet<HighscoreEntry>();
@@ -42,7 +50,9 @@ public final class Highscores implements Serializable {
     }
     
     public static boolean isHighscore(final double value, final IDifficulty difficulty) {
-        
+        if(difficulty instanceof CustomizedDifficulty) {
+            return false;
+        }
         TreeSet<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
         
         HighscoreEntry thisValue = new HighscoreEntry("", value);

@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:keepScreenOn="true"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".activities.GameActivity" >
 
     <include layout="@layout/info_bar" />
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fillViewport="true"
-        android:paddingTop="10dp" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center" >
 
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:fillViewport="true"
-            android:scrollbars="vertical" >
+            android:layout_height="wrap_content"
+            android:background="@android:color/black" >
 
-            <LinearLayout
-                android:id="@+id/layout_playground"
+            <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:orientation="vertical" >
-            </LinearLayout>
-        </ScrollView>
-    </HorizontalScrollView>
+                android:scrollbars="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/layout_playground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </ScrollView>
+        </HorizontalScrollView>
+    </RelativeLayout>
 
 </LinearLayout>

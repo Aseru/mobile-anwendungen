@@ -4,17 +4,14 @@
     android:layout_height="wrap_content"
     android:background="@color/blue"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp" >
+    android:paddingTop="10dp">
 
     <LinearLayout
-        android:id="@+id/layout_info_bar_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal" >
-
-        <!-- TODO: Use images instead of text so save space -->
 
         <TextView
             android:layout_width="wrap_content"

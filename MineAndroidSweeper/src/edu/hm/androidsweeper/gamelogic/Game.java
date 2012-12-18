@@ -70,7 +70,7 @@ public class Game implements Serializable {
         Field field;
         if (tag instanceof Field) {
             field = (Field)tag;
-            if (!field.isRevealed()) {
+            if (!field.isRevealed() && !field.isFlag()) {
                 playground.reveal(field);
             }
         }
