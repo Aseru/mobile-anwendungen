@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.activities.DifficultActivity;
+import edu.hm.androidsweeper.activities.HighscoreActivity;
 import edu.hm.androidsweeper.activities.MainMenuActivity;
 
 /**
@@ -70,8 +71,13 @@ public class GameFinishedDialog extends AlertDialog {
             
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                // TODO Auto-generated method stub
-                
+                Intent mainIntent = new Intent(context, MainMenuActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent highscoreIntent = new Intent(context, HighscoreActivity.class);
+                context.startActivity(mainIntent);
+                context.startActivity(highscoreIntent);
+                dialog.dismiss();
             }
         });
         setButton(BUTTON_POSITIVE, context.getString(R.string.dialog_finished_button_restart),

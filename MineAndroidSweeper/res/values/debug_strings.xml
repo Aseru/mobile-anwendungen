@@ -14,6 +14,8 @@
     <string name="str_dbg_saving_game">Game saved: %1$s</string>
     <string name="str_dbg_loaded_save_game">Loaded game. File size in bytes: %1$d</string>
     <string name="str_dbg_save_game_available">Save game available: %1$s</string>
+    
+    <!-- HighscorePersistenceManager -->
     <string name="str_dbg_loaded_highscores">Loaded Highscores.</string>
     
     <!-- General -->
@@ -23,5 +25,6 @@
     <string name="str_dbg_on_resume">onResume() called</string>
     <string name="str_dbg_on_save_instance">onSaveInstanceState(Bundle) called</string>
     <string name="str_dbg_exception">Exception: </string>
+    <string name="str_dbg_file_not_found">File not found: %1$s</string>
     
 </resources>

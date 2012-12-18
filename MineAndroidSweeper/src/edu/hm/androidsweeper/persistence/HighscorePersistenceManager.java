@@ -51,6 +51,9 @@ public final class HighscorePersistenceManager {
             Log.d(TAG, context.getString(R.string.str_dbg_loaded_highscores));
             return loadedHighscores;
         }
+        catch (FileNotFoundException e) {
+            Log.d(TAG, context.getString(R.string.str_dbg_file_not_found, HIGHSCORES_FILENAME));
+        }
         catch (IOException ioe) {
             Log.e(TAG, context.getString(R.string.str_dbg_exception), ioe);
         }
@@ -75,9 +78,6 @@ public final class HighscorePersistenceManager {
                     HighscorePersistenceManager.HIGHSCORES_FILENAME, Context.MODE_PRIVATE);
             FileUtil.saveObject(fileOutputStream, highscores);
         }
-        catch (FileNotFoundException e) {
-            Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
-        }
         catch (IOException e) {
             Log.e(TAG, context.getString(R.string.str_dbg_exception), e);
         }
@@ -90,7 +90,7 @@ public final class HighscorePersistenceManager {
     }
     
     public static void deleteHighscores(final Context context) {
-        if(context.deleteFile(HIGHSCORES_FILENAME)) {
+        if (context.deleteFile(HIGHSCORES_FILENAME)) {
             ToastUtil.showShortToast(context, R.string.toast_clearhighscore_successful);
         }
     }
