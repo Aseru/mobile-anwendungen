@@ -3,7 +3,6 @@ package edu.hm.androidsweeper.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,9 +16,7 @@ import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
 import edu.hm.androidsweeper.difficulties.EasyDifficulty;
 import edu.hm.androidsweeper.difficulties.HardDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
-import edu.hm.androidsweeper.difficulties.InvalidConfigException;
 import edu.hm.androidsweeper.difficulties.MediumDifficulty;
-import edu.hm.androidsweeper.misc.ToastUtil;
 
 /**
  * Activity where the user can select his desired difficulty.
@@ -265,13 +262,7 @@ public class DifficultActivity extends Activity {
             button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    try {
-                        startGame();
-                    }
-                    catch (InvalidConfigException e) {
-                        ToastUtil.showShortToast(DifficultActivity.this, e.getToastText());
-                        Log.e(TAG, getString(R.string.str_dbg_exception), e);
-                    }
+                    startGame();
                 }
             });
         }
@@ -283,14 +274,14 @@ public class DifficultActivity extends Activity {
         return width * height;
     }
     
-    private void startGame() throws InvalidConfigException {
+    private void startGame() {
         IDifficulty difficulty = getDifficulty();
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(IDifficulty.EXTRA_NAME, difficulty);
         startActivity(intent);
     }
     
-    private IDifficulty getDifficulty() throws InvalidConfigException {
+    private IDifficulty getDifficulty() {
         IDifficulty difficulty = null;
         View view = findViewById(R.id.radioGroup_difficulty);
         if (view instanceof RadioGroup) {

@@ -1,7 +1,5 @@
 package edu.hm.androidsweeper.difficulties;
 
-import edu.hm.androidsweeper.R;
-
 /**
  * Class for representation a customized difficulty.<br>
  * using this difficulty, the user can choose the size of the field and the
@@ -46,17 +44,19 @@ public class CustomizedDifficulty implements IDifficulty {
     
     private static final long serialVersionUID = 6850885455181308430L;
     
-    private final int witdh;
-    private final int heigth;
+    private final int width;
+    private final int height;
     private final int bombs;
+    private final int hints;
     
     /**
      * No-args constructor, needed for Serialization.
      */
     protected CustomizedDifficulty() {
-        witdh = DEFAULT_SIZE;
-        heigth = DEFAULT_SIZE;
+        width = DEFAULT_SIZE;
+        height = DEFAULT_SIZE;
         bombs = DEFAULT_BOMBS;
+        hints = 0;
     }
     
     /**
@@ -64,37 +64,27 @@ public class CustomizedDifficulty implements IDifficulty {
      * 
      * @param width
      *            field width
-     * @param heigth
+     * @param height
      *            field height
      * @param bombs
      *            number of bombs
      * @throws InvalidConfigException
      *             if the config is not valid
      */
-    public CustomizedDifficulty(final int width, final int heigth, final int bombs)
-            throws InvalidConfigException {
-        this.witdh = width;
-        this.heigth = heigth;
+    public CustomizedDifficulty(final int width, final int height, final int bombs) {
+        this.width = width;
+        this.height = height;
         this.bombs = bombs;
-        checkConfig();
+        hints = calcHints();
     }
     
-    private void checkConfig() throws InvalidConfigException {
-        int numberOfFields = witdh * heigth;
-        if (numberOfFields < bombs) {
-            throw new InvalidConfigException("Too many bombs.", R.string.toast_max_bombs);
+    private int calcHints() {
+        int hints = (width + height) / 4;
+        int freeFields = width * height - bombs;
+        if (hints >= freeFields / 2) {
+            hints = freeFields / 2;
         }
-        if (bombs <= 0) {
-            throw new InvalidConfigException("Minimum one bomb.", R.string.toast_min_bombs);
-        }
-        if (witdh > MAX_SIZE) {
-            throw new InvalidConfigException("Field length to high", R.string.toast_max_length,
-                    MAX_SIZE);
-        }
-        if (heigth > MAX_SIZE) {
-            throw new InvalidConfigException("Field width to high", R.string.toast_max_width,
-                    MAX_SIZE);
-        }
+        return hints;
     }
     
     /*
@@ -103,7 +93,7 @@ public class CustomizedDifficulty implements IDifficulty {
      */
     @Override
     public int getWidth() {
-        return witdh;
+        return width;
     }
     
     /*
@@ -112,7 +102,7 @@ public class CustomizedDifficulty implements IDifficulty {
      */
     @Override
     public int getHeight() {
-        return heigth;
+        return height;
     }
     
     /*
@@ -131,6 +121,11 @@ public class CustomizedDifficulty implements IDifficulty {
     @Override
     public DifficultyDescription getDescription() {
         return DESCRIPTION;
+    }
+    
+    @Override
+    public int getHints() {
+        return hints;
     }
     
 }

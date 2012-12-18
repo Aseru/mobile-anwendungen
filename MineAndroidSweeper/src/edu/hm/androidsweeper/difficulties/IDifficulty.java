@@ -40,4 +40,11 @@ public interface IDifficulty extends Serializable {
      */
     DifficultyDescription getDescription();
     
+    /**
+     * Returns the maximum hints.
+     * 
+     * @return number of available hints for this difficulty.
+     */
+    int getHints();
+    
 }

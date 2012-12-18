@@ -8,6 +8,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
@@ -212,6 +215,31 @@ public class GameActivity extends Activity implements IGameActivity {
         else {
             openGameEndDialog();
         }
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_game, menu);
+        MenuItem hint = menu.findItem(R.id.menu_hint);
+        hint.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(), game
+                .getDifficulty().getHints()));
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_hint:
+                if (game.askForHint()) {
+                    item.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(), game
+                            .getDifficulty().getHints()));
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
     
     @Override
