@@ -162,4 +162,13 @@ public class Game implements Serializable {
         return difficulty.getHints() - usedHints;
     }
     
+    /**
+     * Returns the usedHints.
+     * 
+     * @return the usedHints
+     */
+    public int getUsedHints() {
+        return usedHints;
+    }
+    
 }

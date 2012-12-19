@@ -19,12 +19,12 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.dialogs.DialogUtil;
 import edu.hm.androidsweeper.dialogs.GameFinishedDialog;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
-import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.gamelogic.Game;
 import edu.hm.androidsweeper.gamelogic.GameState;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
 import edu.hm.androidsweeper.graphics.PlaygroundViewUtil;
+import edu.hm.androidsweeper.misc.SharedMenu;
 import edu.hm.androidsweeper.persistence.GamePersistenceManager;
 
 /**
@@ -220,6 +220,7 @@ public class GameActivity extends Activity implements IGameActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        SharedMenu.onCreateOptionMenu(menu, getApplicationContext(), inflater);
         inflater.inflate(R.menu.menu_game, menu);
         MenuItem hint = menu.findItem(R.id.menu_hint);
         hint.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(), game
@@ -229,17 +230,19 @@ public class GameActivity extends Activity implements IGameActivity {
     
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_hint:
-                if (game.askForHint()) {
-                    item.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(), game
-                            .getDifficulty().getHints()));
-                }
-                break;
-            default:
-                break;
+        if (!SharedMenu.onOptionItemSelected(item, this)) {
+            switch (item.getItemId()) {
+                case R.id.menu_hint:
+                    if (game.askForHint()) {
+                        item.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(),
+                                game.getDifficulty().getHints()));
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
     
     @Override
@@ -250,9 +253,7 @@ public class GameActivity extends Activity implements IGameActivity {
         long time = getChronometerTimeInMillis();
         setChronometerTime(time);
         game.setCurrentPlaytime(time);
-        if (Highscores.isHighscore(time, game.getDifficulty())) {
-            Highscores.addHighscore(new HighscoreEntry("testPlayer", time), game.getDifficulty());
-        }
+        Highscores.isHighscore(game);
         openGameEndDialog();
     }
     

@@ -1,9 +1,9 @@
 package edu.hm.androidsweeper.features.highscore;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 
 import android.content.Context;
 import edu.hm.androidsweeper.application.App;
@@ -12,6 +12,7 @@ import edu.hm.androidsweeper.difficulties.EasyDifficulty;
 import edu.hm.androidsweeper.difficulties.HardDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.difficulties.MediumDifficulty;
+import edu.hm.androidsweeper.gamelogic.Game;
 import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
 
 public final class Highscores implements Serializable {
@@ -22,9 +23,9 @@ public final class Highscores implements Serializable {
     
     public static final int HIGHSCORE_TABLE_SIZE = 10;
     
-    private final Set<HighscoreEntry> easy;
-    private final Set<HighscoreEntry> medium;
-    private final Set<HighscoreEntry> hard;
+    private final List<HighscoreEntry> easy;
+    private final List<HighscoreEntry> medium;
+    private final List<HighscoreEntry> hard;
     
     public static Highscores getInstance() {
         if (instance == null) {
@@ -33,66 +34,59 @@ public final class Highscores implements Serializable {
         return instance;
     }
     
-    public static void deleteHighscores(final Context context){
+    public static void deleteHighscores(final Context context) {
         instance = null;
         HighscorePersistenceManager.deleteHighscores(context);
         Highscores.getInstance();
     }
     
     private Highscores() {
-        easy = new TreeSet<HighscoreEntry>();
-        medium = new TreeSet<HighscoreEntry>();
-        hard = new TreeSet<HighscoreEntry>();
-        
-        initHighscoreSets();
+        easy = new ArrayList<HighscoreEntry>();
+        medium = new ArrayList<HighscoreEntry>();
+        hard = new ArrayList<HighscoreEntry>();
     }
     
-    private void initHighscoreSets() {
-        
-        // random values
-        for (int i = 1; i <= 3; i++) {
-            easy.add(new HighscoreEntry("player"+i, i*83.3));
-            medium.add(new HighscoreEntry("player"+(i+24), i*23.64));
-            hard.add(new HighscoreEntry("player"+(i+72), i*39.12));
-        }
-    }
-    
-    public static boolean isHighscore(final double value, final IDifficulty difficulty) {
-        if(difficulty instanceof CustomizedDifficulty) {
+    public static boolean isHighscore(final Game game) {
+        IDifficulty difficulty = game.getDifficulty();
+        long time = game.getCurrentPlaytime();
+        double value = time / 1000d;
+        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0) {
             return false;
         }
-        TreeSet<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
+        List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
+        HighscoreEntry entry = new HighscoreEntry("tmp", value);
+        if (list.isEmpty() || list.size() < HIGHSCORE_TABLE_SIZE) {
+            addHighscore(entry, difficulty);
+            return true;
+        }
         
-        HighscoreEntry thisValue = new HighscoreEntry("", value);
-        HighscoreEntry lowestHighscore = list.last();
-        if (thisValue.compareTo(lowestHighscore) > 0) {
+        HighscoreEntry lowestHighscore = list.get(list.size() - 1);
+        if (entry.compareTo(lowestHighscore) < 0) {
+            addHighscore(entry, difficulty);
             return true;
         }
         return false;
     }
     
-    public static boolean addHighscore(final HighscoreEntry highscore, final IDifficulty difficulty) {
-        TreeSet<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
-        
-        if (isHighscore(highscore.getTime(), difficulty)) {
-            list.remove(list.last());
-            list.add(highscore);
-            return true;
+    public static void addHighscore(final HighscoreEntry entry, final IDifficulty difficulty) {
+        List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
+        list.add(entry);
+        Collections.sort(list);
+        if (list.size() > HIGHSCORE_TABLE_SIZE) {
+            list.remove(list.size() - 1);
         }
-        
-        return false;
+        HighscorePersistenceManager.saveHighscores(App.getContext(), Highscores.getInstance());
     }
     
-    private TreeSet<HighscoreEntry> selectList(final IDifficulty difficulty) {
-        Set<HighscoreEntry> list = null;
-        Class<? extends IDifficulty> difClass = difficulty.getClass();
-        if (difClass == EasyDifficulty.class) {
+    private List<HighscoreEntry> selectList(final IDifficulty difficulty) {
+        List<HighscoreEntry> list = null;
+        if (difficulty instanceof EasyDifficulty) {
             list = easy;
         }
-        else if (difClass == MediumDifficulty.class) {
+        else if (difficulty instanceof MediumDifficulty) {
             list = medium;
         }
-        else if (difClass == HardDifficulty.class) {
+        else if (difficulty instanceof HardDifficulty) {
             list = hard;
         }
         else {
@@ -100,19 +94,19 @@ public final class Highscores implements Serializable {
                     "There is no highscore table for the given difficulty.");
         }
         
-        return (TreeSet<HighscoreEntry>)list;
+        return list;
     }
     
-    public Set<HighscoreEntry> getEasy() {
-        return Collections.unmodifiableSet(easy);
+    public List<HighscoreEntry> getEasy() {
+        return Collections.unmodifiableList(easy);
     }
     
-    public Set<HighscoreEntry> getMedium() {
-        return Collections.unmodifiableSet(medium);
+    public List<HighscoreEntry> getMedium() {
+        return Collections.unmodifiableList(medium);
     }
     
-    public Set<HighscoreEntry> getHard() {
-        return Collections.unmodifiableSet(hard);
+    public List<HighscoreEntry> getHard() {
+        return Collections.unmodifiableList(hard);
     }
     
     public static Highscores emptyHighscores() {

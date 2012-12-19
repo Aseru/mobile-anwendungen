@@ -1,7 +1,6 @@
 package edu.hm.androidsweeper.activities;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import edu.hm.androidsweeper.R;
-import edu.hm.androidsweeper.dialogs.ClearHighscoreDialog;
-import edu.hm.androidsweeper.dialogs.DialogUtil;
 import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.misc.SharedMenu;
 import edu.hm.androidsweeper.persistence.GamePersistenceManager;
 
 /**
@@ -109,25 +107,14 @@ public class MainMenuActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        SharedMenu.onCreateOptionMenu(menu, getApplicationContext(), inflater);
         return true;
     }
     
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_clear_highscore:
-                Dialog dialog = new ClearHighscoreDialog(this);
-                DialogUtil.showDialog(dialog);
-                break;
-                
-            case R.id.menu_settings:
-                break;
-                
-            default:
-                break;
-        }
-        return true;
+        SharedMenu.onOptionItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
     }
     
 }

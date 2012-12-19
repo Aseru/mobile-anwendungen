@@ -3,16 +3,17 @@ package edu.hm.androidsweeper.dialogs;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import edu.hm.androidsweeper.R;
-import edu.hm.androidsweeper.application.App;
+import edu.hm.androidsweeper.activities.HighscoreActivity;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 
 public class ClearHighscoreDialog extends AlertDialog {
     
     /**
-     * TODO: Document type AbortDialog.
+     * TODO: Document type AbortAction.
      */
-    private static final class AbortDialog implements OnClickListener {
+    private static final class AbortAction implements OnClickListener {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             dialog.dismiss();
@@ -22,10 +23,20 @@ public class ClearHighscoreDialog extends AlertDialog {
     /**
      * TODO: Document type DeleteHighscore.
      */
-    private static final class DeleteHighscore implements OnClickListener {
+    private static final class DeleteHighscoreAction implements OnClickListener {
+        
+        private final Context context;
+        
+        public DeleteHighscoreAction(final Context context) {
+            this.context = context;
+        }
+        
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
-            Highscores.deleteHighscores(App.getContext());
+            Highscores.deleteHighscores(context);
+            Intent intent = new Intent(context, HighscoreActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intent);
             dialog.dismiss();
         }
     }
@@ -49,10 +60,10 @@ public class ClearHighscoreDialog extends AlertDialog {
     
     private void createButtons() {
         setButton(BUTTON_NEGATIVE, context.getText(R.string.dialog_clearhighscore_button_abort),
-                new AbortDialog());
+                new AbortAction());
         
         setButton(BUTTON_POSITIVE, context.getText(R.string.dialog_clearhighscore_button_delete),
-                new DeleteHighscore());
+                new DeleteHighscoreAction(context));
     }
     
 }

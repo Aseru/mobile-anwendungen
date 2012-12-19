@@ -15,6 +15,68 @@ import edu.hm.androidsweeper.activities.MainMenuActivity;
  */
 public class GameFinishedDialog extends AlertDialog {
     
+    /**
+     * TODO: Document type GoToMainAction.
+     */
+    private static final class GoToMainAction implements OnClickListener {
+        
+        private final Context context;
+        
+        public GoToMainAction(final Context context) {
+            this.context = context;
+        }
+        
+        @Override
+        public void onClick(final DialogInterface dialog, final int which) {
+            Intent intent = new Intent(context, MainMenuActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+            dialog.dismiss();
+        }
+    }
+    
+    /**
+     * TODO: Document type RestartGameAction.
+     */
+    private static final class RestartGameAction implements OnClickListener {
+        
+        private final Context context;
+        
+        public RestartGameAction(final Context context) {
+            this.context = context;
+        }
+        
+        @Override
+        public void onClick(final DialogInterface dialog, final int which) {
+            Intent intent = new Intent(context, DifficultActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intent);
+            dialog.dismiss();
+        }
+    }
+    
+    /**
+     * TODO: Document type OpenHighscoreAction.
+     */
+    private static final class OpenHighscoreAction implements OnClickListener {
+        
+        private final Context context;
+        
+        public OpenHighscoreAction(final Context context) {
+            this.context = context;
+        }
+        
+        @Override
+        public void onClick(final DialogInterface dialog, final int which) {
+            Intent mainIntent = new Intent(context, MainMenuActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent highscoreIntent = new Intent(context, HighscoreActivity.class);
+            context.startActivity(mainIntent);
+            context.startActivity(highscoreIntent);
+            dialog.dismiss();
+        }
+    }
+    
     private final Context context;
     
     /**
@@ -55,42 +117,11 @@ public class GameFinishedDialog extends AlertDialog {
     
     private void createButtons() {
         setButton(BUTTON_NEGATIVE, context.getString(R.string.dialog_finished_button_back),
-                new OnClickListener() {
-            
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                Intent intent = new Intent(context, MainMenuActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
-                dialog.dismiss();
-            }
-        });
+                new GoToMainAction(context));
         setButton(BUTTON_NEUTRAL, context.getString(R.string.dialog_finished_button_highscore),
-                new OnClickListener() {
-            
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                Intent mainIntent = new Intent(context, MainMenuActivity.class);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                Intent highscoreIntent = new Intent(context, HighscoreActivity.class);
-                context.startActivity(mainIntent);
-                context.startActivity(highscoreIntent);
-                dialog.dismiss();
-            }
-        });
+                new OpenHighscoreAction(context));
         setButton(BUTTON_POSITIVE, context.getString(R.string.dialog_finished_button_restart),
-                new OnClickListener() {
-            
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                Intent intent = new Intent(context, DifficultActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent);
-                dialog.dismiss();
-            }
-        });
+                new RestartGameAction(context));
     }
     
 }

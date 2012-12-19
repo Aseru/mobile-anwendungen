@@ -39,11 +39,11 @@ public class HighscoreEntry implements Serializable, Comparable<HighscoreEntry> 
     public int compareTo(final HighscoreEntry o) {
         if (time > o.time) {
             // in value.
-            return -1;
+            return 1;
         }
         else if (time < o.time) {
             // bigger in value.
-            return 1;
+            return -1;
         }
         else {
             return 0;
