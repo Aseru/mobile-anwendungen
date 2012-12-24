@@ -24,6 +24,8 @@
     <string name="dialog_finished_button_back">Zurück</string>
     <string name="dialog_finished_button_restart">Nochmal</string>
     <string name="dialog_finished_button_highscore">Highscore</string>
+    <string name="dialog_finished_player_name">Bitte Spielernamen eintragen:</string>
+    <string name="dialog_finished_new_highscore">Du hast einen neuen Highscore erzielt.</string>
     
     <!-- ClearHighscoreDialog -->
     <string name="dialog_clearhighscore_title">Highscores löschen</string>

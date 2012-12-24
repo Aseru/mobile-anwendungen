@@ -145,13 +145,7 @@ public class GameActivity extends Activity implements IGameActivity {
     }
     
     private void openGameEndDialog() {
-        boolean won = false;
-        if (game.getState() == GameState.WON) {
-            won = true;
-        }
-        long time = game.getCurrentPlaytime();
-        double d = time / 1000d;
-        gameEndDialog = new GameFinishedDialog(this, won, d);
+        gameEndDialog = new GameFinishedDialog(this, game);
         DialogUtil.showDialog(gameEndDialog);
     }
     

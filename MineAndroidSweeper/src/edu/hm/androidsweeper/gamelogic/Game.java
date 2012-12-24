@@ -171,4 +171,9 @@ public class Game implements Serializable {
         return usedHints;
     }
     
+    public double getPlaytimeAsDouble(){
+        long timeLong = currentPlaytime;
+        return timeLong / 1000d;
+    }
+    
 }

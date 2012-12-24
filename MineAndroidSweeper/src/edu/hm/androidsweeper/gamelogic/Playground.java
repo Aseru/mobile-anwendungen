@@ -7,6 +7,7 @@ import java.util.Random;
 
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
+import edu.hm.androidsweeper.graphics.PlaygroundViewUtil;
 
 public class Playground implements Serializable {
     
@@ -179,5 +180,6 @@ public class Playground implements Serializable {
             field = fieldsArray[random.nextInt(fieldsArray.length)];
         } while (field.isBomb() || field.isRevealed());
         reveal(field);
+        PlaygroundViewUtil.getFieldInViewingArea(field);
     }
 }

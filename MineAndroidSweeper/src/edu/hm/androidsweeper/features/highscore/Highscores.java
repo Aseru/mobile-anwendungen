@@ -13,6 +13,7 @@ import edu.hm.androidsweeper.difficulties.HardDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.difficulties.MediumDifficulty;
 import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
 import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
 
 public final class Highscores implements Serializable {
@@ -48,28 +49,27 @@ public final class Highscores implements Serializable {
     
     public static boolean isHighscore(final Game game) {
         IDifficulty difficulty = game.getDifficulty();
-        long time = game.getCurrentPlaytime();
-        double value = time / 1000d;
-        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0) {
+        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0
+                || game.getState() != GameState.WON) {
             return false;
         }
         List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
-        HighscoreEntry entry = new HighscoreEntry("tmp", value);
+        HighscoreEntry entry = new HighscoreEntry("tmp", game.getPlaytimeAsDouble());
         if (list.isEmpty() || list.size() < HIGHSCORE_TABLE_SIZE) {
-            addHighscore(entry, difficulty);
             return true;
         }
         
         HighscoreEntry lowestHighscore = list.get(list.size() - 1);
         if (entry.compareTo(lowestHighscore) < 0) {
-            addHighscore(entry, difficulty);
             return true;
         }
         return false;
     }
     
-    public static void addHighscore(final HighscoreEntry entry, final IDifficulty difficulty) {
+    public static void addHighscore(final Game game, final String playerName) {
+        IDifficulty difficulty = game.getDifficulty();
         List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
+        HighscoreEntry entry = new HighscoreEntry(playerName, game.getPlaytimeAsDouble());
         list.add(entry);
         Collections.sort(list);
         if (list.size() > HIGHSCORE_TABLE_SIZE) {
