@@ -1,6 +1,5 @@
 package edu.hm.androidsweeper.difficulties;
 
-import edu.hm.androidsweeper.R;
 
 /**
  * Class for representation a customized difficulty.<br>
@@ -116,6 +115,11 @@ public class CustomizedDifficulty implements IDifficulty {
     @Override
     public int getHints() {
         return hints;
+    }
+    
+    @Override
+    public String getDifficultyName() {
+        return null;
     }
     
 }

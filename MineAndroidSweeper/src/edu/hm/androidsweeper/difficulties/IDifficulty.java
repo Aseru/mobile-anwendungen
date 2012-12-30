@@ -41,4 +41,11 @@ public interface IDifficulty extends Serializable {
      */
     int getHints();
     
+    /**
+     * Returns the name for the difficulty.
+     * 
+     * @return diffuculty name as string.
+     */
+    String getDifficultyName();
+    
 }

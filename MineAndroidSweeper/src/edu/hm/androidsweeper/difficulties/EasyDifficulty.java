@@ -5,6 +5,11 @@ package edu.hm.androidsweeper.difficulties;
  */
 public class EasyDifficulty implements IDifficulty {
     
+    /**
+     * Name of this difficulty used for extras
+     */
+    public static final String NAME = "easy";
+    
     private static final long serialVersionUID = 1952238030186230671L;
     
     /**
@@ -58,6 +63,11 @@ public class EasyDifficulty implements IDifficulty {
     @Override
     public int getHints() {
         return HINTS;
+    }
+    
+    @Override
+    public String getDifficultyName() {
+        return NAME;
     }
     
 }

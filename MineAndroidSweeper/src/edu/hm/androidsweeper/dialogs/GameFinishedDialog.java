@@ -11,6 +11,7 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.activities.DifficultActivity;
 import edu.hm.androidsweeper.activities.HighscoreActivity;
 import edu.hm.androidsweeper.activities.MainMenuActivity;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.gamelogic.Game;
 import edu.hm.androidsweeper.gamelogic.GameState;
@@ -47,7 +48,7 @@ public class GameFinishedDialog extends AlertDialog {
     
     private void init() {
         setCancelable(true);
-        setMessageNTitle(game);
+        setMessageNTitle();
         createButtons();
         View playerNameLayout = LayoutInflater.from(context).inflate(R.layout.dialog_gamefinished,
                 null);
@@ -61,6 +62,7 @@ public class GameFinishedDialog extends AlertDialog {
             playerNameLayout.setVisibility(View.VISIBLE);
         }
     }
+    
     @Override
     public void dismiss() {
         if (isNewHighscore) {
@@ -71,7 +73,7 @@ public class GameFinishedDialog extends AlertDialog {
         super.dismiss();
     }
     
-    private void setMessageNTitle(final Game game) {
+    private void setMessageNTitle() {
         String title;
         String message;
         GameState state = game.getState();
@@ -94,7 +96,7 @@ public class GameFinishedDialog extends AlertDialog {
         setButton(BUTTON_NEGATIVE, context.getString(R.string.dialog_finished_button_back),
                 new GoToMainAction(context));
         setButton(BUTTON_NEUTRAL, context.getString(R.string.dialog_finished_button_highscore),
-                new OpenHighscoreAction(context));
+                new OpenHighscoreAction(context, game));
         setButton(BUTTON_POSITIVE, context.getString(R.string.dialog_finished_button_restart),
                 new RestartGameAction(context));
     }
@@ -143,9 +145,11 @@ public class GameFinishedDialog extends AlertDialog {
     private static final class OpenHighscoreAction implements OnClickListener {
         
         private final Context context;
+        private final Game game;
         
-        public OpenHighscoreAction(final Context context) {
+        public OpenHighscoreAction(final Context context, final Game game) {
             this.context = context;
+            this.game = game;
         }
         
         @Override
@@ -153,6 +157,11 @@ public class GameFinishedDialog extends AlertDialog {
             Intent mainIntent = new Intent(context, MainMenuActivity.class);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Intent highscoreIntent = new Intent(context, HighscoreActivity.class);
+            IDifficulty difficulty = game.getDifficulty();
+            String difficultyName = difficulty.getDifficultyName();
+            if (difficultyName != null) {
+                highscoreIntent.putExtra(HighscoreActivity.EXTRA_NAME, difficultyName);
+            }
             context.startActivity(mainIntent);
             context.startActivity(highscoreIntent);
         }

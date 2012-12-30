@@ -19,6 +19,9 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.application.App;
 import edu.hm.androidsweeper.dialogs.ClearHighscoreDialog;
 import edu.hm.androidsweeper.dialogs.DialogUtil;
+import edu.hm.androidsweeper.difficulties.EasyDifficulty;
+import edu.hm.androidsweeper.difficulties.HardDifficulty;
+import edu.hm.androidsweeper.difficulties.MediumDifficulty;
 import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.misc.SharedMenu;
@@ -26,6 +29,7 @@ import edu.hm.androidsweeper.misc.SharedMenu;
 public class HighscoreActivity extends Activity {
     
     public static final String TAG = "HighscoreActivity";
+    public static final String EXTRA_NAME = "HighscoreDifficulty";
     
     private Highscores myHighscores;
     
@@ -39,6 +43,29 @@ public class HighscoreActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Object o = extras.get(EXTRA_NAME);
+            if (o instanceof String) {
+                String difficulty = (String)o;
+                if (difficulty.equals(EasyDifficulty.NAME)) {
+                    onEasyClick();
+                    return;
+                }
+                if (difficulty.equals(MediumDifficulty.NAME)) {
+                    onMediumClick();
+                    return;
+                }
+                if (difficulty.equals(HardDifficulty.NAME)) {
+                    onHardClick();
+                    return;
+                }
+                
+            }
+        }
+        else {
+            onEasyClick();
+        }
     }
     
     private void init() {
@@ -77,8 +104,6 @@ public class HighscoreActivity extends Activity {
                 }
             });
         }
-        
-        onEasyClick();
     }
     
     private void setScores(final List<HighscoreEntry> highscoreSet) {

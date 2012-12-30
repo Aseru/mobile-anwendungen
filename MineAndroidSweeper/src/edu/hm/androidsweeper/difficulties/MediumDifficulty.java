@@ -5,6 +5,10 @@ package edu.hm.androidsweeper.difficulties;
  */
 public class MediumDifficulty implements IDifficulty {
     
+    /**
+     * Name of this difficulty used for extras
+     */
+    public static final String NAME = "medium";
     
     private static final long serialVersionUID = -885855746218919308L;
     
@@ -55,10 +59,14 @@ public class MediumDifficulty implements IDifficulty {
         return BOMBS;
     }
     
-    
     @Override
     public int getHints() {
         return HINTS;
+    }
+    
+    @Override
+    public String getDifficultyName() {
+        return NAME;
     }
     
 }
