@@ -1,11 +1,11 @@
-package edu.hm.mineandroidsweeper.test.gamelogic;
+package edu.hm.androidsweeper.test.gamelogic;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import edu.hm.mineandroidsweeper.gamelogic.Coordinate;
-import edu.hm.mineandroidsweeper.gamelogic.Field;
+import edu.hm.androidsweeper.gamelogic.Coordinate;
+import edu.hm.androidsweeper.gamelogic.Field;
 
 public class FieldTest extends TestCase {
 

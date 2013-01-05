@@ -1,4 +1,4 @@
-package edu.hm.mineandroidsweeper.persistence;
+package edu.hm.androidsweeper.persistence;
 
 import java.io.IOException;
 import java.io.OptionalDataException;
@@ -6,11 +6,11 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
 import junit.framework.TestCase;
-import edu.hm.mineandroidsweeper.difficulties.EasyDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
-import edu.hm.mineandroidsweeper.gamelogic.Game;
-import edu.hm.mineandroidsweeper.gamelogic.GameState;
-import edu.hm.mineandroidsweeper.misc.FileUtil;
+import edu.hm.androidsweeper.difficulties.EasyDifficulty;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
+import edu.hm.androidsweeper.misc.FileUtil;
 
 public class GameLoaderTest extends TestCase {
 
@@ -44,9 +44,9 @@ public class GameLoaderTest extends TestCase {
 		
 		// Test if loadedGame equals game.
 		assertEquals(GameState.STARTING, loadedGame.getState());
-		assertEquals(difficulty.getNumberOfBombs(), loadedGame.getDifficulty().getNumberOfBombs());
-		assertEquals(difficulty.getXSize(), loadedGame.getDifficulty().getXSize());
-		assertEquals(difficulty.getYSize(), loadedGame.getDifficulty().getYSize());
+		assertEquals(difficulty.getBombs(), loadedGame.getDifficulty().getBombs());
+		assertEquals(difficulty.getWidth(), loadedGame.getDifficulty().getWidth());
+		assertEquals(difficulty.getHeight(), loadedGame.getDifficulty().getHeight());
 		
 		// ...Playground not tested yet.
 	}

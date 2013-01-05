@@ -1,7 +1,7 @@
-package edu.hm.mineandroidsweeper.test.gamelogic;
+package edu.hm.androidsweeper.test.gamelogic;
 
 import junit.framework.TestCase;
-import edu.hm.mineandroidsweeper.gamelogic.Coordinate;
+import edu.hm.androidsweeper.gamelogic.Coordinate;
 
 public class CoordinateTest extends TestCase {
 

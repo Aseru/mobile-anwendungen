@@ -1,13 +1,13 @@
-package edu.hm.mineandroidsweeper.test.gamelogic;
+package edu.hm.androidsweeper.test.gamelogic;
 
 import java.util.Map;
 
 import junit.framework.TestCase;
-import edu.hm.mineandroidsweeper.difficulties.CustomizedDifficulty;
-import edu.hm.mineandroidsweeper.difficulties.IDifficulty;
-import edu.hm.mineandroidsweeper.gamelogic.Coordinate;
-import edu.hm.mineandroidsweeper.gamelogic.Field;
-import edu.hm.mineandroidsweeper.gamelogic.Playground;
+import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
+import edu.hm.androidsweeper.difficulties.IDifficulty;
+import edu.hm.androidsweeper.gamelogic.Coordinate;
+import edu.hm.androidsweeper.gamelogic.Field;
+import edu.hm.androidsweeper.gamelogic.Playground;
 
 public class PlaygroundTest extends TestCase {
 	
@@ -25,14 +25,14 @@ public class PlaygroundTest extends TestCase {
 	}
 
 	public void testNumberOfFields(){
-		int expectedNumberOfFields = difficulty.getXSize() * difficulty.getYSize();
+		int expectedNumberOfFields = difficulty.getWidth() * difficulty.getHeight();
 		Map<Coordinate, Field> fieldsMap = playground.getFieldsMap();
 		
 		assertEquals(expectedNumberOfFields, fieldsMap.size());
 	}
 	
 	public void testNumberOfBombs(){
-		int expectedNumberOfBombs = difficulty.getNumberOfBombs();
+		int expectedNumberOfBombs = difficulty.getBombs();
 		Map<Coordinate, Field> fieldsMap = playground.getFieldsMap();
 		
 		int actualNumberOfBombs = 0;
@@ -82,7 +82,7 @@ public class PlaygroundTest extends TestCase {
 	}
 	
 	private Field[] getBombs(Map<Coordinate, Field> map){
-		Field[] bombs = new Field[difficulty.getNumberOfBombs()];
+		Field[] bombs = new Field[difficulty.getBombs()];
 		int bombCount = 0;
 		for(Field field : map.values()){
 			if(field.isBomb()){
