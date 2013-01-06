@@ -8,8 +8,7 @@ import android.view.ViewParent;
 import android.widget.LinearLayout;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
 
-/**
- * Class for field representation.
+/** Represents a field on the game playground.
  */
 public class Field implements Serializable {
     
@@ -23,41 +22,35 @@ public class Field implements Serializable {
     private boolean isExploded;
     private boolean isFlag;
     
-    /**
-     * Returns the state of the isFlag boolean.
-     * 
+    private int value;
+    
+    /** Returns whether this field is flagged or not.
      * @return the isFlag
      */
     public boolean isFlag() {
         return isFlag;
     }
     
-    /**
-     * Sets the isFlag boolean.
-     * 
-     * @param isFlag
-     *            the isFlag to set
+    /** Sets the flag variable for this field.
+     * @param flagValue value of the flag
      */
-    public void setFlag(final boolean isFlag) {
-        this.isFlag = isFlag;
+    public void setFlag(final boolean flagValue) {
+        isFlag = flagValue;
         FieldViewUtil.setFlagView(this);
     }
     
-    private int value;
-    
-    /**
-     * @return the isExploded
+    /** Returns whether this field is exploded or not.
+     * @return The isExploded value.
      */
     public boolean isExploded() {
         return isExploded;
     }
     
-    /**
-     * @param isExploded
-     *            the isExploded to set
+    /** Sets the exploded variable of this field.
+     * @param explodedValue value of exploded
      */
-    public void setExploded(final boolean isExploded) {
-        this.isExploded = isExploded;
+    public void setExploded(final boolean explodedValue) {
+        isExploded = explodedValue;
     }
     
     /** No-args constructor needed for Serialization. */
@@ -65,11 +58,8 @@ public class Field implements Serializable {
         coord = null;
     }
     
-    /**
-     * Creates a new instance of {@link Field}.
-     * 
-     * @param coord
-     *            the coordinate of this field
+    /** Creates a new field from a given coordinate.
+     * @param coord the coordinate of this field
      */
     public Field(final Coordinate coord) {
         this.coord = coord;
@@ -78,38 +68,36 @@ public class Field implements Serializable {
         value = 0;
     }
     
-    /**
-     * @return the view
+    /** Returns the view for this field.
+     * @return A {@link View} object.
      */
     public View getView() {
         return view;
     }
     
-    /**
-     * @param view
-     *            the view to set
+    /** Sets the view for this field.
+     * @param view the view to set
      */
     public void setView(final View view) {
         this.view = view;
     }
     
-    /**
-     * @return the isBomb
+    /** Returns whether this field is a bomb or not.
+     * @return the isBomb value
      */
     public boolean isBomb() {
         return isBomb;
     }
     
-    /**
-     * @param isBomb
-     *            the isBomb to set
+    /** Sets the bomb variable of this field.
+     * @param bombValue the isBomb value to set
      */
-    public void setBomb(final boolean isBomb) {
-        this.isBomb = isBomb;
+    public void setBomb(final boolean bombValue) {
+        isBomb = bombValue;
     }
     
-    /**
-     * @return the isRevealed
+    /** Returns whether this field is revealed or not.
+     * @return the isRevealed value
      */
     public boolean isRevealed() {
         return isRevealed;
@@ -129,23 +117,22 @@ public class Field implements Serializable {
         isRevealed = reveal;
     }
     
-    /**
+    /** Returns the value of this field.
      * @return the value
      */
     public int getValue() {
         return value;
     }
     
-    /**
-     * @param value
-     *            the value to set
+    /** Sets the value of this field.
+     * @param value the value to set
      */
     public void setValue(final int value) {
         this.value = value;
     }
     
-    /**
-     * @return the coord
+    /** Returns the coordinate of this field.
+     * @return A {@link Coordinate} object.
      */
     public Coordinate getCoord() {
         return coord;

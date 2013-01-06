@@ -2,6 +2,9 @@ package edu.hm.androidsweeper.gamelogic;
 
 import java.io.Serializable;
 
+/** Represents a point on a two dimensional plane.
+ * The first point of the plane is (0,0).
+ */
 public class Coordinate implements Serializable {
     
     private static final long serialVersionUID = -6415929767292021551L;
@@ -10,25 +13,31 @@ public class Coordinate implements Serializable {
     private final int y;
     
     /* No-args constructor, needed for Serialization. */
+    /** Creates a new instance of {@link Coordinate} at the point (0,0).
+     */
     protected Coordinate() {
         x = 0;
         y = 0;
     }
     
-    public Coordinate(final int x, final int y){
+    /** Constructor for a coordinate from a given position.
+     * @param x The horizontal position on the plane.
+     * @param y The vertical position on the plane.
+     */
+    public Coordinate(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
     
-    /**
-     * @return the x
+    /** Returns the horizontal position.
+     * @return x >= 0
      */
     public int getX() {
         return x;
     }
     
-    /**
-     * @return the y
+    /** Returns the vertical position.
+     * @return y >= 0
      */
     public int getY() {
         return y;
@@ -39,16 +48,11 @@ public class Coordinate implements Serializable {
      */
     @Override
     public boolean equals(final Object o) {
-        if(o == null || !(o instanceof Coordinate)){
+        if (!(o instanceof Coordinate)) {
             return false;
         }
         Coordinate another = (Coordinate) o;
-        if(x == another.x && y == another.y) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return x == another.x && y == another.y;
     }
     
     /* (non-Javadoc)
@@ -69,9 +73,6 @@ public class Coordinate implements Serializable {
         hash = hash * 31 + y;
         return hash;
     }
-    
-    
-    
     
     
 }
