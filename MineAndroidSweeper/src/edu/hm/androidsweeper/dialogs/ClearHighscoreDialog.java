@@ -8,10 +8,11 @@ import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.activities.HighscoreActivity;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 
+/** Dialog class for deleting the Highscores.
+ */
 public class ClearHighscoreDialog extends AlertDialog {
     
-    /**
-     * TODO: Document type AbortAction.
+    /** Class for abort action.
      */
     private static final class AbortAction implements OnClickListener {
         @Override
@@ -20,8 +21,7 @@ public class ClearHighscoreDialog extends AlertDialog {
         }
     }
     
-    /**
-     * TODO: Document type DeleteHighscore.
+    /** Class for delete action.
      */
     private static final class DeleteHighscoreAction implements OnClickListener {
         
@@ -43,6 +43,10 @@ public class ClearHighscoreDialog extends AlertDialog {
     
     private final Context context;
     
+    /**
+     * Creates a new instance of {@link ClearHighscoreDialog}.
+     * @param context The application context.
+     */
     public ClearHighscoreDialog(final Context context) {
         super(context);
         this.context = context;

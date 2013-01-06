@@ -121,23 +121,7 @@ public class DifficultActivity extends Activity {
                 seekWidth.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
             }
             seekWidth.setMax(CustomizedDifficulty.MAX_SIZE - CustomizedDifficulty.MIN_SIZE);
-            seekWidth.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-                @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onProgressChanged(final SeekBar seekBar, final int progress,
-                        final boolean fromUser) {
-                    update();
-                }
-            });
+            seekWidth.setOnSeekBarChangeListener(new DefaultSeekBarListener());
         }
         view = findViewById(R.id.seekBar_height);
         if (view instanceof SeekBar) {
@@ -146,23 +130,7 @@ public class DifficultActivity extends Activity {
                 seekHeight.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_SIZE));
             }
             seekHeight.setMax(CustomizedDifficulty.MAX_SIZE - CustomizedDifficulty.MIN_SIZE);
-            seekHeight.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-                @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onProgressChanged(final SeekBar seekBar, final int progress,
-                        final boolean fromUser) {
-                    update();
-                }
-            });
+            seekHeight.setOnSeekBarChangeListener(new DefaultSeekBarListener());
         }
         view = findViewById(R.id.seekBar_bombs);
         if (view instanceof SeekBar) {
@@ -171,23 +139,7 @@ public class DifficultActivity extends Activity {
                 seekBombs.setProgress(Integer.valueOf(CustomizedDifficulty.DEFAULT_BOMBS
                         - CustomizedDifficulty.MIN_SIZE));
             }
-            seekBombs.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-                @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {
-                    // No implementation necessary
-                }
-                
-                @Override
-                public void onProgressChanged(final SeekBar seekBar, final int progress,
-                        final boolean fromUser) {
-                    update();
-                }
-            });
+            seekBombs.setOnSeekBarChangeListener(new DefaultSeekBarListener());
         }
     }
     
@@ -309,4 +261,26 @@ public class DifficultActivity extends Activity {
         }
         return difficulty;
     }
+    
+    
+    /** Listener for seek bar actions.
+     */
+    private final class DefaultSeekBarListener implements OnSeekBarChangeListener {
+        @Override
+        public void onStopTrackingTouch(final SeekBar seekBar) {
+            // No implementation necessary
+        }
+        
+        @Override
+        public void onStartTrackingTouch(final SeekBar seekBar) {
+            // No implementation necessary
+        }
+        
+        @Override
+        public void onProgressChanged(final SeekBar seekBar, final int progress,
+                final boolean fromUser) {
+            update();
+        }
+    }
+    
 }

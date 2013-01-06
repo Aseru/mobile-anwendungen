@@ -6,7 +6,7 @@ package edu.hm.androidsweeper.difficulties;
 public class EasyDifficulty implements IDifficulty {
     
     /**
-     * Name of this difficulty used for extras
+     * Name of this difficulty used for extras.
      */
     public static final String NAME = "easy";
     

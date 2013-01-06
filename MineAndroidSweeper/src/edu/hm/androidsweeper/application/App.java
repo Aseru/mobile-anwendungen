@@ -3,8 +3,7 @@ package edu.hm.androidsweeper.application;
 import android.app.Application;
 import android.content.Context;
 
-/**
- * TODO: Document type App.
+/** Extended Application class.
  */
 public class App extends Application {
     
@@ -20,6 +19,9 @@ public class App extends Application {
         App.mContext = context;
     }
     
+    /** Returns the application context.
+     * @return The context.
+     */
     public static Context getContext() {
         return mContext;
     }

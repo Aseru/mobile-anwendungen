@@ -23,7 +23,6 @@ import edu.hm.androidsweeper.gamelogic.GameState;
 public class GameFinishedDialog extends AlertDialog {
     
     private final Context context;
-    private final Highscores highscores;
     private final Game game;
     private boolean isNewHighscore;
     private EditText playerNameInput;
@@ -31,18 +30,13 @@ public class GameFinishedDialog extends AlertDialog {
     /**
      * Creates a new instance of {@link GameFinishedDialog}.
      * 
-     * @param context
-     *            the activity context
-     * @param isWon
-     *            the state is the game was won or lose
-     * @param time
-     *            the total playtime for this game
+     * @param context The activity context.
+     * @param game The game object.
      */
     public GameFinishedDialog(final Context context, final Game game) {
         super(context);
         this.context = context;
         this.game = game;
-        highscores = Highscores.getInstance();
         init();
     }
     
@@ -101,8 +95,7 @@ public class GameFinishedDialog extends AlertDialog {
                 new RestartGameAction(context));
     }
     
-    /**
-     * TODO: Document type GoToMainAction.
+    /** Class for the <go to main menu> action.
      */
     private static final class GoToMainAction implements OnClickListener {
         
@@ -120,8 +113,7 @@ public class GameFinishedDialog extends AlertDialog {
         }
     }
     
-    /**
-     * TODO: Document type RestartGameAction.
+    /** Class for the <restart game> action.
      */
     private static final class RestartGameAction implements OnClickListener {
         
@@ -139,8 +131,7 @@ public class GameFinishedDialog extends AlertDialog {
         }
     }
     
-    /**
-     * TODO: Document type OpenHighscoreAction.
+    /** Class for the <open highscores> action.
      */
     private static final class OpenHighscoreAction implements OnClickListener {
         

@@ -3,7 +3,7 @@ package edu.hm.androidsweeper.difficulties;
 import java.io.Serializable;
 
 /**
- * Interface for the difficulty classes TODO: Document type IDifficulty.
+ * Interface for the game difficulty.
  */
 public interface IDifficulty extends Serializable {
     
@@ -12,22 +12,20 @@ public interface IDifficulty extends Serializable {
      */
     String EXTRA_NAME = "edu.hm.mineandroidsweeper.extra.difficulty";
     
-    /**
-     * Returns the field width.
+    /** Returns the playground width.
      * 
-     * @return the size in x direction
+     * @return The horizontal size.
      */
     int getWidth();
     
-    /**
-     * Returns the field heigth.
+    /** Returns the playground height.
      * 
-     * @return the size in y direction
+     * @return The vertical size.
      */
     int getHeight();
     
     /**
-     * Returns the number of bombs.
+     * Returns the number of bombs for this difficulty.
      * 
      * @return the number of bombs
      */
@@ -35,16 +33,16 @@ public interface IDifficulty extends Serializable {
     
     
     /**
-     * Returns the maximum hints.
+     * Returns the maximum number of hints for this difficulty.
      * 
-     * @return number of available hints for this difficulty.
+     * @return the number of available hints.
      */
     int getHints();
     
     /**
-     * Returns the name for the difficulty.
+     * Returns the name of this difficulty.
      * 
-     * @return diffuculty name as string.
+     * @return the difficulty name.
      */
     String getDifficultyName();
     

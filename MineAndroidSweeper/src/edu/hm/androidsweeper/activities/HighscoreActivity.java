@@ -26,9 +26,13 @@ import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.misc.SharedMenu;
 
+/** Activity for displaying the Highscores.
+ */
 public class HighscoreActivity extends Activity {
     
+    /** Class tag. */
     public static final String TAG = "HighscoreActivity";
+    /** Extra data for intents. */
     public static final String EXTRA_NAME = "HighscoreDifficulty";
     
     private Highscores myHighscores;
@@ -44,7 +48,10 @@ public class HighscoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         init();
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras == null) {
+            onEasyClick();
+        }
+        else {
             Object o = extras.get(EXTRA_NAME);
             if (o instanceof String) {
                 String difficulty = (String)o;
@@ -60,12 +67,9 @@ public class HighscoreActivity extends Activity {
                     onHardClick();
                     return;
                 }
-                
             }
         }
-        else {
-            onEasyClick();
-        }
+        
     }
     
     private void init() {
@@ -107,19 +111,21 @@ public class HighscoreActivity extends Activity {
     }
     
     private void setScores(final List<HighscoreEntry> highscoreSet) {
-        TableLayout highscoreTable = (TableLayout)highscoreView.findViewById(R.id.highscoreTable);
+        View ht = highscoreView.findViewById(R.id.highscoreTable);
+        if (!(ht instanceof TableLayout)) {
+            throw new AssertionError();
+        }
+        TableLayout highscoreTable = (TableLayout)ht;
         highscoreTable.removeAllViews();
         
         int rowContentPadding = Math.round(App.getContext().getResources()
                 .getDimension(R.dimen.tablerow_contents_padding));
         
-        HighscoreEntry he = null;
+        HighscoreEntry highscoreEntry = null;
         Iterator<HighscoreEntry> it = highscoreSet.iterator();
         
         for (int i = 1; i <= highscoreSet.size(); i++) {
-            if (it.hasNext()) {
-                he = it.next();
-            }
+            highscoreEntry = it.next();
             
             TableRow tr = new TableRow(this);
             tr.setPadding(
@@ -142,7 +148,7 @@ public class HighscoreActivity extends Activity {
                     rowContentPadding);
             name.setWidth(Math.round(App.getContext().getResources()
                     .getDimension(R.dimen.name_width)));
-            name.setText(he.getPlayerName());
+            name.setText(highscoreEntry.getPlayerName());
             tr.addView(name, 1);
             
             TextView score = new TextView(this);
@@ -150,7 +156,7 @@ public class HighscoreActivity extends Activity {
                     rowContentPadding);
             score.setWidth(Math.round(App.getContext().getResources()
                     .getDimension(R.dimen.score_width)));
-            score.setText(Double.toString(he.getTime()));
+            score.setText(Double.toString(highscoreEntry.getTime()));
             tr.addView(score, 2);
             
             highscoreTable.addView(tr);

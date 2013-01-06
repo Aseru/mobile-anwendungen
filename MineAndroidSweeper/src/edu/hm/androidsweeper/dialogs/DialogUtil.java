@@ -12,9 +12,7 @@ public final class DialogUtil {
     
     private static Handler handler;
     
-    private DialogUtil() {
-        
-    }
+    private DialogUtil() { }
     
     /**
      * Show a passed dialog.
@@ -41,7 +39,7 @@ public final class DialogUtil {
      *            the dialog to dismiss
      */
     public static void dismissDialog(final Dialog dialog) {
-        // Not yet implemented.
+        // Not yet implemented. TODO: Implement
     }
     
     private static void checkHandler() {

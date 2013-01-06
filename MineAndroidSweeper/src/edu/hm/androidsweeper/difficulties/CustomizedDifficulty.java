@@ -75,12 +75,12 @@ public class CustomizedDifficulty implements IDifficulty {
     }
     
     private int calcHints() {
-        int hints = (width + height) / 4;
+        int resHints = (width + height) / 4;
         int freeFields = width * height - bombs;
-        if (hints >= freeFields / 2) {
-            hints = freeFields / 2;
+        if (resHints >= freeFields / 2) {
+            resHints = freeFields / 2;
         }
-        return hints;
+        return resHints;
     }
     
     /*
