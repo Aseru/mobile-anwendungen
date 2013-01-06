@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package edu.hm.mineandroidsweeper.test;
+package edu.hm.androidsweeper.test;
 
 public final class R {
     public static final class attr {
