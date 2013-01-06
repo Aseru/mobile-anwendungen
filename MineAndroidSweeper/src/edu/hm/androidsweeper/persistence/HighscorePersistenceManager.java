@@ -21,7 +21,7 @@ public final class HighscorePersistenceManager {
      * Creates a new instance of {@link GamePersistenceManager}. This
      * constructor should never be called.
      */
-    private HighscorePersistenceManager() {}
+    private HighscorePersistenceManager() { }
     
     /**
      * Tag used for logging.
@@ -89,6 +89,9 @@ public final class HighscorePersistenceManager {
         return result;
     }
     
+    /** Deletes all Highscores.
+     * @param context The application context.
+     */
     public static void deleteHighscores(final Context context) {
         if (context.deleteFile(HIGHSCORES_FILENAME)) {
             ToastUtil.showShortToast(context, R.string.toast_clearhighscore_successful);

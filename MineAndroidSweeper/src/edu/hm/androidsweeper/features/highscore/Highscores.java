@@ -22,6 +22,8 @@ public final class Highscores implements Serializable {
     
     private static Highscores instance;
     
+    private static boolean initialized;
+    
     private static final long serialVersionUID = 46357815423849470L;
     
     /** The maximum number of highscore entries that can be stored in a table.
@@ -43,8 +45,9 @@ public final class Highscores implements Serializable {
      * @return The Highscore instance.
      */
     public static Highscores getInstance() {
-        if (instance == null) {
+        if (!initialized) {
             instance = HighscorePersistenceManager.loadHighscores(App.getContext());
+            initialized = true;
         }
         return instance;
     }
@@ -53,7 +56,7 @@ public final class Highscores implements Serializable {
      * @param context The context for this application.
      */
     public static void deleteHighscores(final Context context) {
-        instance = null;
+        initialized = false;
         HighscorePersistenceManager.deleteHighscores(context);
         Highscores.getInstance();
     }
@@ -84,7 +87,6 @@ public final class Highscores implements Serializable {
      */
     public static void addHighscore(final Game game, final String playerName) {
         IDifficulty difficulty = game.getDifficulty();
-        Highscores h = Highscores.getInstance();
         List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
         HighscoreEntry entry = new HighscoreEntry(playerName, game.getPlaytimeAsDouble());
         list.add(entry);
@@ -147,6 +149,7 @@ public final class Highscores implements Serializable {
      */
     protected static void setInstance(final Highscores inst) {
         instance = inst;
+        initialized = instance != null;
     }
     
 }

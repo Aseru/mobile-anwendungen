@@ -12,8 +12,18 @@ import edu.hm.androidsweeper.gamelogic.Coordinate;
 import edu.hm.androidsweeper.gamelogic.Field;
 import edu.hm.androidsweeper.gamelogic.Game;
 
-public class FieldViewUtil {
+/** Utility class.
+ * Provides methods for connecting views to fields.
+ */
+public final class FieldViewUtil {
     
+    private FieldViewUtil() { }
+    
+    /** Creates the field views for a given game.
+     * @param context The application context.
+     * @param game The game.
+     * @return An array containing the views.
+     */
     public static ImageView[] createFieldViews(final Context context, final Game game) {
         Field[] fields = game.getPlayground().getFieldsArray();
         ImageView[] fieldViews = new ImageView[fields.length];
@@ -53,10 +63,9 @@ public class FieldViewUtil {
     
     /**
      * Reveals the passed field. <br>
-     * Checks the field state and changes the ImageView to fit the state. TODO:
-     * Document method revealView
+     * Checks the field state and changes the ImageView to fit the state.
      * 
-     * @param field
+     * @param field The field to reveal.
      */
     public static void revealView(final Field field) {
         View view = field.getView();
@@ -109,9 +118,7 @@ public class FieldViewUtil {
     
     /**
      * Changes the ImageView of a field to a flag or a tile.
-     * 
-     * @param field
-     *            the field where the view needs to be exchanged
+     * @param field The field who's view should be changed.
      */
     public static void setFlagView(final Field field) {
         boolean isFlag = field.isFlag();
@@ -129,9 +136,7 @@ public class FieldViewUtil {
     
     /**
      * Reveals all bombs on the field.
-     * 
-     * @param map
-     *            the map with all bombs.
+     * @param map the map containing all bombs.
      */
     public static void revealBombs(final Map<Coordinate, Field> map) {
         for (Field field : map.values()) {

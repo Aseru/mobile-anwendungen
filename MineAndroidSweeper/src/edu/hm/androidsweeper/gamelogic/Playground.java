@@ -9,6 +9,8 @@ import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
 import edu.hm.androidsweeper.graphics.PlaygroundViewUtil;
 
+/** Contains and manages the fields.
+ */
 public class Playground implements Serializable {
     
     private static final long serialVersionUID = 3663292402304734906L;
@@ -20,18 +22,25 @@ public class Playground implements Serializable {
     private Map<Coordinate, Field> fieldsMap;
     private Field[] fieldsArray;
     
-    /* No-args constructor needed for Serialization. */
+    /** No-args constructor needed for Serialization. */
     protected Playground() {
         difficulty = null;
         game = null;
     }
     
+    /** Creates a new instance of {@link Playground}.
+     * @param game The game associated to this playground.
+     * @param difficulty The difficulty of this game.
+     */
     public Playground(final Game game, final IDifficulty difficulty) {
         this.game = game;
         this.difficulty = difficulty;
         fieldsMap = new HashMap<Coordinate, Field>();
     }
     
+    /** Initializes the playground.
+     * Must be called before using.
+     */
     public void init() {
         fieldsArray = createFields(difficulty.getWidth(), difficulty.getHeight());
         Field[] bombs = setBombs(fieldsArray, difficulty);
@@ -55,8 +64,8 @@ public class Playground implements Serializable {
         return fields;
     }
     
-    private Field[] setBombs(final Field[] fields, final IDifficulty difficulty) {
-        int numberOfBombs = difficulty.getBombs();
+    private Field[] setBombs(final Field[] fields, final IDifficulty gameDifficulty) {
+        int numberOfBombs = gameDifficulty.getBombs();
         Field[] bombs = new Field[numberOfBombs];
         int random = -1;
         Field field = null;
@@ -97,6 +106,9 @@ public class Playground implements Serializable {
         }
     }
     
+    /** Reveals a given field.
+     * @param field The field to reveal.
+     */
     public void reveal(final Field field) {
         if (field.isBomb()) {
             handleBomb(field);
@@ -127,34 +139,31 @@ public class Playground implements Serializable {
         game.setState(GameState.LOSE);
         field.setExploded(true);
         FieldViewUtil.revealBombs(fieldsMap);
-        return;
     }
     
-    /**
-     * @return the difficulty
+    /** Returns the difficulty of the game.
+     * @return the difficulty value
      */
     public IDifficulty getDifficulty() {
         return difficulty;
     }
     
-    /**
+    /** Returns an array of the fields this playground contains.
      * @return the fieldsArray
      */
     public Field[] getFieldsArray() {
         return fieldsArray;
     }
     
-    /**
+    /** Returns a map of the fields this playground contains.
      * @return the fieldsMap
      */
     public Map<Coordinate, Field> getFieldsMap() {
         return fieldsMap;
     }
     
-    /**
-     * Returns the isCreated.
-     * 
-     * @return the isCreated
+    /** Returns whether this playground has been created or not.
+     * @return the isCreated value
      */
     public boolean isCreated() {
         return isCreated;
@@ -163,15 +172,14 @@ public class Playground implements Serializable {
     /**
      * Sets the isCreated to the specified value.
      * 
-     * @param isCreated
-     *            the value to set
+     * @param createdValue the value to set
      */
-    public void setCreated(final boolean isCreated) {
-        this.isCreated = isCreated;
+    public void setCreated(final boolean createdValue) {
+        isCreated = createdValue;
     }
     
-    /**
-     * TODO: Document method revealRandomField
+    /** Reveals a random field on the playground.
+     * The selected field will be unrevealed and not a bomb.
      */
     public void revealRandomField() {
         Field field;

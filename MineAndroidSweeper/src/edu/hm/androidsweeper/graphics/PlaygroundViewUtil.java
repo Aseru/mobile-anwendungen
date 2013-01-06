@@ -14,8 +14,18 @@ import edu.hm.androidsweeper.application.App;
 import edu.hm.androidsweeper.gamelogic.Field;
 import edu.hm.androidsweeper.gamelogic.Playground;
 
-public class PlaygroundViewUtil {
+/** Utility class.
+ * Provides methods for creating and managing a playground and it's views.
+ */
+public final class PlaygroundViewUtil {
     
+    private PlaygroundViewUtil() { }
+    
+    /** Creates the view for the playground.
+     * @param context The application context.
+     * @param playground The playground to create the view for.
+     * @return The view for the given playground.
+     */
     public static View createPlayGroundView(final Context context, final Playground playground) {
         int xSize = playground.getDifficulty().getWidth();
         int ySize = playground.getDifficulty().getHeight();
