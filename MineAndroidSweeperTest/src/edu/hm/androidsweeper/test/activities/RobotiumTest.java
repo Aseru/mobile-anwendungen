@@ -1,12 +1,9 @@
 package edu.hm.androidsweeper.test.activities;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
