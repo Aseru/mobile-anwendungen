@@ -64,8 +64,6 @@ public class CustomizedDifficulty implements IDifficulty {
      *            field height
      * @param bombs
      *            number of bombs
-     * @throws InvalidConfigException
-     *             if the config is not valid
      */
     public CustomizedDifficulty(final int width, final int height, final int bombs) {
         this.width = width;

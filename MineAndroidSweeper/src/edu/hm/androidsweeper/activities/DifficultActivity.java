@@ -163,50 +163,22 @@ public class DifficultActivity extends Activity {
         RadioButton rButton;
         if (view instanceof RadioButton) {
             rButton = (RadioButton)view;
-            rButton.setOnClickListener(new OnClickListener() {
-                
-                @Override
-                public void onClick(final View v) {
-                    View custom = findViewById(R.id.layout_customized_difficulty);
-                    custom.setVisibility(View.VISIBLE);
-                }
-            });
+            rButton.setOnClickListener(new DifficultyCustomizerVisibiltySwitcher());
         }
         view = findViewById(R.id.radio_easy);
         if (view instanceof RadioButton) {
             rButton = (RadioButton)view;
-            rButton.setOnClickListener(new OnClickListener() {
-                
-                @Override
-                public void onClick(final View v) {
-                    View custom = findViewById(R.id.layout_customized_difficulty);
-                    custom.setVisibility(View.GONE);
-                }
-            });
+            rButton.setOnClickListener(new DifficultyCustomizerVisibiltySwitcher());
         }
         view = findViewById(R.id.radio_medium);
         if (view instanceof RadioButton) {
             rButton = (RadioButton)view;
-            rButton.setOnClickListener(new OnClickListener() {
-                
-                @Override
-                public void onClick(final View v) {
-                    View custom = findViewById(R.id.layout_customized_difficulty);
-                    custom.setVisibility(View.GONE);
-                }
-            });
+            rButton.setOnClickListener(new DifficultyCustomizerVisibiltySwitcher());
         }
         view = findViewById(R.id.radio_hard);
         if (view instanceof RadioButton) {
             rButton = (RadioButton)view;
-            rButton.setOnClickListener(new OnClickListener() {
-                
-                @Override
-                public void onClick(final View v) {
-                    View custom = findViewById(R.id.layout_customized_difficulty);
-                    custom.setVisibility(View.GONE);
-                }
-            });
+            rButton.setOnClickListener(new DifficultyCustomizerVisibiltySwitcher());
         }
         view = findViewById(R.id.button_start);
         if (view instanceof Button) {
@@ -262,8 +234,24 @@ public class DifficultActivity extends Activity {
         return difficulty;
     }
     
+    /**
+     * Visibility switcher for the difficulty customizer.
+     */
+    private static final class DifficultyCustomizerVisibiltySwitcher implements OnClickListener {
+        @Override
+        public void onClick(final View v) {
+            View custom = v.getRootView().findViewById(R.id.layout_customized_difficulty);
+            if (v.getId() == R.id.radio_customized) {
+                custom.setVisibility(View.VISIBLE);
+            }
+            else {
+                custom.setVisibility(View.GONE);
+            }
+        }
+    }
     
-    /** Listener for seek bar actions.
+    /**
+     * Listener for seek bar actions.
      */
     private final class DefaultSeekBarListener implements OnSeekBarChangeListener {
         @Override

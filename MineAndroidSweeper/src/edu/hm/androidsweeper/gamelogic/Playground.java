@@ -7,7 +7,6 @@ import java.util.Random;
 
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.graphics.FieldViewUtil;
-import edu.hm.androidsweeper.graphics.PlaygroundViewUtil;
 
 /** Contains and manages the fields.
  */
@@ -45,7 +44,7 @@ public class Playground implements Serializable {
         fieldsArray = createFields(difficulty.getWidth(), difficulty.getHeight());
         Field[] bombs = setBombs(fieldsArray, difficulty);
         putFieldsInMap(fieldsArray);
-        calcFieldValues(fieldsArray, bombs);
+        calcFieldValues(bombs);
     }
     
     private Field[] createFields(final int xSize, final int ySize) {
@@ -88,7 +87,7 @@ public class Playground implements Serializable {
         }
     }
     
-    private void calcFieldValues(final Field[] fields, final Field[] bombs) {
+    private void calcFieldValues(final Field[] bombs) {
         for (Field bomb : bombs) {
             increaseNeighborValues(bomb);
         }
@@ -136,7 +135,7 @@ public class Playground implements Serializable {
     }
     
     private void handleBomb(final Field field) {
-        game.setState(GameState.LOSE);
+        game.setState(GameState.LOST);
         field.setExploded(true);
         FieldViewUtil.revealBombs(fieldsMap);
     }
@@ -188,6 +187,6 @@ public class Playground implements Serializable {
             field = fieldsArray[random.nextInt(fieldsArray.length)];
         } while (field.isBomb() || field.isRevealed());
         reveal(field);
-        PlaygroundViewUtil.getFieldInViewingArea(field);
+        //        PlaygroundViewUtil.getFieldInViewingArea(field);
     }
 }

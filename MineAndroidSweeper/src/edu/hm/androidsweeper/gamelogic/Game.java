@@ -107,7 +107,7 @@ public class Game implements Serializable {
     public void setState(final GameState state) {
         this.state = state;
         Log.d(TAG, "set state to: " + state);
-        if ((state == GameState.WON || state == GameState.LOSE) && activity != null) {
+        if ((state == GameState.WON || state == GameState.LOST) && activity != null) {
             activity.handleGameEnd();
         }
     }
@@ -189,7 +189,7 @@ public class Game implements Serializable {
     }
     
     /** Returns the currently played time as a double value.
-     * @return TODO: Define return value unit
+     * @return current playtime as double
      */
     public double getPlaytimeAsDouble() {
         long timeLong = currentPlaytime;

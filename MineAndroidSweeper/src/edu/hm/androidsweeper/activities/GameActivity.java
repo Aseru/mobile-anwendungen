@@ -224,17 +224,9 @@ public class GameActivity extends Activity implements IGameActivity {
     
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (!SharedMenu.onOptionItemSelected(item, this)) {
-            switch (item.getItemId()) {
-                case R.id.menu_hint:
-                    if (game.askForHint()) {
-                        item.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(),
-                                game.getDifficulty().getHints()));
-                    }
-                    break;
-                default:
-                    break;
-            }
+        if (!SharedMenu.onOptionItemSelected(item, this) && item.getItemId() == R.id.menu_hint && game.askForHint()) {
+            item.setTitle(getString(R.string.menu_get_hint, game.getAvaiableHints(), game
+                    .getDifficulty().getHints()));
         }
         return super.onOptionsItemSelected(item);
     }

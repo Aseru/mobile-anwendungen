@@ -26,7 +26,8 @@ import edu.hm.androidsweeper.features.highscore.HighscoreEntry;
 import edu.hm.androidsweeper.features.highscore.Highscores;
 import edu.hm.androidsweeper.misc.SharedMenu;
 
-/** Activity for displaying the Highscores.
+/**
+ * Activity for displaying the Highscores.
  */
 public class HighscoreActivity extends Activity {
     
@@ -200,16 +201,9 @@ public class HighscoreActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (!SharedMenu.onOptionItemSelected(item, this)) {
-            switch (item.getItemId()) {
-                case R.id.menu_clear_highscore:
-                    Dialog dialog = new ClearHighscoreDialog(this);
-                    DialogUtil.showDialog(dialog);
-                    break;
-                default:
-                    break;
-                    
-            }
+        if (!SharedMenu.onOptionItemSelected(item, this) && item.getItemId() == R.id.menu_clear_highscore) {
+            Dialog dialog = new ClearHighscoreDialog(this);
+            DialogUtil.showDialog(dialog);
         }
         return super.onOptionsItemSelected(item);
     }

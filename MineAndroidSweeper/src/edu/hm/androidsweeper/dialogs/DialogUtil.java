@@ -32,16 +32,6 @@ public final class DialogUtil {
         handler.post(runnable);
     }
     
-    /**
-     * Dismisses the passed Dialog.
-     * 
-     * @param dialog
-     *            the dialog to dismiss
-     */
-    public static void dismissDialog(final Dialog dialog) {
-        // Not yet implemented. TODO: Implement
-    }
-    
     private static void checkHandler() {
         synchronized (LOCK) {
             if (handler == null) {

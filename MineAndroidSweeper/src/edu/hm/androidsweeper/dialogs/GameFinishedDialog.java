@@ -60,7 +60,6 @@ public class GameFinishedDialog extends AlertDialog {
     @Override
     public void dismiss() {
         if (isNewHighscore) {
-            System.out.println("Dismiss");
             String playerName = playerNameInput.getText().toString();
             Highscores.addHighscore(game, playerName);
         }
