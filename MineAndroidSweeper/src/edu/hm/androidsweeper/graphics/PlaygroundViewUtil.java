@@ -52,38 +52,4 @@ public final class PlaygroundViewUtil {
         return layout;
     }
     
-    //    /**
-    //     * TODO: Document method getFieldInViewingArea
-    //     *
-    //     * @param field
-    //     */
-    //    public static void getFieldInViewingArea(final Field field) {
-    //        View layout = LayoutInflater.from(App.getContext()).inflate(R.layout.activity_game, null);
-    //        View view = layout.findViewById(R.id.scrollview_game);
-    //        ImageView imageView = (ImageView)field.getView();
-    //        if (view instanceof ScrollView) {
-    //            final ScrollView scrollView = (ScrollView)view;
-    //            Rect scrollBounds = new Rect();
-    //            scrollView.getHitRect(scrollBounds);
-    //            if (imageView.getLocalVisibleRect(scrollBounds)) {
-    //                System.out.println(true);
-    //                // imageView is within the visible window
-    //            }
-    //            else {
-    //                System.out.println(false);
-    //                scrollView.post(new Runnable() {
-    //                    //TODO Doesn't work
-    //
-    //                    @Override
-    //                    public void run() {
-    //                        int right = field.getView().getRight();
-    //                        int bottom = field.getView().getBottom();
-    //                        scrollView.scrollTo(0, 800);
-    //                    }
-    //                });
-    //
-    //            }
-    //        }
-    //    }
-    
 }
