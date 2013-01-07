@@ -20,8 +20,12 @@ public class GamePersistenceManagerTest extends AndroidTestCase {
 		game.init();
 	}
 
+	public void testSaveAndLoadGame(){
+		saveGame();
+		loadGame();
+	}
 	
-	public void testSaveGame() {
+	private void saveGame() {
 		if(GamePersistenceManager.saveGameAvailable(getContext())) {
 			GamePersistenceManager.deleteSaveGame(getContext());
 		}
@@ -31,7 +35,7 @@ public class GamePersistenceManagerTest extends AndroidTestCase {
 		assertTrue(GamePersistenceManager.saveGameAvailable(getContext()));
 	}
 	
-	public void testLoadGame() {
+	private void loadGame() {
 		if(!GamePersistenceManager.saveGameAvailable(getContext())) {
 			GamePersistenceManager.saveGame(getContext(), game);
 		}

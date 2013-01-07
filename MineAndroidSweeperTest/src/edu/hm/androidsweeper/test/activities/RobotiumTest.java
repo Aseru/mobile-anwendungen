@@ -115,7 +115,7 @@ public class RobotiumTest extends
 		width.setProgress(10);
 
 		solo.clickOnView(solo.getView(R.id.button_start));
-		solo.waitForActivity("GameActicity");
+		solo.waitForActivity("GameActivity", 500);
 		Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
 		IDifficulty difficulty = (IDifficulty) extras.get(IDifficulty.EXTRA_NAME);
 		assertEquals(10 + CustomizedDifficulty.MIN_BOMBS, difficulty.getBombs());
