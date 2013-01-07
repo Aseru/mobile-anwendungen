@@ -9,7 +9,7 @@
     <string name="menu_settings">Einstellungen</string>
     <string name="menu_clear_highscore">Highscores löschen</string>
     <string name="menu_get_hint">Tipp (%1$s/%2$s)</string>
-    
+
     <!-- Info Bar -->
     <string name="info_bar_time">Zeit:</string>
     <string name="info_bar_bombs">Bomben:</string>
@@ -26,17 +26,19 @@
     <string name="dialog_finished_button_highscore">Highscore</string>
     <string name="dialog_finished_player_name">Bitte Spielernamen eintragen:</string>
     <string name="dialog_finished_new_highscore">Du hast einen neuen Highscore erzielt.</string>
-    
+
     <!-- ClearHighscoreDialog -->
     <string name="dialog_clearhighscore_title">Highscores löschen</string>
     <string name="dialog_clearhighscore_message">Bist du sicher, dass du deine Highscore löschen willst?</string>
     <string name="dialog_clearhighscore_button_delete">Löschen!</string>
     <string name="dialog_clearhighscore_button_abort">Abbrechen</string>
-    
-    
+
     <!-- Toasts -->
     <string name="toast_clearhighscore_successful">Highscores gelöscht.</string>
-    
 
-    
+    <!-- Preferences -->
+    <string name="prefs_default_player_name">Spielername</string>
+    <string name="prefs_default_player_name_key">player_name</string>
+    <string name="prefs_default_player_name_summary">Bitte Spielernamen eingeben</string>
+
 </resources>

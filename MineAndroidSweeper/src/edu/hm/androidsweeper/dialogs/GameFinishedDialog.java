@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -30,14 +32,17 @@ public class GameFinishedDialog extends AlertDialog {
     /**
      * Creates a new instance of {@link GameFinishedDialog}.
      * 
-     * @param context The activity context.
-     * @param game The game object.
+     * @param context
+     *            The activity context.
+     * @param game
+     *            The game object.
      */
     public GameFinishedDialog(final Context context, final Game game) {
         super(context);
         this.context = context;
         this.game = game;
         init();
+        setDefaultPlayerName();
     }
     
     private void init() {
@@ -55,6 +60,14 @@ public class GameFinishedDialog extends AlertDialog {
         if (isNewHighscore) {
             playerNameLayout.setVisibility(View.VISIBLE);
         }
+    }
+    
+    private void setDefaultPlayerName() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String playerName = sharedPrefs.getString(
+                context.getString(R.string.prefs_default_player_name_key),
+                context.getString(R.string.prefs_default_player_name));
+        playerNameInput.setText(playerName);
     }
     
     @Override
@@ -94,7 +107,8 @@ public class GameFinishedDialog extends AlertDialog {
                 new RestartGameAction(context));
     }
     
-    /** Class for the <go to main menu> action.
+    /**
+     * Class for the <go to main menu> action.
      */
     private static final class GoToMainAction implements OnClickListener {
         
@@ -112,7 +126,8 @@ public class GameFinishedDialog extends AlertDialog {
         }
     }
     
-    /** Class for the <restart game> action.
+    /**
+     * Class for the <restart game> action.
      */
     private static final class RestartGameAction implements OnClickListener {
         
@@ -130,7 +145,8 @@ public class GameFinishedDialog extends AlertDialog {
         }
     }
     
-    /** Class for the <open highscores> action.
+    /**
+     * Class for the <open highscores> action.
      */
     private static final class OpenHighscoreAction implements OnClickListener {
         
