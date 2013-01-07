@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import edu.hm.androidsweeper.R;
 import edu.hm.androidsweeper.application.App;
 import edu.hm.androidsweeper.difficulties.CustomizedDifficulty;
 import edu.hm.androidsweeper.difficulties.EasyDifficulty;
@@ -77,11 +80,22 @@ public final class Highscores implements Serializable {
      * @return True if a highscore was made, false if not.
      */
     public static boolean isHighscore(final Game game) {
+        Context c = App.getContext();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
+        boolean hintSwitchValue = sharedPreferences.getBoolean(c.getResources().getString(R.string.prefs_test_ignore_hints_switch_key), false);
+        boolean gameStateSwitchValue = sharedPreferences.getBoolean(c.getResources().getString(R.string.prefs_test_ignore_gamestate_switch_key), false);
+        
         IDifficulty difficulty = game.getDifficulty();
-        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0
-                || game.getState() != GameState.WON) {
+        if (difficulty instanceof CustomizedDifficulty) {
             return false;
         }
+        if (!hintSwitchValue && game.getUsedHints() != 0) {
+            return false;
+        }
+        if (!gameStateSwitchValue && game.getState() != GameState.WON) {
+            return false;
+        }
+        
         List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
         HighscoreEntry entry = new HighscoreEntry("tmp", game.getPlaytimeAsDouble());
         if (list.isEmpty() || list.size() < HIGHSCORE_TABLE_SIZE) {
