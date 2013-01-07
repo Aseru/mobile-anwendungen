@@ -13,10 +13,13 @@ import edu.hm.androidsweeper.difficulties.HardDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.difficulties.MediumDifficulty;
 import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
 import edu.hm.androidsweeper.persistence.HighscorePersistenceManager;
 
-/** This class contains the highscore tables and provides methods for those.<br>
- * It is implemented as a singleton. There is one table for every basic difficulty.
+/**
+ * This class contains the highscore tables and provides methods for those.<br>
+ * It is implemented as a singleton. There is one table for every basic
+ * difficulty.
  */
 public final class Highscores implements Serializable {
     
@@ -26,7 +29,8 @@ public final class Highscores implements Serializable {
     
     private static final long serialVersionUID = 46357815423849470L;
     
-    /** The maximum number of highscore entries that can be stored in a table.
+    /**
+     * The maximum number of highscore entries that can be stored in a table.
      */
     public static final int HIGHSCORE_TABLE_SIZE = 10;
     
@@ -40,8 +44,9 @@ public final class Highscores implements Serializable {
         hard = new ArrayList<HighscoreEntry>();
     }
     
-    
-    /** Loads if needed and returns the Highscore instance for this application.
+    /**
+     * Loads if needed and returns the Highscore instance for this application.
+     * 
      * @return The Highscore instance.
      */
     public static Highscores getInstance() {
@@ -52,8 +57,11 @@ public final class Highscores implements Serializable {
         return instance;
     }
     
-    /** Deletes all saved Highscore entries.
-     * @param context The context for this application.
+    /**
+     * Deletes all saved Highscore entries.
+     * 
+     * @param context
+     *            The context for this application.
      */
     public static void deleteHighscores(final Context context) {
         initialized = false;
@@ -61,14 +69,17 @@ public final class Highscores implements Serializable {
         Highscores.getInstance();
     }
     
-    
-    /** Returns whether the given game scored a highscore or not.
-     * @param game The game to check the score.
+    /**
+     * Returns whether the given game scored a highscore or not.
+     * 
+     * @param game
+     *            The game to check the score.
      * @return True if a highscore was made, false if not.
      */
     public static boolean isHighscore(final Game game) {
         IDifficulty difficulty = game.getDifficulty();
-        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0) {
+        if (difficulty instanceof CustomizedDifficulty || game.getUsedHints() != 0
+                || game.getState() != GameState.WON) {
             return false;
         }
         List<HighscoreEntry> list = Highscores.getInstance().selectList(difficulty);
@@ -81,9 +92,13 @@ public final class Highscores implements Serializable {
         return entry.compareTo(lowestHighscore) > 0;
     }
     
-    /** Adds a highscore for the given game and player name.
-     * @param game The game to add as a highscore entry.
-     * @param playerName The player name for this highscore entry.
+    /**
+     * Adds a highscore for the given game and player name.
+     * 
+     * @param game
+     *            The game to add as a highscore entry.
+     * @param playerName
+     *            The player name for this highscore entry.
      */
     public static void addHighscore(final Game game, final String playerName) {
         IDifficulty difficulty = game.getDifficulty();
@@ -116,36 +131,47 @@ public final class Highscores implements Serializable {
         return list;
     }
     
-    /** Returns the highscore table for the {@link EasyDifficulty}.
+    /**
+     * Returns the highscore table for the {@link EasyDifficulty}.
+     * 
      * @return A list of highscore entries.
      */
     public List<HighscoreEntry> getEasy() {
         return Collections.unmodifiableList(easy);
     }
     
-    /** Returns the highscore table for the {@link MediumDifficulty}.
+    /**
+     * Returns the highscore table for the {@link MediumDifficulty}.
+     * 
      * @return A list of highscore entries.
      */
     public List<HighscoreEntry> getMedium() {
         return Collections.unmodifiableList(medium);
     }
     
-    /** Returns the highscore table for the {@link HardDifficulty}.
+    /**
+     * Returns the highscore table for the {@link HardDifficulty}.
+     * 
      * @return A list of highscore entries.
      */
     public List<HighscoreEntry> getHard() {
         return Collections.unmodifiableList(hard);
     }
     
-    /** Creates a new empty Highscores instance.
+    /**
+     * Creates a new empty Highscores instance.
+     * 
      * @return A new Highscores instance.
      */
     public static Highscores emptyHighscores() {
         return new Highscores();
     }
     
-    /** Manually sets the main instance to the given instance.
-     * @param inst The Highscores instance to set.
+    /**
+     * Manually sets the main instance to the given instance.
+     * 
+     * @param inst
+     *            The Highscores instance to set.
      */
     protected static void setInstance(final Highscores inst) {
         instance = inst;

@@ -4,13 +4,14 @@ import junit.framework.TestCase;
 import edu.hm.androidsweeper.difficulties.EasyDifficulty;
 import edu.hm.androidsweeper.difficulties.IDifficulty;
 import edu.hm.androidsweeper.gamelogic.Game;
+import edu.hm.androidsweeper.gamelogic.GameState;
 
 public class HighscoresTest extends TestCase {
 
 	private Highscores highscores;
-	
+
 	private IDifficulty difficulty = new EasyDifficulty();
-	
+
 	private HighscoreEntry defaultEntry = new HighscoreEntry();
 	private HighscoreEntry emptyEntry = HighscoreEntry.newEmpty();
 	private HighscoreEntry entry1 = new HighscoreEntry("entry1", 1.2);
@@ -25,27 +26,34 @@ public class HighscoresTest extends TestCase {
 	private HighscoreEntry entry10 = new HighscoreEntry("entry10", 192.54);
 	private HighscoreEntry entry11 = new HighscoreEntry("entry11", 241.39);
 	private HighscoreEntry entry12 = new HighscoreEntry("entry12", 491.24);
-	
-	
-	private HighscoreEntry[] entries = {entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12}; 
-	
-	
+
+	private HighscoreEntry[] entries = { entry1, entry2, entry3, entry4,
+			entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12 };
+
 	@Override
 	protected void setUp() throws Exception {
 		highscores = Highscores.emptyHighscores();
 		Highscores.setInstance(highscores);
 	}
-	
+
 	public void testGetInstance() {
 		assertSame(highscores, Highscores.getInstance());
 	}
 
 	public void testIsHighscore() {
+		Game game = null;
 		for(HighscoreEntry he: entries) {
-			assertTrue(Highscores.isHighscore(getHEAsGame(he)));
+			game = getHEAsGame(he);
+			game.setState(GameState.WON);
+			assertTrue(Highscores.isHighscore(game));
 		}
-		assertTrue(Highscores.isHighscore(getHEAsGame(defaultEntry)));
-		assertTrue(Highscores.isHighscore(getHEAsGame(emptyEntry)));
+		game = getHEAsGame(defaultEntry);
+		game.setState(GameState.WON);
+		assertTrue(Highscores.isHighscore(game));
+		
+		game = getHEAsGame(emptyEntry);
+		game.setState(GameState.WON);
+		assertTrue(Highscores.isHighscore(game));
 		
 		for(HighscoreEntry he: entries) {
 			Highscores.addHighscore(getHEAsGame(he), he.getPlayerName());
@@ -56,24 +64,23 @@ public class HighscoresTest extends TestCase {
 		assertFalse(Highscores.isHighscore(getHEAsGame(defaultEntry)));
 		assertFalse(Highscores.isHighscore(getHEAsGame(emptyEntry)));
 	}
-	
+
 	public void testAddHighscore() {
 		assertTrue(highscores.getEasy().isEmpty());
-		
+
 		HighscoreEntry he;
-		for(int i = 0; i<10;i++) {
+		for (int i = 0; i < 10; i++) {
 			he = entries[i];
 			Highscores.addHighscore(getHEAsGame(he), he.getPlayerName());
 			assertTrue(highscores.getEasy().contains(he));
 		}
-		
-		
+
 	}
-	
-	
+
 	public Game getHEAsGame(HighscoreEntry he) {
 		Game g = new Game(difficulty);
-		long playtime = Double.compare(he.getTime(), Double.MAX_VALUE)==0 ? Integer.MAX_VALUE : Math.round(he.getTime()*1000d);
+		long playtime = Double.compare(he.getTime(), Double.MAX_VALUE) == 0 ? Integer.MAX_VALUE
+				: Math.round(he.getTime() * 1000d);
 		g.setCurrentPlaytime(playtime);
 		return g;
 	}
