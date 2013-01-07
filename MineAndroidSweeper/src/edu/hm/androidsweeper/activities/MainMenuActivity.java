@@ -28,6 +28,8 @@ public class MainMenuActivity extends Activity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        MyPreferenceActivity.loadDefaultPreferences(this, false);
         initView();
     }
     

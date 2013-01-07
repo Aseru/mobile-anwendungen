@@ -40,5 +40,15 @@
     <string name="prefs_default_player_name">Spielername</string>
     <string name="prefs_default_player_name_key">player_name</string>
     <string name="prefs_default_player_name_summary">Bitte Spielernamen eingeben</string>
+    <string name="prefs_test_category_title">Testing</string>
+    <string name="prefs_test_ignore_gamestate_switch_title">Ignore state</string>
+    <string name="prefs_test_ignore_gamestate_switch_key">ignore_gamestate_switch</string>
+    <string name="prefs_test_ignore_gamestate_switch_key_summaryOn">Highscore is always added, regardless of game result</string>
+    <string name="prefs_test_ignore_gamestate_switch_key_summaryOff">Off</string>
+    <string name="prefs_game_category_title">Game</string>
+    <string name="prefs_test_ignore_hints_switch_title">Ignore hints</string>
+    <string name="prefs_test_ignore_hints_switch_key">ignore_hints_switch</string>
+    <string name="prefs_test_ignore_hints_switch_key_summaryOn">Highscore will be added, regardless of hint use</string>
+    <string name="prefs_test_ignore_hints_switch_key_summaryOff">Off</string>
 
 </resources>
