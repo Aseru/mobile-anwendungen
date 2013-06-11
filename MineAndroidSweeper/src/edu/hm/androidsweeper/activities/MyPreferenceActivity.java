@@ -25,7 +25,7 @@ public class MyPreferenceActivity extends PreferenceActivity implements OnShared
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.settings);
+        addPreferencesFromResource(getPrefFileID());
         
         Preference pref = getPreferenceScreen().findPreference(KEY_PLAYERNAME_PREFERENCE);
         if (!(pref instanceof EditTextPreference)) {
@@ -78,6 +78,20 @@ public class MyPreferenceActivity extends PreferenceActivity implements OnShared
      * @param override If the values should be overridden if they already exist.
      */
     public static void loadDefaultPreferences(final Context context, final boolean override) {
-        PreferenceManager.setDefaultValues(context, R.xml.settings, override);
+        PreferenceManager.setDefaultValues(context, getPrefFileID(), override);
+    }
+    
+    private static int getPrefFileID() {
+        /* SwitchPreference is not available until API Level 14.
+         * Test for version.
+         */
+        int prefFile;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            prefFile = R.xml.settings;
+        }
+        else {
+            prefFile = R.xml.settings_comp;
+        }
+        return prefFile;
     }
 }

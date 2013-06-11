@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="@string/prefs_game_category_title" />
+    
+    <EditTextPreference
+        android:defaultValue="@string/prefs_default_player_name"
+        android:dialogTitle="@string/prefs_default_player_name"
+        android:key="@string/prefs_default_player_name_key"
+        android:persistent="true"
+        android:summary="@string/prefs_default_player_name_summary"
+        android:title="@string/prefs_default_player_name" />
+
+    
+    <PreferenceCategory
+        android:title="@string/prefs_test_category_title" />
+
+    <CheckBoxPreference 
+        android:title="@string/prefs_test_ignore_gamestate_switch_title"
+        android:key="@string/prefs_test_ignore_gamestate_switch_key"
+		android:defaultValue="false" 
+		android:summaryOn="@string/prefs_test_ignore_gamestate_switch_key_summaryOn"
+		/>
+    
+    <CheckBoxPreference 
+        android:title="@string/prefs_test_ignore_hints_switch_title"
+        android:key="@string/prefs_test_ignore_hints_switch_key"
+		android:defaultValue="false" 
+		android:summaryOn="@string/prefs_test_ignore_hints_switch_key_summaryOn"
+		/>
+    
+</PreferenceScreen>
